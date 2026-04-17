@@ -1,0 +1,26 @@
+/* Esempio di badge tech nel CSS */
+:host { display: inline-block; line-height: 0; }
+.tech-tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Usiamo un padding quadrato per renderlo un cerchio perfetto */
+    padding: 12px; 
+    
+    /* Background: un blu chiarissimo quasi impercettibile */
+    background-color: #F8F9FF; 
+    
+    /* Bordo: invece del grigio, usiamo un blu molto chiaro */
+    border: 1px solid rgba(45, 68, 255, 0.08);
+    
+    border-radius: 50%; /* Cerchio perfetto */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--bg-background-secondary);
+        border-color: rgba(45, 68, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(45, 68, 255, 0.1);
+    }
+}

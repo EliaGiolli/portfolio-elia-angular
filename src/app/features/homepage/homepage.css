@@ -1,0 +1,112 @@
+.main-wrapper {
+    min-height: 100vh;
+    width:100%;
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding: 1.5rem;
+}
+
+.presentation-wrapper {
+    background-color: var(--bg-background-primary);
+    display: flex;
+    flex-direction:column;
+    justify-items:center;
+    align-items:center;
+    text-align:center;
+    min-height:300px;
+    max-width: 850px;
+    padding: 1.5rem;
+    border: 1px solid var(--text-muted);
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(45, 68, 255, 0.1), 
+            0 8px 10px -6px rgba(0, 0, 0, 0.05);
+
+    h1 {
+        margin:0;
+        color: var(--text-accent-primary);
+    }
+
+    h3 {
+        margin-block: 0.5rem;
+    }
+
+   .icons-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+        margin-block: 2rem;
+        
+        .icon-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .group-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted); /* Quel grigio che abbiamo definito */
+            font-weight: 600;
+        }
+        
+        .icons-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+            /* Tablet & Desktop: mettiamo i gruppi affiancati se c'è spazio */
+        @media (min-width: 768px) {
+            .icons-wrapper {
+                flex-direction: row;
+                justify-content: space-evenly;
+                align-items: flex-start;
+            }
+        }
+
+}
+
+}
+
+.buttons-wrapper {
+    display: flex;
+    gap: 10px;
+    padding: 1rem;
+
+    .btn-projects {
+        background-color: var(--bg-accent-primary);
+        color: var(--text-on-accent);
+        padding: 1rem;
+        border-radius:11px;
+        font-weight: 600;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+            background-color: #0b1fb5;
+            transform: translateY(-1px);
+        }
+    }
+
+    .btn-cv {
+        background-color: #FFFFFF;
+        color: var(--bg-accent-primary);
+        border: 1.5px solid var(--bg-accent-primary);
+        
+        padding: 0.8rem 1.8rem;
+        border-radius: 12px;
+        font-weight: 600;
+        transition: all 0.2s ease-in-out;
+        
+        &:hover {
+            background-color: var(--bg-background-secondary); 
+            transform: translateY(-1px);
+        }
+    }
+
+}

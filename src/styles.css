@@ -9,14 +9,15 @@
     --bg-accent-secondary: #E2E8F0;
     
     /* Typography */
-    --text-primary: #1A1A1A;     /* Per titoli (H1, H2) e scritte importanti */
+    --text-primary: #1A1A1A;
+    --text-accent-primary: #2D44FF;     /* Per titoli (H1, H2) e scritte importanti */
     --text-secondary: #575F6E;   /* Per paragrafi e descrizioni. È leggibile ma meno "pesante" */
     --text-muted: #8E97A6;      /* Per i "meta-data" (es: date, tag tecnologie, testi piccolissimi) */
     --text-on-accent: #FFFFFF;  /* Per il testo dentro i bottoni blu */
 }
 body {
   margin: 0;
-  background-color: var(--bg-background-primary);
+  background-color: var(--bg-background-secondary);
   color: var(--text-primary);
   font-family: 'Poppins', system-ui, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
