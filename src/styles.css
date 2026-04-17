@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --bg-background-primary: #FAFAFC;
+    --bg-background-secondary: #F0F2FF;
+    --bg-accent-primary: #2D44FF;
+    --bg-accent-secondary: #E2E8F0;
+    --text-primary: #1A1A1A;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-background-primary);
+  color: var(--text-primary);
+  font-family: 'Poppins', system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+}
