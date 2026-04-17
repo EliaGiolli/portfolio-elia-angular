@@ -1,12 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
+    /* Backgrounds */
     --bg-background-primary: #FAFAFC;
     --bg-background-secondary: #F0F2FF;
+    
+    /* Accents */
     --bg-accent-primary: #2D44FF;
     --bg-accent-secondary: #E2E8F0;
-    --text-primary: #1A1A1A;
+    
+    /* Typography */
+    --text-primary: #1A1A1A;     /* Per titoli (H1, H2) e scritte importanti */
+    --text-secondary: #575F6E;   /* Per paragrafi e descrizioni. È leggibile ma meno "pesante" */
+    --text-muted: #8E97A6;      /* Per i "meta-data" (es: date, tag tecnologie, testi piccolissimi) */
+    --text-on-accent: #FFFFFF;  /* Per il testo dentro i bottoni blu */
 }
-
 body {
   margin: 0;
   background-color: var(--bg-background-primary);
@@ -17,4 +24,22 @@ body {
 
 * {
     box-sizing: border-box;
+}
+
+/* GLOBAL TYPOGRAPHY */
+
+h1, h2, h3, strong {
+    color: var(--text-primary);
+    font-weight: 600; /* Tipico di Poppins per i titoli */
+    letter-spacing: -0.02em;
+}
+
+p, span, li {
+    color: var(--text-secondary);
+    line-height: 1.6; /* Fondamentale per la leggibilità del corpo del testo */
+}
+
+.text-small, .timestamp, .project-category {
+    color: var(--text-muted);
+    font-size: 0.875rem;
 }
