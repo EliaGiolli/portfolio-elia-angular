@@ -1,1 +1,45 @@
-<p>projects-layout works!</p>
+<div class="title-wrapper">
+    <h1>My Projects</h1>
+</div>
+
+<section class="cards-wrapper">
+    <app-card>
+        <div class="card-header" card-header>
+            <app-icon name="monitor" [size]="45" />
+            <h2>Front-end Projects</h2>
+        </div>
+        <div class="card-body" card-body>
+            <p>
+                Explore my client-side applications built with modern frameworks 
+                like Angular and React, focused on performance and UX.
+            </p>
+        </div>
+        <div card-footer class="card-footer">
+            <app-button 
+                variant="secondary" 
+                routerLink="frontend"
+            >
+                View Projects
+            </app-button>
+        </div>
+    </app-card>
+     <app-card>
+        <div class="card-header" card-header>
+            <app-icon name="database" [size]="45" />
+            <h2>Back-end Projects</h2>
+        </div>
+        <div class="card-body" card-body>
+            <p>
+                Robust server-side architectures, REST APIs, and database 
+                management systems that power scalable web solutions.
+            </p>
+        </div>
+        <div class="card-footer" card-footer>
+            <app-button variant="secondary" routerLink="backend">
+               View Projects
+            </app-button>
+        </div>
+     </app-card>
+</section>
+
+

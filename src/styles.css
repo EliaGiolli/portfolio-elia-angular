@@ -15,8 +15,9 @@
     --text-muted: #8E97A6;      /* Per i "meta-data" (es: date, tag tecnologie, testi piccolissimi) */
     --text-on-accent: #FFFFFF;  /* Per il testo dentro i bottoni blu */
 }
-body {
+html, body {
   margin: 0;
+  overflow-x: hidden;
   background-color: var(--bg-background-secondary);
   color: var(--text-primary);
   font-family: 'Poppins', system-ui, sans-serif;

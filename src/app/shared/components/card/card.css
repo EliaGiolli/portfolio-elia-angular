@@ -1,0 +1,32 @@
+:host {
+  display: block; 
+}
+.custom-card {
+  background: #FFFFFF; /* Bianco puro per farla staccare dallo sfondo grigio dell'app */
+  border: 1px solid var(--bg-accent-secondary);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05); /* Ombra morbida per dare profondità */
+}
+
+.card-header {
+  /* Usiamo una versione ultra-light del tuo blu primario */
+  background-color: color-mix(in srgb, var(--bg-accent-secondary), white 94%); 
+  padding: 1.2rem 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--bg-accent-primary), white 85%);
+}
+
+.card-body {
+  background: #FFFFFF; /* Corpo bianco */
+  padding: 1rem;
+}
+.card-footer {
+  display: flex;
+  justify-content: flex-end; 
+}

@@ -1,0 +1,64 @@
+:host {
+  display: inline-block;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:host(.disabled) {
+  pointer-events: none;
+  opacity: 0.6;
+  filter: grayscale(1);
+}
+
+button {
+  all: unset; /* Reset totale dei default del browser */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.8rem 1.8rem;
+  border-radius: 12px;
+  transition: inherit;
+  box-sizing: border-box;
+}
+
+/* VARIANTE: btn-projects (Primary) */
+:host(.btn-primary) button {
+  background-color: var(--bg-accent-primary);
+  color: var(--text-on-accent);
+  box-shadow: 0 4px 14px 0 rgba(45, 68, 255, 0.25);
+}
+
+:host(.btn-primary:hover) {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 6px 20px rgba(45, 68, 255, 0.3);
+}
+
+/* VARIANTE: btn-cv (Secondary / Outline) */
+:host(.btn-secondary) button {
+  background-color: #FFFFFF;
+  color: var(--bg-accent-primary);
+  border: 2px solid var(--bg-accent-primary);
+}
+
+:host(.btn-secondary:hover) {
+  transform: translateY(-2px);
+  background-color: var(--bg-background-secondary);
+}
+
+/* VARIANTE EXTRA: Ghost (utile per link meno importanti nel footer) */
+:host(.btn-ghost) button {
+  background-color: transparent;
+  color: var(--text-secondary);
+}
+
+:host(.btn-ghost:hover) {
+  background-color: var(--bg-background-secondary);
+  color: var(--bg-accent-primary);
+}
