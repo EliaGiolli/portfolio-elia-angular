@@ -28,7 +28,7 @@ Built with a focus on maintainability and the "Zero-Footprint" personalization s
 - [ ] Portfolio Grid implementation (Frontend/Backend filtering)
 - [ ] Individual Project Detail Pages
 - [ ] Contact System with validation
-- [ ] Dark Mode Support & Accessibility Audit
+- [ ] Accessibility Audit
 
 ## 🛠️ Development
 
@@ -37,12 +37,14 @@ To get a local copy up and running, follow these steps:
 1. **Clone the repo**
    ```bash
    git clone [https://github.com/your-username/PortfolioElia.git](https://github.com/your-username/PortfolioElia.git)
-Install dependencies
+2. **Install dependencies**
 
-Bash
+```bash
 npm install
-Run the server
+```
+3. **Run the server**
 
-Bash
+```bash
 ng serve
+```
 Designed and developed with 💙 by Elia Giolli.
