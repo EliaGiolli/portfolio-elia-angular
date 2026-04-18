@@ -1,1 +1,18 @@
-<p>navbar works!</p>
+<header class="navbar">
+  <div class="navbar-container">
+    <a routerLink="/" class="logo">LOGO</a>
+
+    <button class="mobile-toggle" (click)="toggleMenu()" aria-label="Toggle menu">
+      <app-icon 
+        [name]="isMenuOpen() ? CLOSE_ICON : MENU_ICON" 
+        [size]="45">
+      </app-icon>
+    </button>
+
+    <nav [class.open]="isMenuOpen()">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="isMenuOpen.set(false)">Homepage</a>
+      <a routerLink="/projects" routerLinkActive="active" (click)="isMenuOpen.set(false)">My projects</a>
+      <a routerLink="/contacts" routerLinkActive="active" (click)="isMenuOpen.set(false)">Contact me</a>
+    </nav>
+  </div>
+</header>
