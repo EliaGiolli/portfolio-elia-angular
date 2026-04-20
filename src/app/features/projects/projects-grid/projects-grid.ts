@@ -21,7 +21,7 @@ export class ProjectsGrid implements OnInit {
 
   constructor(
     private route: ActivatedRoute, 
-    public projectService: ProjectService, // Public per usarlo nel template
+    public projectService: ProjectService, 
     private location: Location
   ) {}
 
@@ -30,6 +30,13 @@ export class ProjectsGrid implements OnInit {
       this.projectService.selectedStack.set(data['stack'] ?? null);
       this.projectService.activeTags.set([]);
     });
+  }
+
+  get currentAvailableTags(): string[] {
+    const stack = this.projectService.selectedStack();
+    return stack === TechStack.frontend 
+      ? ['Angular', 'React', 'NextJS', 'TypeScript', 'TailwindCSS']
+      : ['NodeJS', 'ExpressJS', 'MongoDB', 'PostgreSQL', 'TypeScript'];
   }
 
   goBack() { this.location.back(); }

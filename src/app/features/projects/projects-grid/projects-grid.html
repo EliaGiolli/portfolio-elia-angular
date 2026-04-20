@@ -1,28 +1,58 @@
-<main class="grid-container">
-  @for (project of projectService.filteredProjects(); track project.id) {
-    <app-card class="project-card">
-      <div card-header>
-        <h3>{{ project.project_name }}</h3>
-      </div>
-      
-      <div card-body>
-        <p>{{ project.description }}</p>
-        
-        <div class="tech-stack-icons">
-          @for (tech of project.technologies; track tech) {
-            <app-icon 
-              [name]="tech.toLowerCase()" 
-              [appTooltip]="tech" 
-              [size]="24" />
-          }
-        </div>
-      </div>
+<main>
+  <header class="projects-nav">
+    <app-button variant="ghost" (click)="goBack()">
+      <app-icon name="arrow-left" [size]="40" /> Torna ai Progetti
+    </app-button>
+    
+    <h2>Progetti {{ projectService.selectedStack() }}</h2>
+  </header>
 
-      <div card-footer>
-        <app-button variant="secondary" [href]="project.demo_link">
-          View Demo
-        </app-button>
-      </div>
-    </app-card>
-  }
+  <div class="filter-container">
+    <p>Filtra per tecnologia:</p>
+    <div class="filter-chips">
+      @for (tag of currentAvailableTags; track tag) {
+        <button 
+          class="chip" 
+          [class.active]="projectService.activeTags().includes(tag)"
+          (click)="projectService.toggleTag(tag)"
+        >
+          {{ tag }}
+        </button>
+      }
+      @if (projectService.activeTags().length > 0) {
+        <button class="chip reset" (click)="projectService.activeTags.set([])">
+          Reset ✕
+        </button>
+      }
+    </div>
+  </div>
+  <section class="grid-container">
+    @for (project of projectService.filteredProjects(); track project.id) {
+      <app-card 
+        class="project-card"
+        [icon]="project.tech_stack === TechStack.frontend ? 'monitor' : 'database'"
+      >
+        <h3 card-header>{{ project.project_name }}</h3>
+        
+        <div card-body>
+          <p>{{ project.description }}</p>
+          
+          <div class="tech-stack-icons">
+            @for (tech of project.technologies; track tech) {
+              <app-icon 
+                [name]="tech.toLowerCase().trim()" 
+                [appTooltip]="tech" 
+                [size]="45" />
+            }
+          </div>
+        </div>
+  
+        <div card-footer>
+          <app-button variant="secondary" [href]="project.demo_link">
+            View Demo
+          </app-button>
+        </div>
+      </app-card>
+    }
+  </section>
 </main>
