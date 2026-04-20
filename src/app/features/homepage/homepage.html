@@ -6,25 +6,25 @@
             <div class="icon-group">
                 <span class="group-label">Frontend</span>
                 <div class="icons-row">
-                    <app-icon name="html5" [size]="37" />
-                    <app-icon name="css" [size]="37" />
-                    <app-icon name="javascript" [size]="37" />
-                    <app-icon name="angular" [size]="37" />
-                    <app-icon name="react" [size]="37" />
+                    <app-icon name="html5" [size]="37" appTooltip="HTML5"/>
+                    <app-icon name="css" [size]="37" appTooltip="CSS3"/>
+                    <app-icon name="javascript" [size]="37"  appTooltip="Javascript"/>
+                    <app-icon name="angular" [size]="37" appTooltip="Angular 19"/>
+                    <app-icon name="react" [size]="37" appTooltip="React"/>
                 </div>
             </div>
+        </div>
 
             <div class="icon-group">
                 <span class="group-label">Backend & DB</span>
                 <div class="icons-row">
-                    <app-icon name="nodedotjs" [size]="37" />
-                    <app-icon name="express" [size]="37" />
-                    <app-icon name="nestjs" [size]="37" />
-                    <app-icon name="mongodb" [size]="37" />
-                    <app-icon name="postgresql" [size]="37" />
+                    <app-icon name="nodedotjs" [size]="37" appTooltip="NodeJS"/>
+                    <app-icon name="express" [size]="37" appTooltip="ExpressJS"/>
+                    <app-icon name="nestjs" [size]="37" appTooltip="NestJS"/>
+                    <app-icon name="mongodb" [size]="37" appTooltip="MongoDB"/>
+                    <app-icon name="postgresql" [size]="37" appTooltip="PostgreSQL"/>
                 </div>
             </div>
-        </div>
         <div class="buttons-wrapper">
             <app-button variant="primary" routerLink="/projects">Go to projects</app-button>
             <app-button variant="secondary">Read my CV</app-button>

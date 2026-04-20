@@ -20,6 +20,7 @@ export class Button {
   variant = input<ButtonVariant>('primary');
   type = input<'button' | 'submit' | 'reset'>('button');
   disabled = input<boolean>(false);
+  href = input<string>()
 
   // Calcoliamo la classe CSS in base alla variante
   protected variantClass = computed(() => `btn-${this.variant()}`);

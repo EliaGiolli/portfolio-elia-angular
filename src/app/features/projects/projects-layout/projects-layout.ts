@@ -10,7 +10,8 @@ import { Button } from '../../../shared/components/button/button';
     Card,
     Button,
     IconComponent, 
-    RouterLink],
+    RouterLink,
+  ],
   templateUrl: './projects-layout.html',
   styleUrl: './projects-layout.css',
 })

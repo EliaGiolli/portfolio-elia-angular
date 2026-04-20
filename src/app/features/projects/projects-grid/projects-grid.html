@@ -1,1 +1,28 @@
-<p>projects-grid works!</p>
+<main class="grid-container">
+  @for (project of projectService.filteredProjects(); track project.id) {
+    <app-card class="project-card">
+      <div card-header>
+        <h3>{{ project.project_name }}</h3>
+      </div>
+      
+      <div card-body>
+        <p>{{ project.description }}</p>
+        
+        <div class="tech-stack-icons">
+          @for (tech of project.technologies; track tech) {
+            <app-icon 
+              [name]="tech.toLowerCase()" 
+              [appTooltip]="tech" 
+              [size]="24" />
+          }
+        </div>
+      </div>
+
+      <div card-footer>
+        <app-button variant="secondary" [href]="project.demo_link">
+          View Demo
+        </app-button>
+      </div>
+    </app-card>
+  }
+</main>

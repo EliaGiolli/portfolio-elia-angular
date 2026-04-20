@@ -47,4 +47,4 @@ npm install
 ```bash
 ng serve
 ```
-Designed and developed with 💙 by Elia Giolli.
+Designed and developed with 💙 by Elia Giolli

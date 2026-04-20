@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { MainLayoutComponent } from './features/main-layout/main-layout';
+import { TechStack } from './shared/types/projects';
 
 export const routes: Routes = [
   {
@@ -11,21 +12,22 @@ export const routes: Routes = [
     component: MainLayoutComponent, 
     children: [
       {
+        // Landing page for projects (shows the two choice cards)
         path: 'projects',
         loadComponent: () => import('./features/projects/projects-layout/projects-layout').then(m => m.ProjectsLayout),
-        children: [
-          // Qui il path vuoto '' indica cosa mostrare di default (es. le due cards FE/BE)
-          // Se invece le due cards devono sparire quando entri nella grid, 
-          // gestisci la logica con uno @if nel template del layout o con rotte separate.
-          {
-            path: 'frontend', // URL: /projects/frontend
-            loadComponent: () => import('./features/projects/projects-grid/projects-grid').then(m => m.ProjectsGrid)
-          },
-          {
-            path: 'backend', // URL: /projects/backend
-            loadComponent: () => import('./features/projects/projects-grid/projects-grid').then(m => m.ProjectsGrid)
-          }
-        ]
+      },
+      {
+        // Separate routes for the filtered grids. These are siblings
+        // of the landing route so the cards aren't rendered together
+        // with the grid (no visual nesting).
+        path: 'projects/frontend',
+        loadComponent: () => import('./features/projects/projects-grid/projects-grid').then(m => m.ProjectsGrid),
+        data: { stack: TechStack.frontend }
+      },
+      {
+        path: 'projects/backend',
+        loadComponent: () => import('./features/projects/projects-grid/projects-grid').then(m => m.ProjectsGrid),
+        data: { stack: TechStack.backend }
       },
       {
         path: 'contacts',

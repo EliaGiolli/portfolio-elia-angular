@@ -1,0 +1,22 @@
+.tech-stack-icons {
+  display: flex;
+  gap: 12px;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.filter-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+/* Stile per il bottone filtro attivo */
+.filter-btn.active {
+  background-color: var(--bg-accent-primary);
+  color: white;
+  border-color: var(--bg-accent-primary);
+}
