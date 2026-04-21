@@ -1,0 +1,120 @@
+<main class="main-wrapper">
+    <section class="info-wrapper" aria-labelledby="about-title">
+        <div class="foto-column">
+          <app-icon name="arrow-left" [size]="32" routerLink="/" class="back-icon" />
+          <img src="assets/images/foto-elia.jpg" alt="Elia Giolli - Full Stack Developer" class="profile-img">
+        </div>
+      
+        <div class="about-me-wrapper">
+          <div class="header-main">
+            <h3>About me</h3>
+            <h1>Full-Stack Developer</h1>
+          </div>
+          
+          <div class="bio-content">
+            <p>
+              I am a <strong>Full-stack Developer</strong> with a distinctive background in 
+              <strong>Networking and IT Systems</strong>. I specialize in designing and 
+              developing efficient, scalable server-side logic and high-performance, 
+              reactive web applications using <strong>Angular</strong>, <strong>React 19</strong>, 
+              and <strong>Next.js 15</strong>[cite: 10, 50, 98].
+            </p>
+            <p>
+              Leveraging solid troubleshooting experience and <strong>CISCO certifications</strong>, 
+              I approach software development with a holistic view. I combine deep expertise in 
+              <strong>Node.js</strong> and <strong>TypeScript</strong> with the ability to 
+              manage network infrastructure, ensuring the delivery of 
+              <strong>"secure by design"</strong>, optimized, and scalable solutions.
+            </p>
+          </div>
+      
+          <div class="icons-wrapper">
+            <a href="https://github.com/EliaGiolli" target="_blank" class="link" aria-label="GitHub Profile">
+              <app-icon name="github" [size]="40" />
+              <span>GitHub</span>
+            </a>
+            <a href="https://linkedin.com/in/eliagiolli" target="_blank" class="link" aria-label="LinkedIn Profile">
+              <app-icon name="linkedin" [size]="40" />
+              <span>LinkedIn</span>
+            </a>
+            <a href="mailto:eliagiolli22@gmail.com" class="link" aria-label="Send Email">
+              <app-icon name="mail" [size]="40" />
+              <span>Email</span>
+            </a>
+          </div>
+        </div>
+    </section>
+  
+    <section class="cv-section" aria-labelledby="webdev-title">
+        <h2 id="webdev-title">Web Development Expertise</h2>
+        
+        <article class="inner-wrapper">
+          <h3>Front-End Engineering</h3>
+          <ul class="skills-list">
+            <li>Developing high-performance, reactive web applications using <strong>Angular 19</strong>, <strong>React 19</strong>, and <strong>Next.js 15</strong>, implementing SSR and SSG for optimal Core Web Vitals.</li>
+            <li>Expertise in advanced state management using <strong>Signals</strong>, <strong>Zustand</strong>, <strong>Redux Toolkit</strong>, and <strong>RxJS</strong> to manage complex data flows.</li>
+            <li>Building accessible (A11y) and responsive interfaces with <strong>TypeScript</strong> and <strong>TailwindCSS v4</strong>, ensuring a "premium" UX across all devices.</li>
+            <li>Implementing robust testing suites with <strong>Jest</strong> and <strong>React Testing Library</strong> to guarantee component reliability and maintainability.</li>
+          </ul>
+        </article>
+      
+        <article class="inner-wrapper">
+          <h3>Back-End & Systems Architecture</h3>
+          <ul class="skills-list">
+            <li>Designing scalable server-side logic and microservices using <strong>Node.js</strong> and <strong>NestJS</strong>, following MVC and SOLID principles.</li>
+            <li>Managing data persistence through <strong>SQL</strong> (PostgreSQL, MySQL) and <strong>NoSQL</strong> (MongoDB) with advanced ORM integration like <strong>Prisma</strong> and <strong>TypeORM</strong>.</li>
+            <li>Architecting secure communication layers using <strong>REST APIs</strong> and <strong>GraphQL</strong>, integrated with OAuth 2.0 and JWT authentication.</li>
+          </ul>
+        </article>
+      </section>
+  
+    <section class="cv-section accent" aria-labelledby="it-title">
+      <h2 id="it-title">Infrastructure & Cybersecurity</h2>
+      
+      <article class="inner-wrapper">
+        <h3>Networking & Cloud</h3>
+        <ul class="skills-list">
+          <li><strong>Cisco Standards:</strong> Troubleshooting and configuring IPv4/IPv6 networks, VLANs, and routing protocols (OSPF, EIGRP).</li>
+          <li>Infrastructure management through CLI, including Linux system administration and SSH security.</li>
+        </ul>
+      </article>
+  
+      <article class="inner-wrapper">
+        <h3>Cybersecurity Foundations</h3>
+        <ul class="skills-list">
+          <li>Deep understanding of the <strong>Cyber Threat Landscape</strong>, including common attack vectors (Phishing, MITM, DoS) and the motivations of different threat actors (White, Gray, and Black Hat hackers).</li>
+          <li>Knowledge of <strong>Defense-in-Depth</strong> strategies (Confidentiality, Integrity, Availability) to protect organizational data and privacy.</li>
+          <li>Study of mitigation techniques for malware, social engineering, and network vulnerabilities to ensure a secure digital environment.</li>
+        </ul>
+      </article>
+    </section>
+  
+    <section class="cv-section" aria-labelledby="cert-title">
+      <h2 id="cert-title">Professional Certifications</h2>
+      <div class="certifications-grid">
+        <article class="cert-item">
+          <h4>Angular Complete Guide</h4>
+          <span class="provider">Maximilian Schwarzmüller</span>
+          <p>Advanced mastery of RxJS, Signals, Standalone Components, and performance tuning.</p>
+        </article>
+
+        <article class="cert-item">
+            <h4>React Complete Guide</h4>
+            <span class="provider">Maximilian Schwarzmüller</span>
+            <p>Advanced mastery of React, Redux Toolkit, Zustand, and performance tuning.</p>
+          </article>
+  
+        <article class="cert-item">
+          <h4>Networking Essentials</h4>
+          <span class="provider">Cisco Networking Academy</span>
+          <p>Comprehensive training on network topologies, IP addressing, and hardware configuration.</p>
+        </article>
+  
+        <article class="cert-item">
+          <h4>Cybersecurity Essentials</h4>
+          <span class="provider">Cisco Networking Academy</span>
+          <p>Focus on basic concepts of network security, data confidentiality, and risk mitigation techniques.</p>
+        </article>
+      </div>
+    </section>
+  </main>

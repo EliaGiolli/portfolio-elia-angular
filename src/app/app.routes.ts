@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { MainLayoutComponent } from './features/main-layout/main-layout';
+import { Cv } from './features/cv/cv';
 import { NotFound } from './features/not-found/not-found';
 import { TechStack } from './shared/types/projects';
 
@@ -36,6 +37,10 @@ export const routes: Routes = [
       {
         path: 'projects/backend/:id',
         loadComponent: () => import('./features/projects/projects-component/projects-component').then(m => m.ProjectsComponent)
+      },
+      {
+        path: 'cv',
+        component: Cv
       },
       // Contacts page
       {
