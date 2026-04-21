@@ -42,13 +42,18 @@
               <app-icon 
                 [name]="tech.toLowerCase().trim()" 
                 [appTooltip]="tech" 
-                [size]="45" />
+                [size]="45" 
+              />
             }
           </div>
         </div>
   
         <div card-footer>
-          <app-button variant="secondary" routerLink="/projects/backend/:id">
+          <!-- Dynamic segment for the route-->
+          <app-button 
+            variant="secondary" 
+            [routerLink]="['/projects', project.tech_stack.toLowerCase(), project.id]"
+          >
             View Details
           </app-button>
         </div>

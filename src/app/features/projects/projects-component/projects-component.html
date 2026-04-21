@@ -1,0 +1,42 @@
+<section class="page-wrapper">
+  @if (project(); as p) {
+    <app-card [icon]="p.tech_stack === 'frontend' ? 'monitor' : 'database'">
+      <h2 card-header>{{ p.project_name }}</h2>
+
+      <div card-body>
+          <p class="description">{{ p.description }}</p>
+          
+          <div class="tech-info">
+            <h4>Tech Stack:</h4>
+            <div class="tech-list">
+              @for (tech of p.technologies; track tech) {
+                <div class="tech-item">
+                   <app-icon [name]="tech.toLowerCase().trim()" [size]="40" />
+                   <span>{{ tech }}</span>
+                </div>
+              }
+            </div>
+          </div>
+      </div>
+
+      <div card-footer class="footer-actions">
+          <app-button variant="ghost" [routerLink]="['/projects', p.tech_stack.toLowerCase()]">
+            <app-icon name="arrow-left" [size]="40" />
+            <span>Back to list</span>
+          </app-button>
+
+          <div class="external-links">
+            <app-button variant="secondary" [href]="'https://github.com/tuo-user/' + p.project_name.toLowerCase()">
+              <app-icon name="github" [size]="40" />
+              <span>Code</span>
+            </app-button>
+
+            <app-button variant="primary" [href]="p.demo_link">
+              <app-icon name="external-link" [size]="40" />
+              <span class="">Live Demo</span>
+            </app-button>
+          </div>
+      </div>
+    </app-card>
+  }
+</section>

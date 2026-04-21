@@ -17,6 +17,7 @@ export const routes: Routes = [
         path: 'projects',
         loadComponent: () => import('./features/projects/projects-layout/projects-layout').then(m => m.ProjectsLayout),
       },
+      // Projects Grid
       {
         path: 'projects/frontend',
         loadComponent: () => import('./features/projects/projects-grid/projects-grid').then(m => m.ProjectsGrid),
@@ -27,6 +28,16 @@ export const routes: Routes = [
         loadComponent: () => import('./features/projects/projects-grid/projects-grid').then(m => m.ProjectsGrid),
         data: { stack: TechStack.backend }
       },
+      //Routes with dynamic segment for the projects' details
+      {
+        path: 'projects/frontend/:id',
+        loadComponent: () => import('./features/projects/projects-component/projects-component').then(m => m.ProjectsComponent)
+      },
+      {
+        path: 'projects/backend/:id',
+        loadComponent: () => import('./features/projects/projects-component/projects-component').then(m => m.ProjectsComponent)
+      },
+      // Contacts page
       {
         path: 'contacts',
         loadComponent: () => import('./features/about/contacts/contacts').then(m => m.Contacts)

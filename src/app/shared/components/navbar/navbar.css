@@ -3,9 +3,10 @@
   background-color: color-mix(in srgb, var(--bg-background-primary), transparent 20%);
   backdrop-filter: blur(10px);
   position: sticky;
-  inset-block-start: 0; /* Sintassi logica moderna per 'top' */
+  inset-block-start: 0; 
   z-index: 1000;
   border-block-end: 1px solid var(--bg-accent-secondary);
+  padding: 2rem;
 
   & .navbar-container {
     max-width: 1200px;
