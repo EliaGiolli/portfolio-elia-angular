@@ -1,1 +1,102 @@
-<p>contacts works!</p>
+<section class="page-wrapper" aria-labelledby="form-title">
+  @if (!isSubmitted()) {
+    <div class="form-intro">
+      <h1 id="form-title">Contacts</h1>
+      <p>If you like how I build websites. Why don't we collaborate together?</p>
+    </div>
+
+    <form [formGroup]="contactsForm" (ngSubmit)="onSubmit($event)">
+      <div class="form-contacts">
+        <div class="input-group">
+          <label for="name">Name</label>
+          <input 
+            id="name" 
+            type="text" 
+            formControlName="name" 
+            placeholder="e.g. John"
+            [class.invalid]="f.name.touched && f.name.invalid"
+          >
+          @if (f.name.touched && f.name.errors) {
+            <div class="error-message">
+              @if (f.name.errors['required']) { <span>Name is required</span> }
+              @if (f.name.errors['minlength']) { <span>Minimum 4 characters required</span> }
+            </div>
+          }
+        </div>
+
+        <div class="input-group">
+          <label for="lastName">Last Name</label>
+          <input 
+            id="lastName" 
+            type="text" 
+            formControlName="lastName" 
+            placeholder="e.g. Doe"
+            [class.invalid]="f.lastName.touched && f.lastName.invalid"
+          >
+          @if (f.lastName.touched && f.lastName.errors) {
+            <div class="error-message">
+              @if (f.lastName.errors['required']) { <span>Last name is required</span> }
+              @if (f.lastName.errors['minlength']) { <span>Minimum 4 characters required</span> }
+            </div>
+          }
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input 
+            id="password" 
+            type="password" 
+            formControlName="password" 
+            placeholder="Enter a secure password"
+            [class.invalid]="f.password.touched && f.password.invalid"
+          >
+          @if (f.password.touched && f.password.errors) {
+            <div class="error-message">
+              @if (f.password.errors['required']) { <span>Password is required</span> }
+              @if (f.password.errors['pattern']) { <span>Must contain uppercase, number and symbol</span> }
+              @if (f.password.errors['minlength']) { <span>Minimum 8 characters required</span> }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="form-text-area">
+        <label for="textarea">Collaboration</label>
+        <textarea 
+          id="textarea" 
+          [formControl]="textArea" 
+          placeholder="Tell me more about your project or how we could work together..."
+          [class.invalid]="textArea.touched && textArea.invalid"
+        ></textarea>
+        @if (textArea.touched && textArea.errors) {
+          <div class="error-message">
+            @if (textArea.errors['required']) { <span>Please provide a short description</span> }
+            @if (textArea.errors['minlength']) { <span>Message must be at least 10 characters</span> }
+          </div>
+        }
+      </div>
+
+      <div class="form-buttons">
+        <app-button 
+          variant="primary" 
+          type="submit" 
+          [disabled]="isSubmitting()"
+        >
+          {{ isSubmitting() ? 'Sending...' : 'Send Message' }}
+        </app-button>
+        <app-button variant="secondary" routerLink="/">Back</app-button>
+      </div>
+    </form>
+  } @else {
+    <div class="success-feedback">
+      <div class="icon-container">
+        <app-icon name="badge-check" [size]="60" />
+      </div>
+      <h2>Message Sent!</h2>
+      <p>Thank you for reaching out. I'll get back to you as soon as possible.</p>
+      <app-button variant="secondary" (click)="isSubmitted.set(false)">
+        Send another message
+      </app-button>
+    </div>
+  }
+</section>
