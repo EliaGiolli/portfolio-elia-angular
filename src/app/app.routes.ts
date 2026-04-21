@@ -3,6 +3,7 @@ import { MainLayoutComponent } from './features/main-layout/main-layout';
 import { Cv } from './features/cv/cv';
 import { NotFound } from './features/not-found/not-found';
 import { TechStack } from './shared/types/projects';
+import { RenderMode } from '@angular/ssr';
 
 export const routes: Routes = [
   {
@@ -32,11 +33,11 @@ export const routes: Routes = [
       //Routes with dynamic segment for the projects' details
       {
         path: 'projects/frontend/:id',
-        loadComponent: () => import('./features/projects/projects-component/projects-component').then(m => m.ProjectsComponent)
+        loadComponent: () => import('./features/projects/projects-component/projects-component').then(m => m.ProjectsComponent),
       },
       {
         path: 'projects/backend/:id',
-        loadComponent: () => import('./features/projects/projects-component/projects-component').then(m => m.ProjectsComponent)
+        loadComponent: () => import('./features/projects/projects-component/projects-component').then(m => m.ProjectsComponent),
       },
       {
         path: 'cv',

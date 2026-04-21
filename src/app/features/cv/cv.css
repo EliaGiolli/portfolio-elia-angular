@@ -142,7 +142,7 @@
   }
   
   /* Profile Header */
-  ..info-wrapper {
+  .info-wrapper {
     display: grid;
     grid-template-columns: 300px 1fr;
     gap: 3rem;

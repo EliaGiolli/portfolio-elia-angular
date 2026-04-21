@@ -1,5 +1,5 @@
 .main-wrapper {
-    min-height: 80vh; /* Centra verticalmente nella viewport */
+    min-height: 80vh; 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -58,7 +58,6 @@
     }
 }
 
-/* Ottimizzazione Mobile */
 @media (max-width: 480px) {
     .actions-wrapper {
         flex-direction: column;

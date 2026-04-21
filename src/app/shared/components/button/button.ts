@@ -10,7 +10,7 @@ import { ButtonVariant } from '../../types/customComponentsTypes';
     </button>
   `,
   styleUrl: './button.css',
-  // Applichiamo la variante direttamente all'elemento host <app-button>
+  // We apply the variant right to the hos element <app-button>
   host: {
     '[class]': 'variantClass()',
     '[class.disabled]': 'disabled()'
@@ -22,6 +22,6 @@ export class Button {
   disabled = input<boolean>(false);
   href = input<string>()
 
-  // Calcoliamo la classe CSS in base alla variante
+  // We calculate the class based on the variant
   protected variantClass = computed(() => `btn-${this.variant()}`);
 }

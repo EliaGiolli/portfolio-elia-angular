@@ -140,17 +140,22 @@ Implemented:
 - Icon images include `alt` attributes.
 - Routing + SSR handled so screen readers receive meaningful server-rendered content.
 
-Recommended improvements (high-priority):
-- Allow `app-icon` to accept `decorative` input to set `alt=""` when the icon is not informative.
-- Ensure images referenced by `project.img_path` include descriptive `alt` text (not filenames).
-- Add visible focus styles for keyboard navigation (global CSS) and ensure interactive elements have clear focus outlines.
-- For filtering actions, consider an `aria-live="polite"` region to announce counts after filters are applied (helps users of AT know how many items remain).
-- Use semantic lists (`<ul>/<li>`) or `role="list"` + `role="listitem"` for project collections to convey grouping to assistive tech.
+Implemented (updates applied):
+- `app-icon` now supports a `decorative` input and an optional `alt` input. When `decorative` is true the image uses `alt=""` and `aria-hidden="true"` so assistive technology ignores purely decorative icons.
+- `app-button` now renders the correct semantic element based on how it's used: it renders an `<a>` for `href` external links (with `target="_blank" rel="noopener noreferrer"`), an `<a>` with the Angular `routerLink` directive for in-app navigation, or a native `<button>` for actions. Anchor and button variants include `aria-disabled`/`disabled` handling and maintain keyboard semantics.
+- `app-card` accepts an optional `label` input which is applied as `aria-label` on the article container when provided, giving a reliable accessible name for complex projected content.
+- Common actionable controls in `projects-component` now include explicit `aria-label` attributes to disambiguate icon-only controls.
+
+Remaining recommendations (low-effort, high-value):
+- Ensure `project.img_path` values include descriptive `alt` text when images are present.
+- Add a small, consistent visible focus style in global CSS (outline or box-shadow) to improve keyboard discoverability.
+- Consider adding an `aria-live="polite"` region that announces filter counts when `selectedStack` or `activeTags` changes.
+- Use semantic lists (`<ul>/<li>`) for the grid of projects or add `role="list"`/`role="listitem"` if markup cannot be changed.
 
 ---
 
 ## 🗂 Project structure (concise map)
-
+```bash
 - `src/app/`
 	- `app.ts`, `app.html`, `app.config.ts`, `app.routes.ts` — app bootstrap and routing config
 	- `core/`
@@ -163,7 +168,7 @@ Recommended improvements (high-priority):
 		- `types/` — shared TypeScript types
 	- `features/` — route-scoped UI: `homepage`, `projects`, `about`, `cv`, `not-found`
 - `src/assets/` — `icons/`, `images/` used by `app-icon` and project entries
-
+```
 ---
 
 ## 🗣 How to explain this to HR (talking points)

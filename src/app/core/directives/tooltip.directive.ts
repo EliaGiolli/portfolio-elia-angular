@@ -6,7 +6,7 @@ import { TechTooltip } from '../../shared/components/tooltip/tooltip';
   standalone: true
 })
 export class TooltipDirective {
-  // Il nome della tech passato dalla direttiva
+
   appTooltip = input.required<string>();
 
   private componentRef: ComponentRef<TechTooltip> | null = null;
@@ -17,16 +17,16 @@ export class TooltipDirective {
   onMouseEnter() {
     if (this.componentRef) return;
 
-    // 1. Creiamo il componente dinamicamente come nel video
+    // 1. The component is created dynamically
     this.componentRef = this.vcr.createComponent(TechTooltip);
 
-    // 2. Passiamo il nome tramite il metodo setInput (essenziale per i Signal Inputs)
+    // 2. the name is passed with the setInput method, required for the Signal Input
     this.componentRef.setInput('techName', this.appTooltip());
   }
 
   @HostListener('mouseleave')
   onMouseLeave() {
-    // 3. Distruggiamo il componente quando il mouse esce
+    // 3. The component is destroyed when the mouse leaves
     if (this.componentRef) {
       this.componentRef.destroy();
       this.componentRef = null;

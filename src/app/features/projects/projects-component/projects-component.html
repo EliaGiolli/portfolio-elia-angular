@@ -1,6 +1,6 @@
 <section class="page-wrapper">
   @if (project(); as p) {
-    <app-card [icon]="p.tech_stack === 'frontend' ? 'monitor' : 'database'">
+    <app-card [icon]="p.tech_stack === 'frontend' ? 'monitor' : 'database'" [label]="p.project_name">
       <h2 card-header>{{ p.project_name }}</h2>
 
       <div card-body>
@@ -20,18 +20,18 @@
       </div>
 
       <div card-footer class="footer-actions">
-          <app-button variant="ghost" [routerLink]="['/projects', p.tech_stack.toLowerCase()]">
+          <app-button variant="ghost" [routerLink]="['/projects', p.tech_stack.toLowerCase()]" aria-label="Back to list">
             <app-icon name="arrow-left" [size]="40" />
             <span>Back to list</span>
           </app-button>
 
           <div class="external-links">
-            <app-button variant="secondary" [href]="'https://github.com/tuo-user/' + p.project_name.toLowerCase()">
+            <app-button variant="secondary" [href]="'https://github.com/tuo-user/' + p.project_name.toLowerCase()" aria-label="View code on GitHub">
               <app-icon name="github" [size]="40" />
               <span>Code</span>
             </app-button>
 
-            <app-button variant="primary" [href]="p.demo_link">
+            <app-button variant="primary" [href]="p.demo_link" aria-label="Open live demo">
               <app-icon name="external-link" [size]="40" />
               <span class="">Live Demo</span>
             </app-button>

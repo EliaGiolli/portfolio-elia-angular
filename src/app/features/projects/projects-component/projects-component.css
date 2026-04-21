@@ -1,15 +1,14 @@
 .page-wrapper {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Inizia dall'alto per scroll migliori su mobile */
+    align-items: flex-start; 
     padding: 2rem 1rem;
     min-height: 100vh;
-    background-color: var(--bg-background-primary); /* Colore di sfondo dell'app */
+    background-color: var(--bg-background-primary); 
 }
 
 app-card {
     width: 100%;
-    /* max-w-3xl di Tailwind equivale a 768px o 48rem */
     max-width: 48rem; 
     margin: 0 auto;
 }
@@ -49,7 +48,6 @@ app-card {
     }
 }
 
-/* Gestione dei bottoni nel footer */
 .footer-actions {
     display: flex;
     justify-content: space-between;
@@ -66,7 +64,7 @@ app-card {
 
 @media (max-width: 640px) {
     .footer-actions {
-        flex-direction: column-reverse; /* Il tasto "Indietro" finisce sotto su mobile */
+        flex-direction: column-reverse; 
     }
     
     .external-links, .footer-actions app-button {

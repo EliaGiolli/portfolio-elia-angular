@@ -9,7 +9,6 @@ import { IconComponent } from '../icon/icon';
   styleUrl: './navbar.css',
 })
 export class Navbar {
-  // Stato del menu mobile
   isMenuOpen = signal(false);
 
   readonly MENU_ICON = 'menu';

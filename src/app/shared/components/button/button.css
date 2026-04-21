@@ -11,7 +11,7 @@
 }
 
 button {
-  all: unset; /* Reset totale dei default del browser */
+  all: unset; /* Total reset of browser's defaults */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,7 +27,7 @@ button {
   box-sizing: border-box;
 }
 
-/* VARIANTE: btn-projects (Primary) */
+/* VARIANT: btn-projects (Primary) */
 :host(.btn-primary) button {
   background-color: var(--bg-accent-primary);
   color: var(--text-on-accent);
@@ -40,7 +40,7 @@ button {
   box-shadow: 0 6px 20px rgba(45, 68, 255, 0.3);
 }
 
-/* VARIANTE: btn-cv (Secondary / Outline) */
+/* VARIANT: btn-cv (Secondary / Outline) */
 :host(.btn-secondary) button {
   background-color: #FFFFFF;
   color: var(--bg-accent-primary);
@@ -52,7 +52,7 @@ button {
   background-color: var(--bg-background-secondary);
 }
 
-/* VARIANTE EXTRA: Ghost (utile per link meno importanti nel footer) */
+/* EXTRA VARIANT: Ghost (link inside the footer) */
 :host(.btn-ghost) button {
   background-color: transparent;
   color: var(--text-secondary);

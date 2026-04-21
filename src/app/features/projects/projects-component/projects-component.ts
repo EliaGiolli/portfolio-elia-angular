@@ -23,22 +23,19 @@ export class ProjectsComponent implements OnInit {
   private router = inject(Router);
   public projectService = inject(ProjectService);
 
-  // Utilizziamo un signal per gestire il progetto trovato in modo reattivo
   public project = signal<ProjectsTypes | undefined>(undefined);
 
   ngOnInit(): void {
-    // 1. Recuperiamo l'id dall'URL (es: /projects/frontend/1)
+    // 1. The id is retrived form the URL (es: /projects/frontend/1)
     const id = this.route.snapshot.paramMap.get('id');
 
     if (id) {
-      // 2. Cerchiamo il progetto nel service o direttamente dal mock
-      // Convertiamo 'id' in numero con il +
+      // 2. we search for the service in our mock data
       const foundProject = this.projectService.projects().find(p => p.id === +id);
       
       if (foundProject) {
         this.project.set(foundProject);
       } else {
-        // Se l'ID non esiste, mandiamo l'utente alla pagina 404
         this.router.navigate(['/404']);
       }
     }

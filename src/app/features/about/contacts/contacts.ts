@@ -54,14 +54,13 @@ export class Contacts {
       return;
     }
 
-    // Simuliamo l'invio
     this.isSubmitting.set(true);
 
     setTimeout(() => {
       this.isSubmitting.set(false);
       this.isSubmitted.set(true);
       
-      // Opzionale: resetta il form dopo l'invio
+      // Optional: reset the form after the submission
       this.contactsForm.reset();
       this.textArea.reset();
     }, 1500);
