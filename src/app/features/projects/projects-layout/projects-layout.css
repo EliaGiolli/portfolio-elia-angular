@@ -13,5 +13,5 @@
 .cards-wrapper {
     display: flex;
     gap: 2rem;
-    margin-top: 1rem;
+    margin-block: 1rem;
 }

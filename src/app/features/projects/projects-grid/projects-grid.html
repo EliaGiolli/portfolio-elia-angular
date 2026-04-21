@@ -1,14 +1,14 @@
 <main>
   <header class="projects-nav">
     <app-button variant="ghost" (click)="goBack()">
-      <app-icon name="arrow-left" [size]="40" /> Torna ai Progetti
+      <app-icon name="arrow-left" [size]="40" /> Back to projects
     </app-button>
     
-    <h2>Progetti {{ projectService.selectedStack() }}</h2>
+    <h2>{{ projectService.selectedStack() }} projects</h2>
   </header>
 
   <div class="filter-container">
-    <p>Filtra per tecnologia:</p>
+    <p>Filter for technologies:</p>
     <div class="filter-chips">
       @for (tag of currentAvailableTags; track tag) {
         <button 
@@ -48,8 +48,8 @@
         </div>
   
         <div card-footer>
-          <app-button variant="secondary" [href]="project.demo_link">
-            View Demo
+          <app-button variant="secondary" routerLink="/projects/backend/:id">
+            View Details
           </app-button>
         </div>
       </app-card>

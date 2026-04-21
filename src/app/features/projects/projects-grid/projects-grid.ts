@@ -1,5 +1,5 @@
 import { Component, computed, OnInit, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Location } from '@angular/common';
 import { TechStack } from '../../../shared/types/projects';
 import { Button } from '../../../shared/components/button/button';
@@ -10,7 +10,7 @@ import { TooltipDirective } from '../../../core/directives/tooltip.directive';
 
 @Component({
   selector: 'app-projects-grid',
-  imports: [Button, Card, IconComponent, TooltipDirective],
+  imports: [Button, Card, IconComponent, TooltipDirective, RouterLink],
   templateUrl: './projects-grid.html',
   styleUrl: './projects-grid.css',
 })

@@ -1,0 +1,71 @@
+.main-wrapper {
+    min-height: 80vh; /* Centra verticalmente nella viewport */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    gap: 2rem;
+
+    & .error-visual {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: var(--bg-accent-secondary);
+        
+        .error-code {
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-top: -1rem;
+            color: var(--bg-accent-primary);
+            opacity: 0.8;
+        }
+
+        .ghost-icon {
+            opacity: 0.3;
+            filter: blur(1px);
+        }
+    }
+
+    & .text-content {
+        max-width: 500px;
+        
+        h1 {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+    }
+
+    & .actions-wrapper {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap; /* Fondamentale per il mobile */
+        justify-content: center;
+
+        & .primary-btn {
+            color: var(--text-on-accent);
+        }
+    }
+}
+
+/* Ottimizzazione Mobile */
+@media (max-width: 480px) {
+    .actions-wrapper {
+        flex-direction: column;
+        width: 100%;
+        
+        app-button {
+            width: 100%;
+        }
+    }
+}

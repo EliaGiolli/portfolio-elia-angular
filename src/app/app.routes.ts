@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { MainLayoutComponent } from './features/main-layout/main-layout';
+import { NotFound } from './features/not-found/not-found';
 import { TechStack } from './shared/types/projects';
 
 export const routes: Routes = [
@@ -17,9 +18,6 @@ export const routes: Routes = [
         loadComponent: () => import('./features/projects/projects-layout/projects-layout').then(m => m.ProjectsLayout),
       },
       {
-        // Separate routes for the filtered grids. These are siblings
-        // of the landing route so the cards aren't rendered together
-        // with the grid (no visual nesting).
         path: 'projects/frontend',
         loadComponent: () => import('./features/projects/projects-grid/projects-grid').then(m => m.ProjectsGrid),
         data: { stack: TechStack.frontend }
@@ -35,5 +33,5 @@ export const routes: Routes = [
       }
     ]
   },
-  { path: '**', redirectTo: '' }
+  { path: '**', component: NotFound }
 ];

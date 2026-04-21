@@ -6,7 +6,7 @@ export const projects:ProjectsTypes[] = [
         "project_name": "NexCoin",
         "img_path": "",
         "description": "A modern, responsive cryptocurrency dashboard built with Next.js 15, TypeScript, TailwindCSS 4, and ShadCN UI components. This project fetches data from the public CoinGecko API",
-        "technologies": ["nextjs", "typescript", "tailwindcss", "nodejs", "postgresql"],
+        "technologies": ["nextdotjs", "typescript", "tailwindcss", "nodedotjs", "postgresql"],
         "demo_link": "",
         "tech_stack": TechStack.frontend
     },
@@ -24,7 +24,7 @@ export const projects:ProjectsTypes[] = [
         "project_name": "Dev Dashboard",
         "img_path": "",
         "description": "A REST API designed to simulate a developer/admin dashboard. It allows to monitor system health, manage logs, and test cryptography",
-        "technologies": ["nodejs", "expressjs", "typescript"],
+        "technologies": ["nodedotjs", "express", "typescript"],
         "demo_link": "",
         "tech_stack": TechStack.backend
     },
@@ -51,8 +51,14 @@ export const projects:ProjectsTypes[] = [
         "project_name": "Authentication Task Management",
         "img_path": "",
         "description": "A robust REST API built with Node.js, Express, TypeScript, and MongoDB that provides JWT-based authentication and comprehensive task management functionality.",
-        "technologies": ["nodejs", "expressjs", "typescript", "mongodb"],
+        "technologies": ["nodedotjs", "express", "typescript", "mongodb"],
         "demo_link": "",
         "tech_stack": TechStack.backend
     },
 ];
+
+
+
+/**
+ * The tech's names correspond to the icon's names
+ */
