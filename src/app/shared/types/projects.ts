@@ -7,10 +7,11 @@ export enum TechStack {
 
 export interface ProjectsTypes {
     id: number,
-    project_name:string,
-    img_path:string,
-    description:string,
+    project_name: string,
+    img_path: string,
+    description: string,
     technologies: string[],
-    demo_link:string,
+    github_link: string,
+    demo_link: string,
     tech_stack: TechStack
 }

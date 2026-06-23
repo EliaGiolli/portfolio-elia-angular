@@ -3,20 +3,20 @@
     <app-button variant="ghost" (click)="goBack()">
       <app-icon name="arrow-left" [size]="40" /> Back to projects
     </app-button>
-    
+
     <h2>{{ projectService.selectedStack() }} projects</h2>
   </header>
 
   <div class="filter-container">
     <p>Filter for technologies:</p>
     <div class="filter-chips">
-      @for (tag of currentAvailableTags; track tag) {
-        <button 
-          class="chip" 
-          [class.active]="projectService.activeTags().includes(tag)"
-          (click)="projectService.toggleTag(tag)"
+      @for (tag of currentTags(); track tag.value) {
+        <button
+          class="chip"
+          [class.active]="isTagActive(tag)"
+          (click)="projectService.toggleTag(tag.value)"
         >
-          {{ tag }}
+          {{ tag.label }}
         </button>
       }
       @if (projectService.activeTags().length > 0) {
@@ -26,32 +26,32 @@
       }
     </div>
   </div>
+
   <section class="grid-container">
     @for (project of projectService.filteredProjects(); track project.id) {
-      <app-card 
+      <app-card
         class="project-card"
         [icon]="project.tech_stack === TechStack.frontend ? 'monitor' : 'database'"
       >
         <h3 card-header>{{ project.project_name }}</h3>
-        
+
         <div card-body>
           <p>{{ project.description }}</p>
-          
+
           <div class="tech-stack-icons">
             @for (tech of project.technologies; track tech) {
-              <app-icon 
-                [name]="tech.toLowerCase().trim()" 
-                [appTooltip]="tech" 
-                [size]="45" 
+              <app-icon
+                [name]="tech.toLowerCase().trim()"
+                [appTooltip]="tech"
+                [size]="45"
               />
             }
           </div>
         </div>
-  
+
         <div card-footer>
-          <!-- Dynamic segment for the route-->
-          <app-button 
-            variant="secondary" 
+          <app-button
+            variant="secondary"
             [routerLink]="['/projects', project.tech_stack.toLowerCase(), project.id]"
           >
             View Details
