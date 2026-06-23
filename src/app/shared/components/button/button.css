@@ -10,8 +10,8 @@
   filter: grayscale(1);
 }
 
-button {
-  all: unset; /* Total reset of browser's defaults */
+:is(button, a) {
+  all: unset;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,10 +25,11 @@ button {
   border-radius: 12px;
   transition: inherit;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
-/* VARIANT: btn-projects (Primary) */
-:host(.btn-primary) button {
+/* VARIANT: Primary */
+:host(.btn-primary) :is(button, a) {
   background-color: var(--bg-accent-primary);
   color: var(--text-on-accent);
   box-shadow: 0 4px 14px 0 rgba(45, 68, 255, 0.25);
@@ -40,9 +41,9 @@ button {
   box-shadow: 0 6px 20px rgba(45, 68, 255, 0.3);
 }
 
-/* VARIANT: btn-cv (Secondary / Outline) */
-:host(.btn-secondary) button {
-  background-color: #FFFFFF;
+/* VARIANT: Secondary */
+:host(.btn-secondary) :is(button, a) {
+  background-color: #ffffff;
   color: var(--bg-accent-primary);
   border: 2px solid var(--bg-accent-primary);
 }
@@ -52,8 +53,8 @@ button {
   background-color: var(--bg-background-secondary);
 }
 
-/* EXTRA VARIANT: Ghost (link inside the footer) */
-:host(.btn-ghost) button {
+/* VARIANT: Ghost */
+:host(.btn-ghost) :is(button, a) {
   background-color: transparent;
   color: var(--text-secondary);
 }

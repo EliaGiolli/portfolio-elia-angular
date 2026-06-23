@@ -94,7 +94,7 @@ form {
   }
 }
 
-/* La password occupa l'intera riga su desktop */
+/* Email spans both columns on desktop */
 .input-group:nth-child(3) {
   grid-column: span 2;
 }

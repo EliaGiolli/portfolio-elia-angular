@@ -45,3 +45,17 @@ p, span, li {
     color: var(--text-muted);
     font-size: 0.875rem;
 }
+
+/* Global focus styles — keyboard users get the same quality experience as mouse users */
+:focus-visible {
+    outline: 2px solid var(--bg-accent-primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* Suppress the outline for elements that already provide their own focus feedback */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: none;
+}

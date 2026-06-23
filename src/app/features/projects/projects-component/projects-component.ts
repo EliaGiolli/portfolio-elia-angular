@@ -1,43 +1,35 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Component, computed, effect, inject, input } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { Card } from '../../../shared/components/card/card';
 import { Button } from '../../../shared/components/button/button';
 import { IconComponent } from '../../../shared/components/icon/icon';
 import { ProjectService } from '../../../core/services/project-service.service';
-import { ProjectsTypes } from '../../../shared/types/projects';
 
 @Component({
   selector: 'app-projects-component',
   standalone: true,
-  imports: [
-    Card, 
-    IconComponent, 
-    Button,
-    RouterLink
-  ],
+  imports: [Card, IconComponent, Button, RouterLink],
   templateUrl: './projects-component.html',
   styleUrl: './projects-component.css',
 })
-export class ProjectsComponent implements OnInit {
-  private route = inject(ActivatedRoute);
+export class ProjectsComponent {
   private router = inject(Router);
-  public projectService = inject(ProjectService);
+  projectService = inject(ProjectService);
 
-  public project = signal<ProjectsTypes | undefined>(undefined);
+  // Route param :id is bound automatically via withComponentInputBinding()
+  id = input<string>('');
 
-  ngOnInit(): void {
-    // 1. The id is retrived form the URL (es: /projects/frontend/1)
-    const id = this.route.snapshot.paramMap.get('id');
+  project = computed(() => {
+    const numId = Number(this.id());
+    if (!numId) return undefined;
+    return this.projectService.projects().find(p => p.id === numId);
+  });
 
-    if (id) {
-      // 2. we search for the service in our mock data
-      const foundProject = this.projectService.projects().find(p => p.id === +id);
-      
-      if (foundProject) {
-        this.project.set(foundProject);
-      } else {
+  constructor() {
+    effect(() => {
+      if (this.id() && this.project() === undefined) {
         this.router.navigate(['/404']);
       }
-    }
+    });
   }
 }

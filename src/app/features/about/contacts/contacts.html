@@ -2,17 +2,17 @@
   @if (!isSubmitted()) {
     <div class="form-intro">
       <h1 id="form-title">Contacts</h1>
-      <p>If you like how I build websites. Why don't we collaborate together?</p>
+      <p>If you like how I build websites, why don't we collaborate together?</p>
     </div>
 
     <form [formGroup]="contactsForm" (ngSubmit)="onSubmit($event)">
       <div class="form-contacts">
         <div class="input-group">
           <label for="name">Name</label>
-          <input 
-            id="name" 
-            type="text" 
-            formControlName="name" 
+          <input
+            id="name"
+            type="text"
+            formControlName="name"
             placeholder="e.g. John"
             [class.invalid]="f.name.touched && f.name.invalid"
           >
@@ -26,10 +26,10 @@
 
         <div class="input-group">
           <label for="lastName">Last Name</label>
-          <input 
-            id="lastName" 
-            type="text" 
-            formControlName="lastName" 
+          <input
+            id="lastName"
+            type="text"
+            formControlName="lastName"
             placeholder="e.g. Doe"
             [class.invalid]="f.lastName.touched && f.lastName.invalid"
           >
@@ -42,44 +42,43 @@
         </div>
 
         <div class="input-group">
-          <label for="password">Password</label>
-          <input 
-            id="password" 
-            type="password" 
-            formControlName="password" 
-            placeholder="Enter a secure password"
-            [class.invalid]="f.password.touched && f.password.invalid"
+          <label for="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="e.g. john.doe@example.com"
+            [class.invalid]="f.email.touched && f.email.invalid"
           >
-          @if (f.password.touched && f.password.errors) {
+          @if (f.email.touched && f.email.errors) {
             <div class="error-message">
-              @if (f.password.errors['required']) { <span>Password is required</span> }
-              @if (f.password.errors['pattern']) { <span>Must contain uppercase, number and symbol</span> }
-              @if (f.password.errors['minlength']) { <span>Minimum 8 characters required</span> }
+              @if (f.email.errors['required']) { <span>Email is required</span> }
+              @if (f.email.errors['email']) { <span>Please enter a valid email address</span> }
             </div>
           }
         </div>
       </div>
 
       <div class="form-text-area">
-        <label for="textarea">Collaboration</label>
-        <textarea 
-          id="textarea" 
-          [formControl]="textArea" 
+        <label for="message">Message</label>
+        <textarea
+          id="message"
+          formControlName="message"
           placeholder="Tell me more about your project or how we could work together..."
-          [class.invalid]="textArea.touched && textArea.invalid"
+          [class.invalid]="f.message.touched && f.message.invalid"
         ></textarea>
-        @if (textArea.touched && textArea.errors) {
+        @if (f.message.touched && f.message.errors) {
           <div class="error-message">
-            @if (textArea.errors['required']) { <span>Please provide a short description</span> }
-            @if (textArea.errors['minlength']) { <span>Message must be at least 10 characters</span> }
+            @if (f.message.errors['required']) { <span>Please provide a short description</span> }
+            @if (f.message.errors['minlength']) { <span>Message must be at least 10 characters</span> }
           </div>
         }
       </div>
 
       <div class="form-buttons">
-        <app-button 
-          variant="primary" 
-          type="submit" 
+        <app-button
+          variant="primary"
+          type="submit"
           [disabled]="isSubmitting()"
         >
           {{ isSubmitting() ? 'Sending...' : 'Send Message' }}
@@ -88,7 +87,7 @@
       </div>
     </form>
   } @else {
-    <div class="success-feedback">
+    <div class="success-feedback" aria-live="polite">
       <div class="icon-container">
         <app-icon name="badge-check" [size]="60" />
       </div>
