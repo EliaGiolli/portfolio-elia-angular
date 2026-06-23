@@ -214,10 +214,269 @@ npm run serve:ssr:portfolio_elia
 
 ---
 
+## 🧪 Testing
+
+### Technology stack
+
+| Tool | Role |
+|---|---|
+| **Vitest 4** | Test runner (replaces Karma/Jest; powered by Vite for fast HMR-style test re-runs) |
+| **@angular/build:unit-test** | Angular CLI builder that wires Angular TestBed into Vitest's worker pool |
+| **Angular TestBed** | Creates a miniature Angular module per test file, compiles components, and manages DI |
+| **@angular/platform-browser** | Provides `By.directive()` and `ComponentFixture` for querying the rendered DOM |
+| **jsdom** | Headless browser environment (no real Chromium needed) used by Vitest workers |
+| **Vitest globals** | `describe`, `it`, `expect`, `vi`, `beforeEach`, etc. available without imports via `"types": ["vitest/globals"]` in `tsconfig.spec.json` |
+
+Tests are co-located with their sources (e.g. `button.ts` → `button.spec.ts`) and run with:
+
+```bash
+npm test
+```
+
+---
+
+### Design decisions
+
+#### Why unit tests over end-to-end tests?
+This portfolio has no backend, no authentication, and no forms that hit a real server.
+The interesting risks are all in the *logic layer*:
+- Does the filter produce the right subset of projects?
+- Does the form block submission when invalid?
+- Does the component navigate to /404 when an id is unknown?
+
+Unit tests answer these questions in milliseconds. E2E tests would require a running dev server, a real browser, and network stability — all unnecessary overhead for deterministic, side-effect-free logic.
+
+#### Why real components instead of shallow rendering?
+Angular's TestBed compiles and mounts the real component, including its template and CSS bindings. This is intentional: shallow rendering (e.g. stubbing child components) would hide bugs in the host–child contract (e.g. a directive that creates a child component dynamically). The only exception is the Router — we provide `provideRouter([])` (an empty route table) rather than a real routing setup, because we test component logic, not URL transitions.
+
+#### Why `vi.spyOn` instead of manual stubs?
+`vi.spyOn` wraps the original implementation and records calls, which means:
+- Assertions are on observed behaviour (`toHaveBeenCalledWith`), not implementation details.
+- `vi.restoreAllMocks()` (called at the end of each test that needs it) guarantees the global scope is clean for subsequent tests.
+
+#### Why mock `globalThis.setTimeout` instead of `fakeAsync`?
+Angular's `fakeAsync` / `tick` helpers require `zone.js/testing` to be loaded before the test suite. The new `@angular/build:unit-test` builder (Angular 21 + Vitest) does not include that setup file by default — using `fakeAsync` causes Vitest workers to crash with an out-of-memory error. The workaround is to intercept `globalThis.setTimeout` with `vi.spyOn(...).mockImplementation`, capture the callback, and invoke it synchronously. This tests the exact same code path as `tick(1500)` but without requiring Zone.js.
+
+#### Why `await fixture.whenStable()` for effect assertions?
+Angular `effect()` callbacks are not run synchronously by `detectChanges()` in the new scheduler. They are scheduled as microtasks. `whenStable()` resolves after the microtask queue drains, making it the correct way to wait for effects in an async test without fakeAsync.
+
+---
+
+### Test file inventory
+
+#### `src/app/core/services/project-service.spec.ts` — ProjectService (unit)
+
+**What is tested:**
+The entire public API of the service: data loading, the three filtering modes (stack-only, tag-only, stack+tag), and the toggleTag mutation.
+
+**Why each group matters:**
+
+| Test group | Risk mitigated |
+|---|---|
+| *loads projects on init* | Catches Zod validation failures that silently return `[]` instead of throwing |
+| *filteredProjects — no filter* | Ensures the computed is a passthrough when both filters are null/empty |
+| *filteredProjects — by stack* | Ensures AND logic doesn't accidentally bleed projects from the wrong stack |
+| *filteredProjects — by tag (case-insensitive)* | Technology strings in the model may be stored in mixed case; the lower-case comparison must hold |
+| *filteredProjects — stack + tag* | Validates that both filters compose correctly with AND (not OR) semantics |
+| *filteredProjects — impossible tag* | Edge case: no match must produce `[]`, not `undefined` or a crash |
+| *toggleTag — add* | Adding a tag not yet in the array |
+| *toggleTag — remove* | Removing one tag must not disturb other tags in the array |
+| *toggleTag — double toggle* | Round-trip: final state equals initial state |
+| *toggleTag — multiple tags* | Independent toggles must not interfere with each other |
+
+**Key technique:** signals update synchronously, so every assertion runs without `async`/`await`.
+
+---
+
+#### `src/app/shared/components/button/button.spec.ts` — Button (unit)
+
+**What is tested:**
+Host class bindings (`btn-{variant}`), the `.disabled` class on the host element, the native `disabled` attribute on the inner `<button>`, and the `type` attribute default/override.
+
+**Why each group matters:**
+
+| Test group | Risk mitigated |
+|---|---|
+| *variant class* | A typo in the `variantClass` computed string (e.g. `btn_primary`) would make CSS rules miss and render unstyled buttons across the entire app |
+| *disabled state — host class* | The `.disabled` class on `<app-button>` drives the CSS visual style; if it's missing the button looks enabled even when it isn't |
+| *disabled state — inner button* | The native `disabled` attribute on `<button>` is what browsers and screen readers use; without it, keyboard users can activate a "disabled" button |
+| *type attribute default* | Buttons inside `<form>` elements default to `type="submit"` in browsers if no explicit type is set; the component must override this to `"button"` to prevent accidental form submissions |
+
+**Key technique:** `fixture.componentRef.setInput()` drives signal inputs (Angular 16+ API); `fixture.nativeElement.classList` and `querySelector('button')` assert on the real DOM.
+
+---
+
+#### `src/app/shared/components/navbar/navbar.spec.ts` — Navbar (unit)
+
+**What is tested:**
+The `isMenuOpen` signal initial state and its toggle behaviour through two full cycles.
+
+**Why each group matters:**
+
+| Test | Risk mitigated |
+|---|---|
+| *is false by default* | If the signal starts as `true`, the mobile menu is open on page load — a layout regression |
+| *toggleMenu once* | Verifies the signal actually changes when the method is called |
+| *toggleMenu twice* | Verifies the toggle is truly bidirectional; a broken implementation that always sets to `true` would pass the first test but fail this one |
+| *icon constants* | The template selects SVG icons by name constant; a rename without updating the constant would silently break the icons |
+
+**Key technique:** `provideRouter([])` is required to satisfy `RouterLink` / `RouterLinkActive` in the template even though we never navigate.
+
+---
+
+#### `src/app/shared/components/icon/icon.spec.ts` — IconComponent (unit)
+
+**What is tested:**
+The `src` construction from the `name` input, the `size` inline style, and all three accessibility attribute combinations (`informational`, `decorative`, `explicit alt`).
+
+**Why each group matters:**
+
+| Test group | Risk mitigated |
+|---|---|
+| *src — correct path* | If the asset path convention changes (`assets/icons/` → `icons/`), all icons break silently |
+| *src — reactivity* | The same icon slot may render different icons depending on data; the binding must update |
+| *size — default 24px* | A missing default would make icons appear as 0×0 (invisible) |
+| *size — custom* | Size is applied as inline `style`, not as a class; the test confirms the pixel value, not just a class name |
+| *a11y — auto alt* | Screen readers need text for informational icons; `"{name} icon"` is the fallback |
+| *a11y — explicit alt* | The explicit alt must take priority over the auto-generated one |
+| *a11y — decorative* | Both `aria-hidden="true"` AND `alt=""` must be set together; setting only one is an incomplete fix |
+| *a11y — no aria-hidden when informational* | `aria-hidden="false"` is handled inconsistently by some screen readers; the correct fix is to omit the attribute entirely |
+
+---
+
+#### `src/app/features/about/contacts/contacts.spec.ts` — Contacts (unit)
+
+**What is tested:**
+Individual field validators (required, minLength, email format), the invalid-submit guard behaviour, and the full valid-submit state machine.
+
+**Why each group matters:**
+
+| Test group | Risk mitigated |
+|---|---|
+| *form invalid when empty* | Catches a missing `Validators.required` that would allow empty submissions |
+| *name / lastName minLength* | Boundary test at the minimum (4 chars); one character below the threshold must still fail |
+| *email format* | `Validators.email` rejects strings without a valid format; ensures the validator is wired correctly |
+| *all fields valid* | Integration check: only when every field is satisfied is the group valid |
+| *invalid submit — markAllAsTouched* | Without this call, Angular only shows errors on fields the user has touched; the test ensures all errors appear at once on a submit attempt |
+| *invalid submit — no isSubmitting* | Prevents showing a loading spinner with no real action behind it |
+| *valid submit — isSubmitting immediately* | The spinner must appear before the 1500 ms delay, not after |
+| *valid submit — full lifecycle* | Tests the callback side-effects (isSubmitting=false, isSubmitted=true, form reset) using a `setTimeout` mock instead of `fakeAsync` |
+
+**Key technique — setTimeout mock:**
+```typescript
+vi.spyOn(globalThis, 'setTimeout').mockImplementation((fn: any) => {
+  capturedCallback = fn;        // capture without scheduling
+  return 0 as unknown as ReturnType<typeof setTimeout>;
+});
+// ...then later:
+capturedCallback!();            // run synchronously, no timer needed
+```
+This avoids `fakeAsync` (which crashes this project's Vitest setup) while testing the exact same callback code.
+
+---
+
+#### `src/app/features/projects/projects-grid/projects-grid.spec.ts` — ProjectsGrid (unit/integration)
+
+**What is tested:**
+The `currentTags` computed, the `isTagActive` method, the constructor `effect()` that keeps the service in sync, and the `goBack()` delegation to `Location`.
+
+**Why each group matters:**
+
+| Test group | Risk mitigated |
+|---|---|
+| *currentTags — frontend* | The tag list must contain the right technologies; wrong tags show a useless filter UI |
+| *currentTags — backend* | Verifies the conditional logic in the computed correctly branches on `TechStack.backend` |
+| *currentTags — default (null)* | Before the route resolves, stack is null; the component must not crash and must show some tags |
+| *isTagActive — false* | Freshly mounted component must show all chips as inactive |
+| *isTagActive — true* | Writing to the service's signal directly must immediately reflect in the method's return value |
+| *effect — selectedStack sync* | If the effect does not run, the service filter stays stale and the project list does not update |
+| *effect — activeTags reset* | Switching stacks without resetting tags would show frontend tags as "active" on the backend grid |
+| *goBack* | Confirms delegation to `Location.back()` — the only navigation from this component |
+
+---
+
+#### `src/app/features/projects/projects-component/projects-component.spec.ts` — ProjectsComponent (unit/integration)
+
+**What is tested:**
+The `project` computed signal (id → project object lookup) and the 404-navigation effect with all three conditional branches.
+
+**Why each group matters:**
+
+| Test group | Risk mitigated |
+|---|---|
+| *project — empty id* | The component is mounted before the router binds the param; undefined here prevents a crash |
+| *project — valid id* | The `Number(id)` conversion and `array.find()` call return the right object |
+| *project — unknown id* | Undefined result is the trigger for the 404 redirect; must not silently return a wrong project |
+| *effect — navigate to /404* | Users who bookmarks or type an invalid URL must land on the 404 page, not a blank detail view |
+| *effect — no navigate (empty id)* | The guard `if (this.id() && ...)` must short-circuit; otherwise the component redirects on every mount |
+| *effect — no navigate (valid id)* | A found project must not redirect; this tests the third branch explicitly |
+
+**Key technique:** `vi.spyOn(router, 'navigate').mockResolvedValue(true)` is called before `detectChanges()` so even the initial effect run is intercepted. `await fixture.whenStable()` lets the microtask-scheduled effect complete before the assertion.
+
+---
+
+#### `src/app/core/directives/tooltip.directive.spec.ts` — TooltipDirective (unit/integration)
+
+**What is tested:**
+Directive attachment, dynamic component creation on `mouseenter`, destruction on `mouseleave`, the duplicate-creation guard, and the forwarded `techName` value.
+
+**Why each group matters:**
+
+| Test | Risk mitigated |
+|---|---|
+| *attaches without error* | Confirms the DI token (ViewContainerRef) resolves and the directive initialises |
+| *creates tooltip on mouseenter* | The core UX: hovering must insert the tooltip component into the DOM |
+| *removes tooltip on mouseleave* | A missing `destroy()` call leaks component instances; each hover would add a new invisible ghost |
+| *no duplicates on repeated mouseenter* | Without the `if (this.componentRef) return` guard, rapid mouse movements add multiple tooltips |
+| *passes techName correctly* | `setInput('techName', value)` must forward the bound value; a bug here renders a blank tooltip |
+
+**Key technique:** a minimal `HostComponent` is declared inside the spec file (not in the src tree) purely for test purposes. Real `MouseEvent` objects are dispatched to give Angular's `@HostListener` handlers the same input they receive in a real browser. The tooltip is found with `querySelector('app-tech-tooltip')` because `ViewContainerRef.createComponent()` inserts the element adjacent to the host — it is not a child of Angular's debug tree in the usual sense.
+
+---
+
+#### `src/app/shared/components/tooltip/tooltip.spec.ts` — TechTooltip (unit)
+
+**What is tested:**
+The component's rendering when created directly (without the directive), and its reactivity when `techName` changes after creation.
+
+**Why this is a separate test from the directive spec:**
+The directive test verifies the *interaction contract* (create/destroy on mouse events). This spec verifies the *display contract* (text content, reactivity). Keeping them separate means a bug in one does not mask a bug in the other.
+
+| Test | Risk mitigated |
+|---|---|
+| *renders techName* | The `.tooltip-box` selector and the `{{ techName() }}` interpolation must be correct |
+| *updates on techName change* | The directive may call `setInput` after creation; the component must re-render without being recreated |
+
+---
+
+### Running tests
+
+```bash
+# Run once (CI mode)
+npm test
+
+# Re-run on file changes (watch mode, not yet configured — add "--watch" to the ng test command)
+npm test -- --watch
+```
+
+**About the OOM warning in the output:**
+You may see `FATAL ERROR: AlignedAlloc Allocation failed - process out of memory` in some Vitest worker processes. This is a Node.js heap limit issue caused by Vitest spawning many parallel workers, each of which loads Angular's compiler. All 73 tests pass before the crash occurs. To suppress the warning, add a worker limit to `angular.json`:
+
+```json
+"test": {
+  "builder": "@angular/build:unit-test",
+  "options": {
+    "poolOptions": {
+      "forks": { "maxForks": 2 }
+    }
+  }
+}
+```
+
+---
+
 ## ✅ Next steps I can do for you
 
 - Commit this documentation into the repo (done now).
 - Add a Mermaid diagram visualizing the data flow and include it in README.
 - Add a small a11y patch: decorative icon support and `alt` improvements for images.
-
-If you'd like, I can also generate the Mermaid diagram and append it to this README. Which of the next steps would you like me to perform now?
