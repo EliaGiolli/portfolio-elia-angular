@@ -1,17 +1,25 @@
 .title-wrapper {
-    display:flex;
+    display: flex;
     justify-content: center;
-    align-items:center;
-    text-align:center;
-    
+    align-items: center;
+    text-align: center;
+    margin-bottom: 0.5rem;
+
     h1 {
-        text-transform:uppercase;
-        color: var(--text-accent-primary)
+        text-transform: uppercase;
+        color: var(--text-accent-primary);
+        letter-spacing: 0.04em;
+        font-size: 2rem;
     }
 }
 
 .cards-wrapper {
     display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
-    margin-block: 1rem;
+    margin-block: 1.5rem;
+
+    app-card {
+        flex: 1 1 280px;
+    }
 }

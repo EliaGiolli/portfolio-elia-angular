@@ -10,42 +10,73 @@
   align-items: center;
   gap: 2rem;
   margin-bottom: 2rem;
+
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-transform: capitalize;
+    color: var(--text-primary);
+  }
 }
 
 .filter-container {
   margin-bottom: 2rem;
-  padding: 1rem;
+  padding: 1rem 1.25rem;
   background: var(--bg-accent-secondary);
   border-radius: 15px;
+
+  p {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin: 0;
+  }
 }
 
 .filter-chips {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
 }
 
 .chip {
-  padding: 0.5rem 1rem;
+  padding: 0.45rem 1.1rem;
   border-radius: 20px;
-  border: 1px solid var(--border-light);
+  border: 1.5px solid rgba(45, 68, 255, 0.15);
   background: white;
   cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
   transition: all 0.2s ease;
-  font-size: 0.9rem;
+
+  &:hover {
+    border-color: var(--bg-accent-primary);
+    color: var(--bg-accent-primary);
+    background: rgba(45, 68, 255, 0.04);
+  }
 }
 
 .chip.active {
   background: var(--bg-accent-primary);
   color: white;
   border-color: var(--bg-accent-primary);
+  box-shadow: 0 2px 8px rgba(45, 68, 255, 0.25);
 }
 
 .chip.reset {
-  background: #ff4d4d15;
+  background: #ff4d4d12;
   color: #ff4d4d;
-  border-color: #ff4d4d;
+  border-color: #ff4d4d60;
+
+  &:hover {
+    background: #ff4d4d20;
+    color: #ff4d4d;
+  }
 }
 
 .card-body {
