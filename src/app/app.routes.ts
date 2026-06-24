@@ -30,11 +30,6 @@ export const routes: Routes = [
         loadComponent: () => import('./features/projects/projects-grid/projects-grid').then(m => m.ProjectsGrid),
         data: { stack: TechStack.backend }
       },
-      {
-        path: 'projects/angular',
-        loadComponent: () => import('./features/projects/projects-grid/projects-grid').then(m => m.ProjectsGrid),
-        data: { stack: TechStack.angular }
-      },
       //Routes with dynamic segment for the projects' details
       {
         path: 'projects/frontend/:id',
@@ -42,10 +37,6 @@ export const routes: Routes = [
       },
       {
         path: 'projects/backend/:id',
-        loadComponent: () => import('./features/projects/projects-component/projects-component').then(m => m.ProjectsComponent),
-      },
-      {
-        path: 'projects/angular/:id',
         loadComponent: () => import('./features/projects/projects-component/projects-component').then(m => m.ProjectsComponent),
       },
       {

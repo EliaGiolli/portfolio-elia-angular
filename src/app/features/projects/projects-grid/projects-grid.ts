@@ -31,6 +31,7 @@ export class ProjectsGrid {
   private readonly frontendTags: FilterTag[] = [
     { label: 'React', value: 'react' },
     { label: 'Next.js', value: 'nextdotjs' },
+    { label: 'Angular', value: 'angular' },
     { label: 'TypeScript', value: 'typescript' },
     { label: 'JavaScript', value: 'javascript' },
     { label: 'TailwindCSS', value: 'tailwindcss' },
@@ -45,18 +46,9 @@ export class ProjectsGrid {
     { label: 'TypeScript', value: 'typescript' },
   ];
 
-  private readonly angularTags: FilterTag[] = [
-    { label: 'Angular', value: 'angular' },
-    { label: 'TypeScript', value: 'typescript' },
-    { label: 'TailwindCSS', value: 'tailwindcss' },
-  ];
-
-  currentTags = computed<FilterTag[]>(() => {
-    const stack = this.stack();
-    if (stack === TechStack.frontend) return this.frontendTags;
-    if (stack === TechStack.angular) return this.angularTags;
-    return this.backendTags;
-  });
+  currentTags = computed<FilterTag[]>(() =>
+    this.stack() === TechStack.frontend ? this.frontendTags : this.backendTags
+  );
 
   constructor() {
     // Sync service state whenever the stack route data changes

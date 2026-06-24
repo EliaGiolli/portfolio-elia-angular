@@ -2,8 +2,7 @@
 export enum TechStack {
     "frontend" = "frontend",
     "backend" = "backend",
-    "full-stack" = "full-stack",
-    "angular" = "angular"
+    "full-stack" = "full-stack"
 }
 
 export interface ProjectsTypes {

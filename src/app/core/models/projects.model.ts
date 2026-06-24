@@ -99,7 +99,7 @@ export const projects: ProjectsTypes[] = [
         "technologies": ["angular", "typescript", "tailwindcss"],
         "github_link": "https://github.com/EliaGiolli/Shelfspot---angular",
         "demo_link": "https://shelfspot-angular.vercel.app/",
-        "tech_stack": TechStack.angular
+        "tech_stack": TechStack.frontend
     },
     {
         "id": 11,
@@ -109,7 +109,7 @@ export const projects: ProjectsTypes[] = [
         "technologies": ["angular", "typescript", "tailwindcss"],
         "github_link": "https://github.com/EliaGiolli/zenith-dashboard-angular",
         "demo_link": "https://zenith-dashboard-angular.vercel.app/",
-        "tech_stack": TechStack.angular
+        "tech_stack": TechStack.frontend
     },
 ];
 
