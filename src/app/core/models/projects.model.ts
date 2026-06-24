@@ -91,6 +91,26 @@ export const projects: ProjectsTypes[] = [
         "demo_link": "",
         "tech_stack": TechStack.frontend
     },
+    {
+        "id": 10,
+        "project_name": "Shelfspot",
+        "img_path": "",
+        "description": "Angular version of ShelfSpot — a modern web application that allows users to explore and manage books through the OpenLibrary API, built with Angular and TypeScript.",
+        "technologies": ["angular", "typescript", "tailwindcss"],
+        "github_link": "https://github.com/EliaGiolli/Shelfspot---angular",
+        "demo_link": "https://shelfspot-angular.vercel.app/",
+        "tech_stack": TechStack.angular
+    },
+    {
+        "id": 11,
+        "project_name": "Zenith Dashboard",
+        "img_path": "",
+        "description": "Angular version of Zenith — a sleek developer/admin dashboard featuring data visualization, system monitoring, and a clean modern UI built with Angular and TypeScript.",
+        "technologies": ["angular", "typescript", "tailwindcss"],
+        "github_link": "https://github.com/EliaGiolli/zenith-dashboard-angular",
+        "demo_link": "https://zenith-dashboard-angular.vercel.app/",
+        "tech_stack": TechStack.angular
+    },
 ];
 
 /**

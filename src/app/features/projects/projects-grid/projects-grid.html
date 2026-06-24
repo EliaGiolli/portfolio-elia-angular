@@ -31,7 +31,7 @@
     @for (project of projectService.filteredProjects(); track project.id) {
       <app-card
         class="project-card"
-        [icon]="project.tech_stack === TechStack.frontend ? 'monitor' : 'database'"
+        [icon]="project.tech_stack === TechStack.frontend ? 'monitor' : project.tech_stack === TechStack.angular ? 'angular' : 'database'"
       >
         <h3 card-header>{{ project.project_name }}</h3>
 

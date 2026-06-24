@@ -45,9 +45,18 @@ export class ProjectsGrid {
     { label: 'TypeScript', value: 'typescript' },
   ];
 
-  currentTags = computed<FilterTag[]>(() =>
-    this.stack() === TechStack.frontend ? this.frontendTags : this.backendTags
-  );
+  private readonly angularTags: FilterTag[] = [
+    { label: 'Angular', value: 'angular' },
+    { label: 'TypeScript', value: 'typescript' },
+    { label: 'TailwindCSS', value: 'tailwindcss' },
+  ];
+
+  currentTags = computed<FilterTag[]>(() => {
+    const stack = this.stack();
+    if (stack === TechStack.frontend) return this.frontendTags;
+    if (stack === TechStack.angular) return this.angularTags;
+    return this.backendTags;
+  });
 
   constructor() {
     // Sync service state whenever the stack route data changes

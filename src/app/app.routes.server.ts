@@ -13,6 +13,10 @@ export const serverRoutes: ServerRoute[] = [
     path: 'projects/backend/:id',
     renderMode: RenderMode.Server
   },
+  {
+    path: 'projects/angular/:id',
+    renderMode: RenderMode.Server
+  },
 ];
 
 /**
