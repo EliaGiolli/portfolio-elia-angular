@@ -19,10 +19,22 @@
   text-align: center;
   
   & .footer-logo {
-    color: var(--bg-accent-primary);
-    font-weight: 800;
-    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
     margin-bottom: 0.5rem;
+
+    & svg {
+      flex-shrink: 0;
+    }
+
+    & h2 {
+      color: var(--bg-accent-primary);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
   }
 
   & .footer-tagline {
