@@ -24,12 +24,20 @@
             0 8px 10px -6px rgba(0, 0, 0, 0.05);
 
     h1 {
-        margin:0;
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 700;
         color: var(--text-accent-primary);
+        letter-spacing: -0.03em;
+        line-height: 1.1;
     }
 
     h3 {
-        margin-block: 0.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        margin-bottom: 0.25rem;
     }
 
    .icons-wrapper {
@@ -47,10 +55,10 @@
         }
         
         .group-label {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--text-muted); /* Quel grigio che abbiamo definito */
+            color: var(--text-muted);
             font-weight: 600;
         }
         

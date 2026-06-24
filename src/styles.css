@@ -30,15 +30,21 @@ html, body {
 
 /* GLOBAL TYPOGRAPHY */
 
-h1, h2, h3, strong {
+h1, h2, h3, h4, strong {
     color: var(--text-primary);
-    font-weight: 600; /* Tipico di Poppins per i titoli */
+    font-weight: 600;
     letter-spacing: -0.02em;
+    margin: 0;
 }
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.2rem; }
+h4 { font-size: 1rem; font-weight: 600; letter-spacing: 0; }
 
 p, span, li {
     color: var(--text-secondary);
-    line-height: 1.6; /* Fondamentale per la leggibilità del corpo del testo */
+    line-height: 1.6;
 }
 
 .text-small, .timestamp, .project-category {

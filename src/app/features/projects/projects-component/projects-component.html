@@ -11,7 +11,7 @@
           <div class="tech-list">
             @for (tech of p.technologies; track tech) {
               <div class="tech-item">
-                <app-icon [name]="tech.toLowerCase().trim()" [size]="40" />
+                <app-icon [name]="tech.toLowerCase().trim()" [size]="48" />
                 <span>{{ tech }}</span>
               </div>
             }
@@ -21,21 +21,21 @@
 
       <div card-footer class="footer-actions">
         <app-button variant="ghost" [routerLink]="['/projects', p.tech_stack.toLowerCase()]" aria-label="Back to list">
-          <app-icon name="arrow-left" [size]="40" />
+          <app-icon name="arrow-left" [size]="48" />
           <span>Back to list</span>
         </app-button>
 
         <div class="external-links">
           @if (p.github_link) {
             <app-button variant="secondary" [href]="p.github_link" aria-label="View code on GitHub">
-              <app-icon name="github" [size]="40" />
+              <app-icon name="github" [size]="48" />
               <span>Code</span>
             </app-button>
           }
 
           @if (p.demo_link) {
             <app-button variant="primary" [href]="p.demo_link" aria-label="Open live demo">
-              <app-icon name="external-link" [size]="40" />
+              <app-icon name="external-link" [size]="48" />
               <span>Live Demo</span>
             </app-button>
           }

@@ -2,17 +2,28 @@
   <div class="navbar-container">
     <a routerLink="/" class="logo">GIOLLI DESIGN</a>
 
-    <button class="mobile-toggle" (click)="toggleMenu()" aria-label="Toggle menu">
-      <app-icon 
-        [name]="isMenuOpen() ? CLOSE_ICON : MENU_ICON" 
-        [size]="45">
-      </app-icon>
+    <button
+      class="mobile-toggle"
+      (click)="toggleMenu()"
+      [attr.aria-label]="isMenuOpen() ? 'Close navigation menu' : 'Open navigation menu'"
+      [attr.aria-expanded]="isMenuOpen()"
+      aria-controls="main-nav"
+    >
+      <app-icon
+        [name]="isMenuOpen() ? CLOSE_ICON : MENU_ICON"
+        [size]="28"
+        [decorative]="true"
+      />
     </button>
 
-    <nav [class.open]="isMenuOpen()">
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="isMenuOpen.set(false)">Homepage</a>
-      <a routerLink="/projects" routerLinkActive="active" (click)="isMenuOpen.set(false)">My projects</a>
-      <a routerLink="/contacts" routerLinkActive="active" (click)="isMenuOpen.set(false)">Contact me</a>
+    <nav
+      id="main-nav"
+      aria-label="Main navigation"
+      [class.open]="isMenuOpen()"
+    >
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" ariaCurrentWhenActive="page" (click)="isMenuOpen.set(false)">Homepage</a>
+      <a routerLink="/projects" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="isMenuOpen.set(false)">My projects</a>
+      <a routerLink="/contacts" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="isMenuOpen.set(false)">Contact me</a>
     </nav>
   </div>
 </header>

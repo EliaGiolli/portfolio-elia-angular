@@ -4,8 +4,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px; 
-    background-color: #F8F9FF; 
+    padding: 10px;
+    background-color: #F8F9FF;
     border: 1px solid rgba(45, 68, 255, 0.08);
     
     border-radius: 50%; 

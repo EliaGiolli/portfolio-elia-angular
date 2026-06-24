@@ -2,10 +2,9 @@
   background-color: color-mix(in srgb, var(--bg-background-primary), transparent 20%);
   backdrop-filter: blur(10px);
   position: sticky;
-  inset-block-start: 0; 
+  inset-block-start: 0;
   z-index: 1000;
   border-block-end: 1px solid var(--bg-accent-secondary);
-  padding: 1.5rem;
 
   & .navbar-container {
     max-width: 1200px;
@@ -20,7 +19,8 @@
     font-weight: 800;
     color: var(--bg-accent-primary);
     text-decoration: none;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    letter-spacing: -0.01em;
     transition: opacity 0.2s ease;
 
     &:hover {
@@ -34,11 +34,12 @@
 
     & a {
       text-decoration: none;
-      color: var(--text-secondary);
+      font-size: 0.95rem;
       font-weight: 500;
+      color: var(--text-secondary);
       transition: color 0.2s;
 
-      &:hover, 
+      &:hover,
       &.active {
         color: var(--bg-accent-primary);
       }
@@ -62,7 +63,7 @@
 
   .navbar nav {
     position: fixed;
-    inset-block-start: 70px;
+    inset-block-start: 57px;
     inset-inline-start: 0;
     width: 100%;
     height: 0;
@@ -70,12 +71,17 @@
     flex-direction: column;
     align-items: center;
     overflow: hidden;
-    transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    visibility: hidden;
+    transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0s linear 0.3s;
     gap: 0;
 
     &.open {
-      height: calc(100dvb - 70px); /* dvb = dynamic viewport block */
+      height: calc(100dvh - 57px);
       padding-block-start: 2rem;
+      visibility: visible;
+      transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                  visibility 0s linear 0s;
     }
 
     & a {
