@@ -1,0 +1,67 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+    /* Backgrounds */
+    --bg-background-primary: #FAFAFC;
+    --bg-background-secondary: #F0F2FF;
+    
+    /* Accents */
+    --bg-accent-primary: #2D44FF;
+    --bg-accent-secondary: #E2E8F0;
+    
+    /* Typography */
+    --text-primary: #1A1A1A;
+    --text-accent-primary: #2D44FF;     /* Per titoli (H1, H2) e scritte importanti */
+    --text-secondary: #575F6E;   /* Per paragrafi e descrizioni. È leggibile ma meno "pesante" */
+    --text-muted: #8E97A6;      /* Per i "meta-data" (es: date, tag tecnologie, testi piccolissimi) */
+    --text-on-accent: #FFFFFF;  /* Per il testo dentro i bottoni blu */
+}
+html, body {
+  margin: 0;
+  overflow-x: hidden;
+  background-color: var(--bg-background-secondary);
+  color: var(--text-primary);
+  font-family: 'Poppins', system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* GLOBAL TYPOGRAPHY */
+
+h1, h2, h3, h4, strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.2rem; }
+h4 { font-size: 1rem; font-weight: 600; letter-spacing: 0; }
+
+p, span, li {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.text-small, .timestamp, .project-category {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+/* Global focus styles — keyboard users get the same quality experience as mouse users */
+:focus-visible {
+    outline: 2px solid var(--bg-accent-primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* Suppress the outline for elements that already provide their own focus feedback */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: none;
+}

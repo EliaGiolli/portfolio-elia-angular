@@ -1,0 +1,23 @@
+<main class="main-wrapper" role="main">
+    <div class="error-visual" aria-hidden="true">
+        <app-icon name="monitor" [size]="120" class="ghost-icon" />
+        <span class="error-code">404</span>
+    </div>
+
+    <div class="text-content">
+        <h1>Oops! Page not found</h1>
+        <p>It seems that the link is broken or that the requested page was moved away. Don't worry, you can navigate back below:</p>
+    </div>
+
+    <div class="actions-wrapper">
+        <app-button variant="primary" routerLink="/" aria-label="Back to Homepage">
+            <app-icon name="arrow-left" [size]="40"/>
+            <span class="primary-btn">Back to the Homepage</span>
+        </app-button>
+        
+        <app-button variant="secondary" routerLink="/projects" aria-label="Go to the projects">
+            <span>Explore my projects</span>
+            <app-icon name="database" [size]="40" />
+        </app-button>
+    </div>
+</main>

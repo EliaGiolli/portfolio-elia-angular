@@ -1,0 +1,32 @@
+<main class="main-wrapper">
+    <div class="presentation-wrapper">
+        <h3>I'm Elia Giolli</h3>
+        <h1>Full-Stack developer</h1>
+        <div class="icons-wrapper">
+            <div class="icon-group">
+                <span class="group-label">Frontend</span>
+                <div class="icons-row">
+                    <app-icon name="html5" [size]="52" appTooltip="HTML5"/>
+                    <app-icon name="css" [size]="52" appTooltip="CSS3"/>
+                    <app-icon name="javascript" [size]="52" appTooltip="Javascript"/>
+                    <app-icon name="angular" [size]="52" appTooltip="Angular 19"/>
+                    <app-icon name="react" [size]="52" appTooltip="React"/>
+                </div>
+            </div>
+            <div class="icon-group">
+                <span class="group-label">Backend & DB</span>
+                <div class="icons-row">
+                    <app-icon name="nodedotjs" [size]="52" appTooltip="NodeJS"/>
+                    <app-icon name="express" [size]="52" appTooltip="ExpressJS"/>
+                    <app-icon name="nestjs" [size]="52" appTooltip="NestJS"/>
+                    <app-icon name="mongodb" [size]="52" appTooltip="MongoDB"/>
+                    <app-icon name="postgresql" [size]="52" appTooltip="PostgreSQL"/>
+                </div>
+            </div>
+        </div>
+        <div class="buttons-wrapper">
+            <app-button variant="primary" routerLink="/projects">Go to projects</app-button>
+            <app-button variant="secondary" routerLink="/cv">Read my CV</app-button>
+        </div>
+    </div>
+</main>

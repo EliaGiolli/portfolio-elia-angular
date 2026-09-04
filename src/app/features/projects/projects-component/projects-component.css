@@ -1,0 +1,77 @@
+.page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    padding: 2rem 1rem;
+    min-height: 100vh;
+    background-color: var(--bg-background-primary); 
+}
+
+app-card {
+    width: 100%;
+    max-width: 48rem; 
+    margin: 0 auto;
+}
+
+.description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.tech-info {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--bg-accent-secondary);
+
+    h4 {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+    }
+}
+
+.tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.tech-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    span {
+        font-weight: 500;
+        color: var(--text-secondary);
+    }
+}
+
+.footer-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.external-links {
+    display: flex;
+    gap: 1rem;
+}
+
+@media (max-width: 640px) {
+    .footer-actions {
+        flex-direction: column-reverse; 
+    }
+    
+    .external-links, .footer-actions app-button {
+        width: 100%;
+    }
+}

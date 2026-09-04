@@ -1,0 +1,46 @@
+<section class="page-wrapper">
+  @if (project(); as p) {
+    <app-card [icon]="p.tech_stack === 'frontend' ? 'monitor' : 'database'" [label]="p.project_name">
+      <h2 card-header>{{ p.project_name }}</h2>
+
+      <div card-body>
+        <p class="description">{{ p.description }}</p>
+
+        <div class="tech-info">
+          <h4>Tech Stack:</h4>
+          <div class="tech-list">
+            @for (tech of p.technologies; track tech) {
+              <div class="tech-item">
+                <app-icon [name]="tech.toLowerCase().trim()" [size]="48" />
+                <span>{{ tech }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div card-footer class="footer-actions">
+        <app-button variant="ghost" [routerLink]="['/projects', p.tech_stack.toLowerCase()]" aria-label="Back to list">
+          <app-icon name="arrow-left" [size]="48" />
+          <span>Back to list</span>
+        </app-button>
+
+        <div class="external-links">
+          @if (p.github_link) {
+            <app-button variant="secondary" [href]="p.github_link" aria-label="View code on GitHub">
+              <app-icon name="github" [size]="48" />
+              <span>Code</span>
+            </app-button>
+          }
+
+          @if (p.demo_link) {
+            <app-button variant="primary" [href]="p.demo_link" aria-label="Open live demo">
+              <app-icon name="external-link" [size]="48" />
+              <span>Live Demo</span>
+            </app-button>
+          }
+        </div>
+      </div>
+    </app-card>
+  }
+</section>
