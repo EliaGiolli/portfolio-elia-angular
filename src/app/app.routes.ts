@@ -15,6 +15,10 @@ export const routes: Routes = [
     component: MainLayoutComponent, 
     children: [
       {
+        path: 'about',
+        loadComponent: () => import('./features/about/about-me/about-me').then(m => m.AboutMe)
+      },
+      {
         // Landing page for projects (shows the two choice cards)
         path: 'projects',
         loadComponent: () => import('./features/projects/projects-layout/projects-layout').then(m => m.ProjectsLayout),
