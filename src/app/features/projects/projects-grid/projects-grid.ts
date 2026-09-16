@@ -35,6 +35,7 @@ export class ProjectsGrid {
     { label: 'TypeScript', value: 'typescript' },
     { label: 'JavaScript', value: 'javascript' },
     { label: 'TailwindCSS', value: 'tailwindcss' },
+    { label: 'Astro', value: 'astro' },
   ];
 
   private readonly backendTags: FilterTag[] = [
