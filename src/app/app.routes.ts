@@ -3,20 +3,19 @@ import { MainLayoutComponent } from './features/main-layout/main-layout';
 import { Cv } from './features/cv/cv';
 import { NotFound } from './features/not-found/not-found';
 import { TechStack } from './shared/types/projects';
-import { RenderMode } from '@angular/ssr';
 
 export const routes: Routes = [
-  {
-    path: '',
-    loadComponent: () => import('./features/homepage/homepage').then(m => m.Homepage)
-  },
   {
     path: '',
     component: MainLayoutComponent, 
     children: [
       {
+        path: '',
+        loadComponent: () => import('./features/homepage/homepage').then(m => m.Homepage)
+      },
+      {
         path: 'about',
-        loadComponent: () => import('./features/about/about-me/about-me').then(m => m.AboutMe)
+        loadComponent: () => import('./features/about/about-me/about-me').then(m => m.AboutComponent)
       },
       {
         // Landing page for projects (shows the two choice cards)

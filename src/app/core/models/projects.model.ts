@@ -7,18 +7,18 @@ export const projects: ProjectsTypes[] = [
         "img_path": "",
         "description": "A modern, responsive cryptocurrency dashboard built with Next.js 15, TypeScript, TailwindCSS 4, and ShadCN UI components. This project fetches data from the public CoinGecko API",
         "technologies": ["nextdotjs", "typescript", "tailwindcss", "nodedotjs", "postgresql"],
-        "github_link": "",
+        "github_link": "https://github.com/EliaGiolli/dashboard-crypto-next",
         "demo_link": "",
         "tech_stack": TechStack.frontend
     },
     {
         "id": 2,
-        "project_name": "Taskflow",
+        "project_name": "Imperi e Rivoluzioni - blog",
         "img_path": "",
-        "description": "Taskflow allows users to efficiently create, view, and manage tasks. Tasks can be either static (defined in tasks.js) or dynamic (created by the user through the form)",
-        "technologies": ["react", "javascript", "tailwindcss"],
-        "github_link": "",
-        "demo_link": "",
+        "description": "A personal blog dedicated to contemporary history and geopolitics. The project brings together articles, recommended reading and in-depth analyses on the relationships between empires, ideologies, conflicts and the international order.",
+        "technologies": ["astro", "typescript", "tailwindcss"],
+        "github_link": "https://github.com/EliaGiolli/imperi-e-rivoluzioni-blog",
+        "demo_link": "https://imperi-e-rivoluzioni-blog.vercel.app/",
         "tech_stack": TechStack.frontend
     },
     {
@@ -27,7 +27,7 @@ export const projects: ProjectsTypes[] = [
         "img_path": "",
         "description": "A REST API designed to simulate a developer/admin dashboard. It allows to monitor system health, manage logs, and test cryptography",
         "technologies": ["nodedotjs", "express", "typescript"],
-        "github_link": "",
+        "github_link": "https://github.com/EliaGiolli/dashboard-admin-express",
         "demo_link": "",
         "tech_stack": TechStack.backend
     },
@@ -35,10 +35,10 @@ export const projects: ProjectsTypes[] = [
         "id": 4,
         "project_name": "Shelfspot",
         "img_path": "",
-        "description": "ShelfSpot is a modern web application that allows users to explore and manage books through the OpenLibrary API",
-        "technologies": ["react", "typescript", "tailwindcss"],
-        "github_link": "",
-        "demo_link": "https://vercel.com/elias-projects-5d10482a/shelf-spot-react",
+        "description": "Angular version of ShelfSpot — a modern web application that allows users to explore and manage books through the OpenLibrary API, built with Angular and TypeScript.",
+        "technologies": ["angular", "typescript", "tailwindcss"],
+        "github_link": "https://github.com/EliaGiolli/Shelfspot---angular",
+        "demo_link": "https://shelfspot-angular.vercel.app/",
         "tech_stack": TechStack.frontend
     },
     {
@@ -63,52 +63,32 @@ export const projects: ProjectsTypes[] = [
     },
     {
         "id": 7,
-        "project_name": "Bookstore API",
+        "project_name": "Bookgraph - NestJS",
         "img_path": "",
-        "description": "A robust REST API built with Nest.js, TypeScript, and SQLite that provides JWT-based authentication and comprehensive book store management functionality.",
+        "description": "A robust REST API built with Nest.js, TypeScript, and PostgreSQL that provides JWT-based authentication and comprehensive book store management functionality.",
         "technologies": ["nodedotjs", "nestjs", "typescript", "postgresql"],
-        "github_link": "",
+        "github_link": "https://github.com/EliaGiolli/bookgraph-nestjs",
         "demo_link": "",
         "tech_stack": TechStack.backend
     },
     {
         "id": 8,
-        "project_name": "Orizon Travel Agency",
-        "img_path": "",
-        "description": "Orizon specializes in providing exceptional travel experiences across South America and Asia, featuring a clean, premium design with smooth animations and intuitive user experience.",
-        "technologies": ["react", "typescript", "tailwindcss"],
-        "github_link": "",
-        "demo_link": "",
-        "tech_stack": TechStack.frontend
-    },
-    {
-        "id": 9,
-        "project_name": "PennyWise",
-        "img_path": "",
-        "description": "A modern expense tracking application built with React and Redux Toolkit, showcasing the evolution from local state management to enterprise-level state management.",
-        "technologies": ["react", "javascript", "tailwindcss"],
-        "github_link": "",
-        "demo_link": "",
-        "tech_stack": TechStack.frontend
-    },
-    {
-        "id": 10,
-        "project_name": "Shelfspot",
-        "img_path": "",
-        "description": "Angular version of ShelfSpot — a modern web application that allows users to explore and manage books through the OpenLibrary API, built with Angular and TypeScript.",
-        "technologies": ["angular", "typescript", "tailwindcss"],
-        "github_link": "https://github.com/EliaGiolli/Shelfspot---angular",
-        "demo_link": "https://shelfspot-angular.vercel.app/",
-        "tech_stack": TechStack.frontend
-    },
-    {
-        "id": 11,
         "project_name": "Zenith Dashboard",
         "img_path": "",
         "description": "Angular version of Zenith — a sleek developer/admin dashboard featuring data visualization, system monitoring, and a clean modern UI built with Angular and TypeScript.",
         "technologies": ["angular", "typescript", "tailwindcss"],
         "github_link": "https://github.com/EliaGiolli/zenith-dashboard-angular",
         "demo_link": "https://zenith-dashboard-angular.vercel.app/",
+        "tech_stack": TechStack.frontend
+    },
+    {
+        "id": 9,
+        "project_name": "VeggieVibes",
+        "img_path": "",
+        "description": "VeggieVibes is a modern application that fetches the data from the Spoonacular API and navigates through various internal pages with react-router v6",
+        "technologies": ["react", "typescript", "tailwindcss"],
+        "github_link": "https://github.com/EliaGiolli/veggievibes-react",
+        "demo_link": "https://veggievibes-react.vercel.app/",
         "tech_stack": TechStack.frontend
     },
 ];
