@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 // Custom Components
 import { Card } from '../../../shared/components/card/card';
 import { IconComponent } from '../../../shared/components/icon/icon';
@@ -21,7 +21,8 @@ export class AboutComponent {
   constructor() {
     this.seo.update({
       title: 'About | Elia Giolli — Angular Front-End Developer',
-      description: 'Angular developer with an IT support background, building accessible, component-driven web apps with TypeScript, Node.js, and NestJS.'
+      description: 'Angular developer with an IT support background, building accessible, component-driven web apps with TypeScript, Node.js, and NestJS.',
+      path: '/about'
     });
   }
 }

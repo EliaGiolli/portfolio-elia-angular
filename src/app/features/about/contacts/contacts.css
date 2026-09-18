@@ -72,8 +72,9 @@ form {
     outline: none;
 
     &::placeholder {
+      /* No extra opacity here: --text-muted is already tuned to clear WCAG AA,
+         and dimming it further dropped the effective contrast to ~1.6:1. */
       color: var(--text-muted);
-      opacity: 0.6;
     }
 
     &:focus {

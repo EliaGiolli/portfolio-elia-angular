@@ -1,12 +1,6 @@
+/* The --space-* scale now lives in :root (src/styles.css) so that shared/
+   components resolve it wherever they are used, not just inside this page. */
 :host {
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 1rem;
-  --space-4: 1.5rem;
-  --space-5: 2rem;
-  --space-6: 3rem;
-  --space-7: 4rem;
-
   display: block;
 }
 
@@ -123,29 +117,6 @@
   color: var(--text-accent-primary);
   padding: 0.15em 0.4em;
   border-radius: 6px;
-}
-
-/* ---------- SKILLS ---------- */
-
-.skills-section h2 {
-  margin-bottom: var(--space-4);
-}
-
-.skills-grid {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
-  gap: var(--space-4);
-}
-
-.skills-grid > li {
-  display: flex;
-}
-
-.skills-grid app-card {
-  width: 100%;
 }
 
 /* ---------- METHODOLOGY / BADGES ---------- */

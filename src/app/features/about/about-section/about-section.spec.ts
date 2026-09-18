@@ -13,6 +13,9 @@ describe('AboutSection', () => {
 
     fixture = TestBed.createComponent(AboutSection);
     component = fixture.componentInstance;
+    // `id` and `title` are input.required, so they must be set before change detection runs.
+    fixture.componentRef.setInput('id', 'skills');
+    fixture.componentRef.setInput('title', 'Technical Skills');
     await fixture.whenStable();
   });
 

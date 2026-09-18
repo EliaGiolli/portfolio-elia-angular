@@ -1,18 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Tooltip } from './tooltip';
+import { TechTooltip } from './tooltip';
 
-describe('Tooltip', () => {
-  let component: Tooltip;
-  let fixture: ComponentFixture<Tooltip>;
+describe('TechTooltip', () => {
+  let component: TechTooltip;
+  let fixture: ComponentFixture<TechTooltip>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Tooltip],
+      imports: [TechTooltip],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Tooltip);
+    fixture = TestBed.createComponent(TechTooltip);
     component = fixture.componentInstance;
+    // `techName` is input.required, so it must be set before change detection runs.
+    fixture.componentRef.setInput('techName', 'Angular');
     await fixture.whenStable();
   });
 

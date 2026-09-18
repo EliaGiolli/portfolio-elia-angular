@@ -4,8 +4,10 @@ import { RouterLink } from '@angular/router';
 import { TechStack } from '../../../shared/types/projects';
 import { Button } from '../../../shared/components/button/button';
 import { Card } from '../../../shared/components/card/card';
+import { CardGrid } from '../../../shared/components/card-grid/card-grid';
 import { IconComponent } from '../../../shared/components/icon/icon';
 import { ProjectService } from '../../../core/services/project-service.service';
+import { SeoService } from '../../../core/services/seo.service';
 import { TooltipDirective } from '../../../core/directives/tooltip.directive';
 
 interface FilterTag {
@@ -15,7 +17,7 @@ interface FilterTag {
 
 @Component({
   selector: 'app-projects-grid',
-  imports: [Button, Card, IconComponent, TooltipDirective, RouterLink],
+  imports: [Button, Card, CardGrid, IconComponent, TooltipDirective, RouterLink],
   templateUrl: './projects-grid.html',
   styleUrl: './projects-grid.css',
 })
@@ -24,6 +26,7 @@ export class ProjectsGrid {
 
   projectService = inject(ProjectService);
   private location = inject(Location);
+  private seo = inject(SeoService);
 
   // Route data { stack } is bound automatically via withComponentInputBinding()
   stack = input<TechStack | null>(null);
@@ -56,6 +59,21 @@ export class ProjectsGrid {
     effect(() => {
       this.projectService.selectedStack.set(this.stack());
       this.projectService.activeTags.set([]);
+    });
+
+    // One component serves both /projects/frontend and /projects/backend, so the
+    // page metadata has to follow the route data rather than be set once.
+    effect(() => {
+      const isFrontend = this.stack() === TechStack.frontend;
+      this.seo.update({
+        title: isFrontend
+          ? 'Front-End Projects | Elia Giolli'
+          : 'Back-End Projects | Elia Giolli',
+        description: isFrontend
+          ? 'Front-end projects by Elia Giolli, built with Angular, React, Next.js, Astro and TypeScript. Filter them by technology.'
+          : 'Back-end projects by Elia Giolli, built with Node.js, Express, NestJS, MongoDB and PostgreSQL. Filter them by technology.',
+        path: isFrontend ? '/projects/frontend' : '/projects/backend'
+      });
     });
   }
 

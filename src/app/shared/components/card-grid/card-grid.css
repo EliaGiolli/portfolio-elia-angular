@@ -6,8 +6,9 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
-  gap: var(--space-4, 1.5rem);
+  /* min(..., 100%) keeps a single card from overflowing a narrow viewport. */
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--card-grid-min, 260px), 100%), 1fr));
+  gap: var(--card-grid-gap, var(--space-4));
 }
 
 .card-grid > ::ng-deep li { display: flex; }

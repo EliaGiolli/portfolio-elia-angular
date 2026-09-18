@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "cross-env NODE_OPTIONS=--max-old-space-size=4096 ng test",
+    "test": "ng test",
     "serve:ssr:portfolio_elia": "node dist/portfolio_elia/server/server.mjs"
   },
   "private": true,

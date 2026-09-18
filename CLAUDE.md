@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+Before doing anything, always refer to the skills inside the `.agents/skills/` path — currently `angular-developer` (Angular's official skill: a `SKILL.md` router plus 40 on-demand reference files).
+
 ## What this is
 
 Elia Giolli's personal portfolio: an Angular 21 (standalone components, zoneless-friendly Signals) app with SSR via `@angular/ssr` + Express, and Zod runtime validation of static content data.
@@ -23,6 +25,8 @@ npx ng test --include src/app/shared/components/card/card.spec.ts   # single fil
 npx ng test --filter "CardComponent"                                 # match by suite/test name
 npx ng test --watch                                                   # force watch mode
 ```
+
+Vitest options live in `vitest.config.ts`, wired in via the builder's `runnerConfig` option. It forces the specs to run **serially in a single worker** (`fileParallelism: false`, `pool: 'threads'`): one jsdom environment per spec file in parallel exhausts Windows commit charge and the run dies with `ENOMEM` / "JavaScript heap out of memory" before reporting anything. Don't re-enable parallelism, and don't reintroduce a `--max-old-space-size` override in the `test` script — raising the ceiling makes V8 defer GC and made the failure *more* likely, not less. Note these are top-level options: `test.poolOptions` was removed in Vitest 4.
 
 There is no separate lint script configured in `package.json`. Formatting is via Prettier (`.prettierrc`: single quotes, 100 print width, Angular parser for `*.html`).
 
@@ -50,7 +54,9 @@ If `ProjectsSchema.parse` fails validation fails at `ProjectService` constructio
 
 ### Routing (`src/app/app.routes.ts`)
 
-Every route is nested under `MainLayoutComponent` (navbar + footer), including the homepage — there is no standalone/layout-free route currently. `/cv` is the only route imported eagerly (`component: Cv`); every other route uses `loadComponent()` lazy imports. The `**` wildcard renders `NotFound`.
+Every route is nested under `MainLayoutComponent` (navbar + footer), including the homepage and the `**` wildcard — there is no standalone/layout-free route. `/cv` is the only route imported eagerly (`component: Cv`); every other route uses `loadComponent()` lazy imports. Both `404` (the explicit target `ProjectsComponent` redirects to for an unknown `:id`) and the `**` wildcard render `NotFound`.
+
+`app.routes.server.ts` matches **in declaration order**, so every specific entry must precede the `**` wildcard — putting the wildcard first silently denies the `:id` routes their `RenderMode.Server`.
 
 `ProjectsGrid` is one component reused for both `/projects/frontend` and `/projects/backend`; the route's `data: { stack: TechStack.frontend | .backend }` is delivered as a typed component `input()` via `withComponentInputBinding()` (configured in `app.config.ts`) rather than injecting `ActivatedRoute`.
 
@@ -60,7 +66,11 @@ Every route is nested under `MainLayoutComponent` (navbar + footer), including t
 
 ### SEO
 
-`SeoService` (`src/app/core/services/seo.service.ts`) wraps Angular's `Title`/`Meta` services. Feature components that represent a distinct page (e.g. `AboutComponent`) call `seo.update({ title, description })` in their constructor — follow this pattern for any new top-level route component rather than setting `Title`/`Meta` directly.
+`SeoService` (`src/app/core/services/seo.service.ts`) wraps Angular's `Title`/`Meta` services and also manages `og:*`, `twitter:*` and the `<link rel="canonical">`. Every routed page calls `seo.update({ title, description, path })` in its constructor — follow this pattern for any new top-level route component rather than setting `Title`/`Meta` directly. Passing `path` (root-relative, e.g. `/about`) is what emits `og:url` + canonical; omit it only for pages that should not be canonicalised, like `NotFound`.
+
+`ProjectsGrid` and `ProjectsComponent` serve more than one URL from one class, so they call `seo.update` inside an `effect()` reading their route input rather than once in the constructor.
+
+The absolute origin lives in one place, `src/app/core/seo.config.ts` (`SITE_ORIGIN`). The static `Person` JSON-LD in `src/index.html` and `public/sitemap.xml` hardcode the same origin — change all three together.
 
 ### Directory layout
 
@@ -72,9 +82,12 @@ Every route is nested under `MainLayoutComponent` (navbar + footer), including t
 
 - **`app-button`**: renders `<button>` normally, or `<a>` when `href` is passed, or uses `routerLink` for internal navigation — pick the input based on destination, don't wrap `app-button` in your own anchor/button.
 - **`app-card`**: composed via named content-projection slots — `card-header`, `card-body`, `card-footer` attributes on projected elements, not component inputs. `icon` is decorative by default (`iconDecorative` defaults `true`); pass `iconDecorative="false"` only when the icon is the sole label for the card.
+- **`app-card-grid`**: renders a `<ul>`, so callers must project `<li>` elements — projecting bare `app-card`s produces invalid list markup. Layout is tuned per call site with the `minColumnWidth` and `gap` inputs, which are forwarded to CSS custom properties on the host; don't re-declare grid rules in the consuming component's stylesheet. Used by both `/about` and `/projects/{frontend,backend}`.
 - **`app-icon`**: resolves `name` to `assets/icons/{name}.svg`. Always set `decorative` explicitly for purely visual icons (emits `aria-hidden="true"` + `alt=""`); otherwise it falls back to `"{name} icon"` alt text if none is given.
 - Accessibility is a first-class concern throughout: prefer native semantic elements (`<article>`, `<nav>`, `<header>`, `<footer>`), explicit `aria-label`/`aria-expanded`/`aria-controls` on non-obvious interactive elements, and keep decorative icons out of the accessibility tree.
 
 ### Validation
 
 Two Zod schemas live in `core/schemas/`: `projectsSchema.ts` (validates the static `projects.model.ts` array at `ProjectService` construction) and `formSchema.ts` (contacts form). `projectsSchema.ts` exports both the schema and a `z.infer`-derived `Project` type, but `ProjectService` and components actually type against `ProjectsTypes` in `shared/types/projects.ts` — a hand-written interface kept separate from `Project`. When adding/changing a project field, update the Zod schema *and* `ProjectsTypes` together; they aren't unified and can silently drift if only one is edited.
+
+For the same reason, adding or removing an entry in `projects.model.ts` also means editing `public/sitemap.xml` by hand — the sitemap is static and lists every project detail URL.

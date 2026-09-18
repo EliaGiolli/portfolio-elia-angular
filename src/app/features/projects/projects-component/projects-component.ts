@@ -39,7 +39,8 @@ export class ProjectsComponent {
       if (!p) return;
       this.seo.update({
         title: `${p.project_name} | ${p.tech_stack} Project — Elia Giolli`,
-        description: p.description.slice(0, 155)
+        description: p.description.slice(0, 155),
+        path: `/projects/${p.tech_stack.toLowerCase()}/${p.id}`
       });
     });
   }
