@@ -54,7 +54,9 @@ If `ProjectsSchema.parse` fails validation fails at `ProjectService` constructio
 
 ### Routing (`src/app/app.routes.ts`)
 
-Every route is nested under `MainLayoutComponent` (navbar + footer), including the homepage and the `**` wildcard — there is no standalone/layout-free route. `/cv` is the only route imported eagerly (`component: Cv`); every other route uses `loadComponent()` lazy imports. Both `404` (the explicit target `ProjectsComponent` redirects to for an unknown `:id`) and the `**` wildcard render `NotFound`.
+Every route is nested under `MainLayoutComponent` (navbar + footer), including the homepage and the `**` wildcard — there is no standalone/layout-free route. Two components are imported eagerly — `MainLayoutComponent` (the shell every route nests under) and `NotFound` (referenced twice by class, by the `404` route and the `**` wildcard). Every actual page route uses `loadComponent()` lazy imports. Both `404` (the explicit target `ProjectsComponent` redirects to for an unknown `:id`) and the `**` wildcard render `NotFound`.
+
+There is no `/cv` route. The CV is a static PDF at `public/Elia_Giolli_CV_Angular_Developer.pdf`, linked from the homepage with `app-button`'s `download` input; `/cv` intentionally 404s.
 
 `app.routes.server.ts` matches **in declaration order**, so every specific entry must precede the `**` wildcard — putting the wildcard first silently denies the `:id` routes their `RenderMode.Server`.
 
@@ -76,7 +78,7 @@ The absolute origin lives in one place, `src/app/core/seo.config.ts` (`SITE_ORIG
 
 - `core/` — app-wide singletons with no UI: models (static data), Zod schemas, services, directives (`TooltipDirective`, which dynamically creates a `TechTooltip` component on `mouseenter`/destroys on `mouseleave` rather than using `*ngIf`).
 - `shared/` — presentational, reusable pieces with no feature-specific knowledge: `button`, `card`, `card-grid`, `icon`, `tooltip`, `navbar`, `footer`, plus `types/` for cross-cutting TS types (`TechStack` enum, `ProjectsTypes`, `ButtonVariant`).
-- `features/` — routed pages: `homepage`, `main-layout`, `projects/` (`projects-layout`, `projects-grid`, `projects-component`), `cv`, `about/` (`about-me` is the routed `/about` page; `about-section` and `card-grid` are the layout primitives it composes; `contacts` is the `/contacts` form), `not-found`.
+- `features/` — routed pages: `homepage`, `main-layout`, `projects/` (`projects-layout`, `projects-grid`, `projects-component`), `about/` (`about-me` is the routed `/about` page; `about-section` and `card-grid` are the layout primitives it composes; `contacts` is the `/contacts` form), `not-found`.
 
 ### Shared component conventions
 

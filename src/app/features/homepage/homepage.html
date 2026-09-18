@@ -26,7 +26,14 @@
         </div>
         <div class="buttons-wrapper">
             <app-button variant="primary" routerLink="/projects">Go to projects</app-button>
-            <app-button variant="secondary" routerLink="/cv">Read my CV</app-button>
+            <app-button
+                variant="secondary"
+                href="/Elia_Giolli_CV_Angular_Developer.pdf"
+                download=""
+            >
+                <app-icon name="download" [size]="20" [decorative]="true" />
+                Download my CV
+            </app-button>
         </div>
     </div>
 </main>

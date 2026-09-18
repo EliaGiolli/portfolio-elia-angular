@@ -101,20 +101,4 @@
         }
     }
 
-    .btn-cv {
-        background-color: #FFFFFF;
-        color: var(--bg-accent-primary);
-        border: 1.5px solid var(--bg-accent-primary);
-        
-        padding: 0.8rem 1.8rem;
-        border-radius: 12px;
-        font-weight: 600;
-        transition: all 0.2s ease-in-out;
-        
-        &:hover {
-            background-color: var(--bg-background-secondary); 
-            transform: translateY(-1px);
-        }
-    }
-
 }
