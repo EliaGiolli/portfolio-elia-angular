@@ -1,31 +1,124 @@
-article {
-  padding: 2rem 1rem;
+:host {
+  /* Local spacing scale — promote to styles.css later if it proves useful site-wide */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+  --space-7: 4rem;
+
+  display: block;
+}
+
+.about {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  gap: var(--space-7);
+  max-width: 72rem;
+  margin-inline: auto;
 }
 
-h1 {
+/* ---------- INTRO ---------- */
+
+.about-intro {
+  max-width: 65ch;
+}
+
+.eyebrow {
   color: var(--text-accent-primary);
-  font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 0.95rem;
   text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 var(--space-2);
 }
 
-.subtitle{
-  color: var(--text-primary);
-  font-size: 1.3rem;
+.about-intro h1 {
+  font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1.2rem;
   font-weight: 500;
+  margin-top: var(--space-2);
+}
+
+.intro-copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+/* ---------- SKILLS ---------- */
+
+.skills-section h2 {
+  margin-bottom: var(--space-4);
 }
 
 .skills-grid {
-  margin-top: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: var(--space-4);
+}
 
-  .cards-layout{
-    margin-top: 2rem;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+.skills-grid > li {
+  display: flex;
+}
+
+.skills-grid app-card {
+  width: 100%;
+}
+
+/* ---------- METHODOLOGY / BADGES ---------- */
+
+.badge-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--bg-accent-primary), white 92%);
+  color: var(--bg-accent-primary);
+  border: 1px solid color-mix(in srgb, var(--bg-accent-primary), white 78%);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ---------- FOOTER CTA ---------- */
+
+.about-footer app-button {
+  align-self: flex-start;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 480px) {
+  .about {
+    gap: var(--space-6);
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  :host * {
+    transition: none !important;
+    animation: none !important;
   }
 }

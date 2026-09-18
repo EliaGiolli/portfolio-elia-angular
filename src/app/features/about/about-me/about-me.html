@@ -1,73 +1,72 @@
-<article class="about-container container section-padding">
-  
-  <!-- HEADER / INTRODUZIONE -->
-  <header class="about-header">
-    <h1>My name is Elia Giolli</h1>
-    <h2 class="subtitle">Angular Developer || junior Front-End Developer</h2>
-    
-    <p>
-      Front-End Developer specializing in Angular, with a growing portfolio of self-directed projects built over 6+ months of continuous, hands-on study (December 2025 - present).
-    </p>
-    <p>
-      I bring a solid foundation in TypeScript, component-driven architecture, and full-stack integration (Node.js, NestJS, PostgreSQL), reinforced by prior professional-level experience with React and Next.js.
-    </p>
+<article class="about container section-padding">
+
+  <!-- INTRO -->
+  <header class="about-intro">
+    <p class="eyebrow" lang="en">Front-End Developer</p>
+    <h1>Elia Giolli</h1>
+    <p class="subtitle" lang="en">Angular Developer &amp; Junior Front-End Developer</p>
+
+    <div class="intro-copy">
+      <p lang="en">
+        Front-End Developer specializing in Angular, with a growing portfolio of
+        self-directed projects built over 6+ months of continuous, hands-on study
+        (December 2025 – present).
+      </p>
+      <p lang="en">
+        I bring a solid foundation in TypeScript, component-driven architecture,
+        and full-stack integration (Node.js, NestJS, PostgreSQL), reinforced by
+        prior professional-level experience with React and Next.js.
+      </p>
+    </div>
   </header>
 
-  <!-- SEZIONE CARDS COMPETENZE -->
-  <section class="skills-grid">
-    <h2 class="subtitle">Competenze Tecniche & Ambiti di Intervento</h2>
+  <!-- SKILLS -->
+  <section class="skills-section" aria-labelledby="skills-heading" lang="it">
+    <h2 id="skills-heading">Competenze Tecniche</h2>
 
-    <div class="cards-layout">
-      
-      <!-- Card 1: Supporto Tecnico -->
-      <app-card icon="support" [iconSize]="40" label="IT Support e Troubleshooting">
-        <div card-header>
-          <h3>IT Support & Troubleshooting</h3>
-        </div>
-        <div card-body>
-          <p>Diagnosi e risoluzione di problemi hardware e software, configurazione postazioni di lavoro, gestione periferiche e sistemi operativi (Windows, Linux, macOS).</p>
-        </div>
-      </app-card>
+    <ul class="skills-grid">
+      <li>
+        <app-card icon="support" [iconSize]="40" label="IT Support e Troubleshooting">
+          <h3 card-header>IT Support &amp; Troubleshooting</h3>
+          <div card-body>
+            <p>Diagnosi e risoluzione di problemi hardware e software, configurazione postazioni di lavoro, gestione periferiche e sistemi operativi (Windows, Linux, macOS).</p>
+          </div>
+        </app-card>
+      </li>
 
-      <!-- Card 2: Networking -->
-      <app-card icon="network" [iconSize]="40" label="Gestione Reti e Sistemi">
-        <div card-header>
-          <h3>Gestione Reti & Sistemi</h3>
-        </div>
-        <div card-body>
-          <p>Nozioni di networking (TCP/IP, DNS, DHCP, VPN), configurazione router/switch e gestione degli accessi utente.</p>
-        </div>
-      </app-card>
+      <li>
+        <app-card icon="network" [iconSize]="40" label="Gestione Reti e Sistemi">
+          <h3 card-header>Gestione Reti &amp; Sistemi</h3>
+          <div card-body>
+            <p>Nozioni di networking (TCP/IP, DNS, DHCP, VPN), configurazione router/switch e gestione degli accessi utente.</p>
+          </div>
+        </app-card>
+      </li>
 
-      <!-- Card 3: Sviluppo Web -->
-      <app-card icon="code" [iconSize]="40" label="Sviluppo e Scripting">
-        <div card-header>
-          <h3>Sviluppo & Scripting</h3>
-        </div>
-        <div card-body>
-          <p>Competenze in ambito Web Development (Angular, TypeScript, JavaScript, HTML5/CSS3) e scripting per l'automazione di task e l'analisi di problemi applicativi.</p>
-        </div>
-      </app-card>
+      <li>
+        <app-card icon="code" [iconSize]="40" label="Sviluppo e Scripting">
+          <h3 card-header>Sviluppo &amp; Scripting</h3>
+          <div card-body>
+            <p>Competenze in ambito Web Development (Angular, TypeScript, JavaScript, HTML5/CSS3) e scripting per l'automazione di task e l'analisi di problemi applicativi.</p>
+          </div>
+        </app-card>
+      </li>
 
-      <!-- Card 4: Service Desk -->
-      <app-card icon="terminal" [iconSize]="40" label="Ticketing e Service Desk">
-        <div card-header>
-          <h3>Ticketing & Service Desk</h3>
-        </div>
-        <div card-body>
-          <p>Utilizzo di logiche di gestione delle richieste, tracciamento degli incidenti, documentazione tecnica e rispetto degli SLA (Service Level Agreement).</p>
-        </div>
-      </app-card>
-
-    </div>
+      <li>
+        <app-card icon="terminal" [iconSize]="40" label="Ticketing e Service Desk">
+          <h3 card-header>Ticketing &amp; Service Desk</h3>
+          <div card-body>
+            <p>Utilizzo di logiche di gestione delle richieste, tracciamento degli incidenti, documentazione tecnica e rispetto degli SLA (Service Level Agreement).</p>
+          </div>
+        </app-card>
+      </li>
+    </ul>
   </section>
 
-  <!-- SEZIONE METODOLOGIA -->
-  <section class="methodology-section">
+  <!-- METHODOLOGY -->
+  <section class="methodology-section" lang="it">
     <app-card label="Metodologia di lavoro e risoluzione problemi">
-      <div card-header>
-        <h2 class="section-title">Metodologia di Lavoro e Troubleshooting</h2>
-      </div>
+      <h2 card-header>Metodologia di Lavoro e Troubleshooting</h2>
       <div card-body>
         <p>
           Come evidenziato dai miei progetti e dalle mie repository su GitHub, considero la documentazione e l'ordine procedurale aspetti fondamentali dell'informatica. Ogni intervento di troubleshooting che eseguo segue un approccio analitico: isolamento del problema, individuazione della causa radice, applicazione della soluzione e tracciamento della procedura a beneficio del team.
@@ -77,30 +76,28 @@
         </p>
       </div>
       <div card-footer>
-        <div class="badge-container">
-          <span class="badge">Problem Solving</span>
-          <span class="badge">Agile / Scrum</span>
-          <span class="badge">Ticketing System</span>
-          <span class="badge">SLA Management</span>
-        </div>
+        <ul class="badge-list">
+          <li class="badge">Problem Solving</li>
+          <li class="badge">Agile / Scrum</li>
+          <li class="badge">Ticketing System</li>
+          <li class="badge">SLA Management</li>
+        </ul>
       </div>
     </app-card>
   </section>
 
-  <!-- FOOTER / CALL TO ACTION -->
-  <footer class="about-footer">
+  <!-- CTA -->
+  <footer class="about-footer" lang="it">
     <app-card icon="github" [iconSize]="32" label="Contatti e GitHub">
-      <div card-header>
-        <h3>Iniziamo a Collaborare</h3>
-      </div>
+      <h2 card-header>Iniziamo a Collaborare</h2>
       <div card-body>
         <p>Se sei alla ricerca di un IT Specialist, di un addetto all'Help Desk di livello 1/2 o di una figura tecnica versatile in grado di supportare l'infrastruttura aziendale, sono a disposizione.</p>
       </div>
       <div card-footer>
-        <a href="https://github.com/EliaGiolli" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        <app-button variant="primary" href="https://github.com/EliaGiolli">
           <app-icon name="github" [size]="20" [decorative]="true" />
           Visita il mio Profilo GitHub
-        </a>
+        </app-button>
       </div>
     </app-card>
   </footer>
