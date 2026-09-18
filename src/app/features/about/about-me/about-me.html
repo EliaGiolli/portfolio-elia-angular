@@ -70,47 +70,45 @@
   </div>
 
   <!-- SKILLS -->
-  <section class="skills-section" aria-labelledby="skills-heading">
-    <h2 id="skills-heading">Technical Skills</h2>
-
-    <ul class="skills-grid">
+  <app-about-section id="skills" title="Technical Skills">
+    <app-card-grid>
       <li>
-        <app-card icon="angular" [iconSize]="40" label="Angular & Front-End Development">
-          <h3 card-header>Angular &amp; Front-End Development</h3>
-          <div card-body>
-            <p>Building responsive, component-driven UIs with Angular and TypeScript. Comfortable with Angular Signals for state management, reactive forms, and RESTful API integration.</p>
-          </div>
-        </app-card>
-      </li>
+          <app-card icon="angular" [iconSize]="40" label="Angular & Front-End Development">
+            <h3 card-header>Angular &amp; Front-End Development</h3>
+            <div card-body>
+              <p>Building responsive, component-driven UIs with Angular and TypeScript. Comfortable with Angular Signals for state management, reactive forms, and RESTful API integration.</p>
+            </div>
+          </app-card>
+        </li>
 
-      <li>
-        <app-card icon="monitor" [iconSize]="40" label="Full-Stack Integration">
-          <h3 card-header>Full-Stack Integration</h3>
-          <div card-body>
-            <p>Connecting front-end apps to Node.js and NestJS APIs, with PostgreSQL for persistence. Working knowledge of authentication flows, CRUD operations, and end-to-end deployment.</p>
-          </div>
-        </app-card>
-      </li>
+        <li>
+          <app-card icon="monitor" [iconSize]="40" label="Full-Stack Integration">
+            <h3 card-header>Full-Stack Integration</h3>
+            <div card-body>
+              <p>Connecting front-end apps to Node.js and NestJS APIs, with PostgreSQL for persistence. Working knowledge of authentication flows, CRUD operations, and end-to-end deployment.</p>
+            </div>
+          </app-card>
+        </li>
 
-      <li>
-        <app-card icon="brain" [iconSize]="40" label="Problem Solving & Scripting">
-          <h3 card-header>Problem Solving &amp; Scripting</h3>
-          <div card-body>
-            <p>A structured, analytical approach to debugging: isolate the issue, trace the root cause, apply a fix, document it. Writing scripts to automate repetitive diagnostic and reporting tasks.</p>
-          </div>
-        </app-card>
-      </li>
+        <li>
+          <app-card icon="brain" [iconSize]="40" label="Problem Solving & Scripting">
+            <h3 card-header>Problem Solving &amp; Scripting</h3>
+            <div card-body>
+              <p>A structured, analytical approach to debugging: isolate the issue, trace the root cause, apply a fix, document it. Writing scripts to automate repetitive diagnostic and reporting tasks.</p>
+            </div>
+          </app-card>
+        </li>
 
-      <li>
-        <app-card icon="database" [iconSize]="40" label="IT Support & Systems Background">
-          <h3 card-header>IT Support &amp; Systems Background</h3>
-          <div card-body>
-            <p>Hands-on experience diagnosing hardware and software issues, configuring workstations, and managing networks (TCP/IP, DNS, DHCP, VPN). This is where the troubleshooting discipline I bring to debugging code comes from.</p>
-          </div>
-        </app-card>
-      </li>
-    </ul>
-  </section>
+        <li>
+          <app-card icon="database" [iconSize]="40" label="IT Support & Systems Background">
+            <h3 card-header>IT Support &amp; Systems Background</h3>
+            <div card-body>
+              <p>Hands-on experience diagnosing hardware and software issues, configuring workstations, and managing networks (TCP/IP, DNS, DHCP, VPN). This is where the troubleshooting discipline I bring to debugging code comes from.</p>
+            </div>
+          </app-card>
+        </li>
+    </app-card-grid>
+  </app-about-section>
 
   <!-- METHODOLOGY -->
   <section class="methodology-section">
@@ -152,9 +150,9 @@
       </div>
       <div card-footer>
         <app-button variant="primary" href="https://github.com/EliaGiolli">
-          <app-icon name="github" [size]="20" [decorative]="true" />
-          Visit my GitHub Profile
-        </app-button>
+          <app-icon name="github" [size]="40" [decorative]="true" />
+            Visit my GitHub Profile
+          </app-button>
       </div>
     </app-card>
   </footer>
