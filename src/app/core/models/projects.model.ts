@@ -9,7 +9,19 @@ export const projects: ProjectsTypes[] = [
         "technologies": ["nextdotjs", "typescript", "tailwindcss", "nodedotjs", "postgresql"],
         "github_link": "https://github.com/EliaGiolli/dashboard-crypto-next",
         "demo_link": "",
-        "tech_stack": TechStack.frontend
+        "tech_stack": TechStack.frontend,
+        // Worked example of the long-form fields. Everything below restates what the
+        // short description already claimed — nothing new was invented about the
+        // project. Replace it with the real story, and add `role` and `year`.
+        "summary": [
+            "NexCoin is a cryptocurrency dashboard built with Next.js 15 and TypeScript, styled with TailwindCSS 4 and ShadCN UI components.",
+            "It reads live market data from the public CoinGecko API and lays it out responsively, so the same dashboard is usable on a desktop monitor and on a phone."
+        ],
+        "highlights": [
+            "Built on Next.js 15 with TypeScript used throughout.",
+            "Live market data pulled from the public CoinGecko API.",
+            "Interface composed from ShadCN UI components and styled with TailwindCSS 4."
+        ]
     },
     {
         "id": 2,
@@ -96,4 +108,13 @@ export const projects: ProjectsTypes[] = [
 /**
  * The tech names correspond to the SVG icon filenames in assets/icons/.
  * Fill in github_link values with the actual GitHub repo URLs before deploying.
+ *
+ * `summary`, `highlights`, `role` and `year` are optional long-form fields rendered
+ * by the detail page. Only NexCoin (id 1) has them so far, as a worked example — the
+ * other eight are waiting on real write-ups. A project without them renders exactly
+ * as it did before.
+ *
+ * Adding or removing an entry here also means editing public/sitemap.xml by hand, and
+ * any field change must be mirrored in BOTH shared/types/projects.ts and
+ * core/schemas/projectsSchema.ts.
  */

@@ -4,7 +4,34 @@
       <h2 card-header>{{ p.project_name }}</h2>
 
       <div card-body>
+        @if (p.role || p.year) {
+          <p class="project-meta">
+            @if (p.role) { <span>{{ p.role }}</span> }
+            @if (p.role && p.year) { <span aria-hidden="true"> · </span> }
+            @if (p.year) { <span>{{ p.year }}</span> }
+          </p>
+        }
+
         <p class="description">{{ p.description }}</p>
+
+        @if (p.summary; as summary) {
+          <div class="project-summary">
+            @for (paragraph of summary; track $index) {
+              <p>{{ paragraph }}</p>
+            }
+          </div>
+        }
+
+        @if (p.highlights; as highlights) {
+          <section class="project-highlights" aria-labelledby="highlights-heading">
+            <h3 id="highlights-heading">Highlights</h3>
+            <ul>
+              @for (item of highlights; track $index) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          </section>
+        }
 
         <div class="tech-info">
           <h4>Tech Stack:</h4>
