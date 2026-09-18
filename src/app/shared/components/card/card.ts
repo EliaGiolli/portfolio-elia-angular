@@ -1,15 +1,15 @@
 import { Component, input } from '@angular/core';
-import { IconComponent } from '../icon/icon'; // Assicurati che il percorso sia corretto
+import { IconComponent } from '../icon/icon';
 
 @Component({
   selector: 'app-card',
   standalone: true,
   imports: [IconComponent],
   template: `
-    <article class="custom-card" role="article" [attr.aria-label]="label() || null">
+    <article class="custom-card" [attr.aria-label]="label() || null">
       <header class="card-header">
         @if (icon()) {
-          <app-icon [name]="icon()!" [size]="iconSize()" />
+          <app-icon [name]="icon()!" [size]="iconSize()" [decorative]="iconDecorative()" />
         }
         <div class="header-content">
           <ng-content select="[card-header]"></ng-content>
@@ -32,8 +32,10 @@ import { IconComponent } from '../icon/icon'; // Assicurati che il percorso sia 
 export class Card {
   icon = input<string>();
   iconSize = input<number>(56);
-  // Optional label used for accessibility. When provided it is applied as `aria-label` on the article.
   label = input<string | undefined>();
-  // Getter to hide the padding from the footer (optional)
-  get hasFooter() { return true; } 
+  /** Cards almost always have a visible title next to the icon, so the icon
+   * is decorative by default. Set to false for the rare card whose icon is
+   * the only label (e.g. an icon-only nav card with no visible heading). */
+  iconDecorative = input<boolean>(true);
+  get hasFooter() { return true; }
 }

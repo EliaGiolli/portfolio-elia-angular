@@ -1,0 +1,14 @@
+/* card-grid.css */
+:host { display: block; }
+
+.card-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: var(--space-4, 1.5rem);
+}
+
+.card-grid > ::ng-deep li { display: flex; }
+.card-grid > ::ng-deep li > app-card { width: 100%; }
