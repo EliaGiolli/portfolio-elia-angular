@@ -7,7 +7,6 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'projects', renderMode: RenderMode.Prerender },
   { path: 'projects/frontend', renderMode: RenderMode.Prerender },
   { path: 'projects/backend', renderMode: RenderMode.Prerender },
-  { path: 'cv', renderMode: RenderMode.Prerender },
   { path: 'contacts', renderMode: RenderMode.Prerender },
 
   // Dynamic + error routes: rendered per request.
@@ -32,8 +31,9 @@ export const serverRoutes: ServerRoute[] = [
  *   NotFound flag the request (REQUEST_CONTEXT) so server.ts can answer 404.
  *
  * - Static pages are therefore listed one by one to keep them prerendered;
- *   relying on '**' to cover them would drop all 7 back to per-request SSR.
- *   Adding a static route to app.routes.ts means adding it here too.
+ *   relying on '**' to cover them would drop all 6 back to per-request SSR.
+ *   Adding a static route to app.routes.ts means adding it here too, and
+ *   removing one means removing it here too.
  *
  * - Project detail routes use SSR to handle dynamic parameters without needing
  *   'getPrerenderParams'.
