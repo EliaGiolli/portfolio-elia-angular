@@ -1,5 +1,4 @@
 :host {
-  /* Local spacing scale — promote to styles.css later if it proves useful site-wide */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 1rem;
@@ -19,39 +18,111 @@
   margin-inline: auto;
 }
 
-/* ---------- INTRO ---------- */
+/* ---------- LEAD ---------- */
 
-.about-intro {
-  max-width: 65ch;
+.about-lead {
+  max-width: 42rem;
 }
 
 .eyebrow {
   color: var(--text-accent-primary);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
   margin: 0 0 var(--space-2);
 }
 
-.about-intro h1 {
+.about-lead h1 {
   font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
   font-weight: 700;
   line-height: 1.1;
 }
 
-.subtitle {
+.lead-subtitle {
   color: var(--text-secondary);
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin-top: var(--space-2);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  margin-top: var(--space-3);
 }
 
-.intro-copy {
+/* ---------- LEAD GRID: photo + narrative blocks ---------- */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+@media (min-width: 64rem) {
+  .about-grid {
+    grid-template-columns: 0.8fr 1fr 1fr;
+    gap: var(--space-6);
+    align-items: start;
+  }
+}
+
+.about-photo {
+  margin: 0;
+}
+
+.about-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 1px solid var(--bg-accent-secondary);
+  box-shadow: 10px 10px 0 color-mix(in srgb, var(--bg-accent-primary), transparent 82%);
+}
+
+.about-photo figcaption {
+  margin-top: var(--space-2);
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.about-block {
+  padding-top: var(--space-3);
+  border-top: 2px solid var(--text-primary);
+}
+
+.block-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.block-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--bg-accent-primary);
+}
+
+.about-block h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.block-copy {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  margin-top: var(--space-4);
+}
+
+.block-copy p {
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.block-copy code {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  background-color: var(--bg-background-secondary);
+  color: var(--text-accent-primary);
+  padding: 0.15em 0.4em;
+  border-radius: 6px;
 }
 
 /* ---------- SKILLS ---------- */

@@ -1,62 +1,111 @@
 <article class="about container section-padding">
 
-  <!-- INTRO -->
-  <header class="about-intro">
-    <p class="eyebrow" lang="en">Front-End Developer</p>
+  <!-- LEAD -->
+  <header class="about-lead">
+    <p class="eyebrow">Developer Profile</p>
     <h1>Elia Giolli</h1>
-    <p class="subtitle" lang="en">Angular Developer &amp; Junior Front-End Developer</p>
-
-    <div class="intro-copy">
-      <p lang="en">
-        Front-End Developer specializing in Angular, with a growing portfolio of
-        self-directed projects built over 6+ months of continuous, hands-on study
-        (December 2025 – present).
-      </p>
-      <p lang="en">
-        I bring a solid foundation in TypeScript, component-driven architecture,
-        and full-stack integration (Node.js, NestJS, PostgreSQL), reinforced by
-        prior professional-level experience with React and Next.js.
-      </p>
-    </div>
+    <p class="lead-subtitle">
+      Software that gets diagnosed, not just designed: an Angular
+      developer's approach to building interfaces — start from first
+      principles, ship real projects, and treat every bug as a system to
+      be understood.
+    </p>
   </header>
 
+  <div class="about-grid">
+    <figure class="about-photo">
+      <img src="/assets/images/foto-elia.jpg" alt="Elia Giolli"
+           width="720" height="400" loading="lazy" />
+      <figcaption>Pisa, Italy — front-end developer specializing in Angular.</figcaption>
+    </figure>
+
+    <article class="about-block">
+      <div class="block-heading">
+        <span class="block-icon" aria-hidden="true">◈</span>
+        <h2>Learning in public, shipping real code</h2>
+      </div>
+      <div class="block-copy">
+        <p>
+          I'm a front-end developer specializing in Angular — standalone
+          components, Signals, <code>computed()</code>, and server-side
+          rendering — built on more than six months of focused,
+          self-directed study and reinforced by prior professional-level
+          experience with React and Next.js.
+        </p>
+        <p>
+          Every project in my portfolio is a real, working application,
+          not a tutorial clone: a Signal-driven server monitoring
+          dashboard, a library manager consuming a live API through
+          <code>toSignal</code>, and this portfolio itself — SSR with
+          client hydration, Zod-validated data, and a reusable,
+          accessible component library.
+        </p>
+      </div>
+    </article>
+
+    <article class="about-block">
+      <div class="block-heading">
+        <span class="block-icon" aria-hidden="true">⌁</span>
+        <h2>From diagnosis to deployment</h2>
+      </div>
+      <div class="block-copy">
+        <p>
+          Before Angular, I was diagnosing network and software incidents
+          on logistics systems under real time pressure. That habit
+          carried over directly: isolate the problem, trace it to its
+          root cause, fix it, document it — the same discipline I now
+          bring to debugging a broken effect or a failed API call.
+        </p>
+        <p>
+          It also means I think past the component boundary — how a
+          front end authenticates against a REST API, where state
+          actually lives, what happens when the network fails. That,
+          plus working fluency in five languages, makes cross-team
+          communication — with users, with backend engineers, with
+          whoever inherits the code next — second nature rather than an
+          afterthought.
+        </p>
+      </div>
+    </article>
+  </div>
+
   <!-- SKILLS -->
-  <section class="skills-section" aria-labelledby="skills-heading" lang="it">
-    <h2 id="skills-heading">Competenze Tecniche</h2>
+  <section class="skills-section" aria-labelledby="skills-heading">
+    <h2 id="skills-heading">Technical Skills</h2>
 
     <ul class="skills-grid">
       <li>
-        <app-card icon="support" [iconSize]="40" label="IT Support e Troubleshooting">
-          <h3 card-header>IT Support &amp; Troubleshooting</h3>
+        <app-card icon="angular" [iconSize]="40" label="Angular & Front-End Development">
+          <h3 card-header>Angular &amp; Front-End Development</h3>
           <div card-body>
-            <p>Diagnosi e risoluzione di problemi hardware e software, configurazione postazioni di lavoro, gestione periferiche e sistemi operativi (Windows, Linux, macOS).</p>
+            <p>Building responsive, component-driven UIs with Angular and TypeScript. Comfortable with Angular Signals for state management, reactive forms, and RESTful API integration.</p>
           </div>
         </app-card>
       </li>
 
       <li>
-        <app-card icon="network" [iconSize]="40" label="Gestione Reti e Sistemi">
-          <h3 card-header>Gestione Reti &amp; Sistemi</h3>
+        <app-card icon="monitor" [iconSize]="40" label="Full-Stack Integration">
+          <h3 card-header>Full-Stack Integration</h3>
           <div card-body>
-            <p>Nozioni di networking (TCP/IP, DNS, DHCP, VPN), configurazione router/switch e gestione degli accessi utente.</p>
+            <p>Connecting front-end apps to Node.js and NestJS APIs, with PostgreSQL for persistence. Working knowledge of authentication flows, CRUD operations, and end-to-end deployment.</p>
           </div>
         </app-card>
       </li>
 
       <li>
-        <app-card icon="code" [iconSize]="40" label="Sviluppo e Scripting">
-          <h3 card-header>Sviluppo &amp; Scripting</h3>
+        <app-card icon="brain" [iconSize]="40" label="Problem Solving & Scripting">
+          <h3 card-header>Problem Solving &amp; Scripting</h3>
           <div card-body>
-            <p>Competenze in ambito Web Development (Angular, TypeScript, JavaScript, HTML5/CSS3) e scripting per l'automazione di task e l'analisi di problemi applicativi.</p>
+            <p>A structured, analytical approach to debugging: isolate the issue, trace the root cause, apply a fix, document it. Writing scripts to automate repetitive diagnostic and reporting tasks.</p>
           </div>
         </app-card>
       </li>
 
       <li>
-        <app-card icon="terminal" [iconSize]="40" label="Ticketing e Service Desk">
-          <h3 card-header>Ticketing &amp; Service Desk</h3>
+        <app-card icon="database" [iconSize]="40" label="IT Support & Systems Background">
+          <h3 card-header>IT Support &amp; Systems Background</h3>
           <div card-body>
-            <p>Utilizzo di logiche di gestione delle richieste, tracciamento degli incidenti, documentazione tecnica e rispetto degli SLA (Service Level Agreement).</p>
+            <p>Hands-on experience diagnosing hardware and software issues, configuring workstations, and managing networks (TCP/IP, DNS, DHCP, VPN). This is where the troubleshooting discipline I bring to debugging code comes from.</p>
           </div>
         </app-card>
       </li>
@@ -64,39 +113,47 @@
   </section>
 
   <!-- METHODOLOGY -->
-  <section class="methodology-section" lang="it">
-    <app-card label="Metodologia di lavoro e risoluzione problemi">
-      <h2 card-header>Metodologia di Lavoro e Troubleshooting</h2>
+  <section class="methodology-section">
+    <app-card label="How I work and troubleshoot">
+      <h2 card-header>How I Work</h2>
       <div card-body>
         <p>
-          Come evidenziato dai miei progetti e dalle mie repository su GitHub, considero la documentazione e l'ordine procedurale aspetti fondamentali dell'informatica. Ogni intervento di troubleshooting che eseguo segue un approccio analitico: isolamento del problema, individuazione della causa radice, applicazione della soluzione e tracciamento della procedura a beneficio del team.
+          My GitHub repositories reflect how I actually work: documentation
+          and procedural order aren't an afterthought. I troubleshoot the
+          way I was trained to in IT support — isolate the problem,
+          identify the root cause, apply a fix, then document it for
+          whoever picks it up next.
         </p>
         <p>
-          Grazie alle mie basi nello sviluppo software con framework come Angular, ho una comprensione profonda di come le applicazioni comunicano con le reti e i server. Questo mi permette di dialogare efficacemente sia con gli utenti finali sia con i team di sviluppo e sistemistici di livello superiore.
+          Building software with Angular has given me a deeper
+          understanding of how applications talk to servers and networks,
+          which makes it easier to communicate clearly with both end users
+          and engineering teams — and to translate between the two when
+          needed.
         </p>
       </div>
       <div card-footer>
         <ul class="badge-list">
           <li class="badge">Problem Solving</li>
+          <li class="badge">Debugging</li>
+          <li class="badge">Documentation</li>
           <li class="badge">Agile / Scrum</li>
-          <li class="badge">Ticketing System</li>
-          <li class="badge">SLA Management</li>
         </ul>
       </div>
     </app-card>
   </section>
 
   <!-- CTA -->
-  <footer class="about-footer" lang="it">
-    <app-card icon="github" [iconSize]="32" label="Contatti e GitHub">
-      <h2 card-header>Iniziamo a Collaborare</h2>
+  <footer class="about-footer">
+    <app-card icon="github" [iconSize]="32" label="Contact and GitHub">
+      <h2 card-header>Let's Work Together</h2>
       <div card-body>
-        <p>Se sei alla ricerca di un IT Specialist, di un addetto all'Help Desk di livello 1/2 o di una figura tecnica versatile in grado di supportare l'infrastruttura aziendale, sono a disposizione.</p>
+        <p>Looking for a front-end developer who's equally comfortable shipping UI and troubleshooting the infrastructure underneath it? I'd like to hear from you.</p>
       </div>
       <div card-footer>
         <app-button variant="primary" href="https://github.com/EliaGiolli">
           <app-icon name="github" [size]="20" [decorative]="true" />
-          Visita il mio Profilo GitHub
+          Visit my GitHub Profile
         </app-button>
       </div>
     </app-card>
