@@ -1,9 +1,11 @@
-<article class="about container section-padding">
+<!-- MainLayoutComponent already provides the page's single <main>, and this page is
+     not an independently syndicatable composition, so the root is a plain wrapper. -->
+<div class="about">
 
   <!-- LEAD -->
   <header class="about-lead">
     <p class="eyebrow">Developer Profile</p>
-    <h1>Elia Giolli</h1>
+    <h1>Elia Giolli — Angular Front-End Developer</h1>
     <p class="lead-subtitle">
       Software that gets diagnosed, not just designed: an Angular
       developer's approach to building interfaces — start from first
@@ -14,15 +16,19 @@
 
   <div class="about-grid">
     <figure class="about-photo">
+      <!-- Above the fold on desktop, so almost certainly the LCP element: eager +
+           high priority. The dimensions describe the *rendered* box (CSS forces
+           aspect-ratio 4/5 with object-fit: cover over a 974x779 source), which is
+           what the browser needs to reserve the right space and avoid a shift. -->
       <img src="/assets/images/foto-elia.jpg" alt="Elia Giolli"
-           width="720" height="400" loading="lazy" />
+           width="720" height="900" loading="eager" fetchpriority="high" />
       <figcaption>Pisa, Italy — front-end developer specializing in Angular.</figcaption>
     </figure>
 
-    <article class="about-block">
+    <section class="about-block" aria-labelledby="block-shipping-heading">
       <div class="block-heading">
         <span class="block-icon" aria-hidden="true">◈</span>
-        <h2>Learning in public, shipping real code</h2>
+        <h2 id="block-shipping-heading">Learning in public, shipping real code</h2>
       </div>
       <div class="block-copy">
         <p>
@@ -41,12 +47,12 @@
           accessible component library.
         </p>
       </div>
-    </article>
+    </section>
 
-    <article class="about-block">
+    <section class="about-block" aria-labelledby="block-diagnosis-heading">
       <div class="block-heading">
         <span class="block-icon" aria-hidden="true">⌁</span>
-        <h2>From diagnosis to deployment</h2>
+        <h2 id="block-diagnosis-heading">From diagnosis to deployment</h2>
       </div>
       <div class="block-copy">
         <p>
@@ -66,14 +72,14 @@
           afterthought.
         </p>
       </div>
-    </article>
+    </section>
   </div>
 
   <!-- SKILLS -->
   <app-about-section id="skills" title="Technical Skills">
     <app-card-grid>
       <li>
-          <app-card icon="angular" [iconSize]="40" label="Angular & Front-End Development">
+          <app-card icon="angular" [iconSize]="40">
             <h3 card-header>Angular &amp; Front-End Development</h3>
             <div card-body>
               <p>Building responsive, component-driven UIs with Angular and TypeScript. Comfortable with Angular Signals for state management, reactive forms, and RESTful API integration.</p>
@@ -82,7 +88,7 @@
         </li>
 
         <li>
-          <app-card icon="monitor" [iconSize]="40" label="Full-Stack Integration">
+          <app-card icon="monitor" [iconSize]="40">
             <h3 card-header>Full-Stack Integration</h3>
             <div card-body>
               <p>Connecting front-end apps to Node.js and NestJS APIs, with PostgreSQL for persistence. Working knowledge of authentication flows, CRUD operations, and end-to-end deployment.</p>
@@ -91,7 +97,7 @@
         </li>
 
         <li>
-          <app-card icon="brain" [iconSize]="40" label="Problem Solving & Scripting">
+          <app-card icon="brain" [iconSize]="40">
             <h3 card-header>Problem Solving &amp; Scripting</h3>
             <div card-body>
               <p>A structured, analytical approach to debugging: isolate the issue, trace the root cause, apply a fix, document it. Writing scripts to automate repetitive diagnostic and reporting tasks.</p>
@@ -100,7 +106,7 @@
         </li>
 
         <li>
-          <app-card icon="database" [iconSize]="40" label="IT Support & Systems Background">
+          <app-card icon="database" [iconSize]="40">
             <h3 card-header>IT Support &amp; Systems Background</h3>
             <div card-body>
               <p>Hands-on experience diagnosing hardware and software issues, configuring workstations, and managing networks (TCP/IP, DNS, DHCP, VPN). This is where the troubleshooting discipline I bring to debugging code comes from.</p>
@@ -111,9 +117,9 @@
   </app-about-section>
 
   <!-- METHODOLOGY -->
-  <section class="methodology-section">
-    <app-card label="How I work and troubleshoot">
-      <h2 card-header>How I Work</h2>
+  <section class="methodology-section" aria-labelledby="methodology-heading">
+    <app-card>
+      <h2 card-header id="methodology-heading">How I Work</h2>
       <div card-body>
         <p>
           My GitHub repositories reflect how I actually work: documentation
@@ -142,19 +148,23 @@
   </section>
 
   <!-- CTA -->
-  <footer class="about-footer">
-    <app-card icon="github" [iconSize]="32" label="Contact and GitHub">
-      <h2 card-header>Let's Work Together</h2>
+  <!-- A <section>, not a <footer>: now that the page root is a plain <div>, a
+       <footer> here would be top-level and become a second `contentinfo`
+       landmark competing with the site footer. -->
+  <section class="about-footer" aria-labelledby="cta-heading">
+    <app-card icon="github" [iconSize]="32">
+      <h2 card-header id="cta-heading">Let's Work Together</h2>
       <div card-body>
         <p>Looking for a front-end developer who's equally comfortable shipping UI and troubleshooting the infrastructure underneath it? I'd like to hear from you.</p>
       </div>
       <div card-footer>
         <app-button variant="primary" href="https://github.com/EliaGiolli">
           <app-icon name="github" [size]="40" [decorative]="true" />
-            Visit my GitHub Profile
-          </app-button>
+          Visit my GitHub Profile
+          <span class="sr-only"> (opens in a new tab)</span>
+        </app-button>
       </div>
     </app-card>
-  </footer>
+  </section>
 
-</article>
+</div>
