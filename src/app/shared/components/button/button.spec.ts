@@ -1,6 +1,21 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Button } from './button';
+
+@Component({
+  standalone: true,
+  imports: [Button],
+  template: `
+    <app-button [href]="href" [download]="download">
+      <span class="projected">Download my CV</span>
+    </app-button>
+  `,
+})
+class HostComponent {
+  href: string | undefined = undefined;
+  download: string | undefined = undefined;
+}
 
 describe('Button', () => {
   let component: Button;
@@ -59,6 +74,36 @@ describe('Button', () => {
       await fixture.whenStable();
 
       expect(anchor()!.getAttribute('download')).toBe('Renamed.pdf');
+    });
+  });
+
+  // Regression: the template used to carry one <ng-content> per @if branch. Angular
+  // resolves projection statically, so the anchor branch rendered empty — every
+  // href-based button was a bare <a></a> with no label and no icon.
+  describe('content projection across both branches', () => {
+    let host: ComponentFixture<HostComponent>;
+
+    beforeEach(async () => {
+      host = TestBed.createComponent(HostComponent);
+    });
+
+    it('projects into the <button> branch', async () => {
+      await host.whenStable();
+
+      const btn = host.nativeElement.querySelector('button') as HTMLElement;
+      expect(btn.querySelector('.projected')).toBeTruthy();
+      expect(btn.textContent).toContain('Download my CV');
+    });
+
+    it('projects into the <a> branch too', async () => {
+      host.componentInstance.href = '/Elia_Giolli_CV_Angular_Developer.pdf';
+      host.componentInstance.download = '';
+      await host.whenStable();
+
+      const a = host.nativeElement.querySelector('a') as HTMLAnchorElement;
+      expect(a).toBeTruthy();
+      expect(a.querySelector('.projected')).toBeTruthy();
+      expect(a.textContent).toContain('Download my CV');
     });
   });
 });
