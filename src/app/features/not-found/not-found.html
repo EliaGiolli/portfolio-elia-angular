@@ -1,4 +1,6 @@
-<main class="main-wrapper" role="main">
+<!-- MainLayoutComponent owns the page's single <main>; a nested one here also
+     carried a redundant role="main" on top of the implicit landmark role. -->
+<div class="main-wrapper">
     <div class="error-visual" aria-hidden="true">
         <app-icon name="monitor" [size]="120" class="ghost-icon" />
         <span class="error-code">404</span>
@@ -20,4 +22,4 @@
             <app-icon name="database" [size]="40" />
         </app-button>
     </div>
-</main>
+</div>
