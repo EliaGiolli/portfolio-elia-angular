@@ -38,13 +38,30 @@ app.use(
 
 /**
  * Handle all other requests by rendering the Angular application.
+ *
+ * The context object is exposed inside the app as the REQUEST_CONTEXT token. The
+ * NotFound component sets `notFound` on it while rendering, which lets us answer
+ * with a real 404 instead of a soft 404 (a 200 response showing an error page).
  */
 app.use((req, res, next) => {
+  const context: { notFound?: boolean } = {};
+
   angularApp
-    .handle(req)
-    .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
-    )
+    .handle(req, context)
+    .then((response) => {
+      if (!response) return next();
+
+      const finalResponse =
+        context.notFound && response.status === 200
+          ? new Response(response.body, {
+              status: 404,
+              statusText: 'Not Found',
+              headers: response.headers,
+            })
+          : response;
+
+      return writeResponseToNodeResponse(finalResponse, res);
+    })
     .catch(next);
 });
 

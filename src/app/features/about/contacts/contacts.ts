@@ -1,5 +1,6 @@
 import {
   Component,
+  inject,
   signal,
 } from '@angular/core';
 import {
@@ -11,6 +12,7 @@ import {
 import { Button } from '../../../shared/components/button/button';
 import { IconComponent } from '../../../shared/components/icon/icon';
 import { RouterLink } from '@angular/router';
+import { SeoService } from '../../../core/services/seo.service';
 
 @Component({
   selector: 'app-contacts',
@@ -19,8 +21,19 @@ import { RouterLink } from '@angular/router';
   styleUrl: './contacts.css',
 })
 export class Contacts {
+  private seo = inject(SeoService);
+
   isSubmitted = signal(false);
   isSubmitting = signal(false);
+
+  constructor() {
+    this.seo.update({
+      title: 'Contact | Elia Giolli',
+      description:
+        'Get in touch with Elia Giolli about front-end or full-stack roles, freelance work, or collaboration on an Angular or Node.js project.',
+      path: '/contacts'
+    });
+  }
 
   contactsForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),

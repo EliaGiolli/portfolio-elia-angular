@@ -50,8 +50,17 @@ export const routes: Routes = [
       {
         path: 'contacts',
         loadComponent: () => import('./features/about/contacts/contacts').then(m => m.Contacts)
+      },
+      // Explicit target for ProjectsComponent's redirect on an unknown :id.
+      {
+        path: '404',
+        component: NotFound
+      },
+      // Wildcard lives inside the layout so the 404 page keeps the navbar and footer.
+      {
+        path: '**',
+        component: NotFound
       }
     ]
-  },
-  { path: '**', component: NotFound }
+  }
 ];

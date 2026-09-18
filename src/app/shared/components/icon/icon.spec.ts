@@ -1,18 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Icon } from '../icon';
+import { IconComponent } from './icon';
 
-describe('Icon', () => {
-  let component: Icon;
-  let fixture: ComponentFixture<Icon>;
+describe('IconComponent', () => {
+  let component: IconComponent;
+  let fixture: ComponentFixture<IconComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Icon],
+      imports: [IconComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Icon);
+    fixture = TestBed.createComponent(IconComponent);
     component = fixture.componentInstance;
+    // `name` is input.required, so it must be set before change detection runs.
+    fixture.componentRef.setInput('name', 'angular');
     await fixture.whenStable();
   });
 

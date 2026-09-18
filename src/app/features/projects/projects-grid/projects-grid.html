@@ -27,37 +27,39 @@
     </div>
   </div>
 
-  <section class="grid-container">
+  <app-card-grid minColumnWidth="300px" gap="var(--space-5)">
     @for (project of projectService.filteredProjects(); track project.id) {
-      <app-card
-        class="project-card"
-        [icon]="project.tech_stack === TechStack.frontend ? 'monitor' : 'database'"
-      >
-        <h3 card-header>{{ project.project_name }}</h3>
+      <li>
+        <app-card
+          class="project-card"
+          [icon]="project.tech_stack === TechStack.frontend ? 'monitor' : 'database'"
+        >
+          <h3 card-header>{{ project.project_name }}</h3>
 
-        <div card-body>
-          <p>{{ project.description }}</p>
+          <div card-body>
+            <p>{{ project.description }}</p>
 
-          <div class="tech-stack-icons">
-            @for (tech of project.technologies; track tech) {
-              <app-icon
-                [name]="tech.toLowerCase().trim()"
-                [appTooltip]="tech"
-                [size]="52"
-              />
-            }
+            <div class="tech-stack-icons">
+              @for (tech of project.technologies; track tech) {
+                <app-icon
+                  [name]="tech.toLowerCase().trim()"
+                  [appTooltip]="tech"
+                  [size]="52"
+                />
+              }
+            </div>
           </div>
-        </div>
 
-        <div card-footer>
-          <app-button
-            variant="secondary"
-            [routerLink]="['/projects', project.tech_stack.toLowerCase(), project.id]"
-          >
-            View Details
-          </app-button>
-        </div>
-      </app-card>
+          <div card-footer>
+            <app-button
+              variant="secondary"
+              [routerLink]="['/projects', project.tech_stack.toLowerCase(), project.id]"
+            >
+              View Details
+            </app-button>
+          </div>
+        </app-card>
+      </li>
     }
-  </section>
+  </app-card-grid>
 </main>
