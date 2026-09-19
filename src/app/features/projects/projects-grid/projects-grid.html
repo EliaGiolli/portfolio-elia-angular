@@ -2,7 +2,8 @@
 <div>
   <header class="projects-nav">
     <app-button variant="ghost" (click)="goBack()">
-      <app-icon name="arrow-left" [size]="40" /> Back to projects
+      <app-icon name="arrow-left" [size]="18" tone="current" [decorative]="true" />
+      Back to projects
     </app-button>
 
     <h2>{{ projectService.selectedStack() }} projects</h2>
@@ -45,7 +46,9 @@
                 <app-icon
                   [name]="tech.toLowerCase().trim()"
                   [appTooltip]="label(tech)"
-                  [size]="52"
+                  [size]="30"
+                  badge
+                  [decorative]="true"
                 />
               }
             </div>

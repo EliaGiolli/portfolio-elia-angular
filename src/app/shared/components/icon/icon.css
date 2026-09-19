@@ -1,21 +1,59 @@
-/* Esempio di badge tech nel CSS */
-:host { display: inline-block; line-height: 0; }
-.tech-tag {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    background-color: #F8F9FF;
-    border: 1px solid rgba(45, 68, 255, 0.08);
-    
-    border-radius: 50%; 
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  /* So a masked glyph inherits the button/link colour it sits in rather than a
+     colour of its own. Overridden per call site where an icon wants a fixed tint. */
+  color: inherit;
+}
 
-    &:hover {
-        background-color: var(--bg-background-secondary);
-        border-color: rgba(45, 68, 255, 0.2);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(45, 68, 255, 0.1);
-    }
+.glyph {
+  display: block;
+  flex: none;
+}
+
+.glyph--mask {
+  /* The glyph is a <span>, and the global `p, span, li { color: var(--text-secondary) }`
+     rule would otherwise win on specificity and paint every masked icon that one grey. */
+  color: inherit;
+  background-color: currentColor;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+
+/* The circular chip behind the tech rows, the card headers and the social links.
+   Opt-in (`badge`), because an icon inside a button is not a chip — it used to be
+   applied to every icon, which put a grey pill inside every button. */
+:host(.is-badge) {
+  padding: 10px;
+  background-color: #f8f9ff;
+  border: 1px solid rgba(45, 68, 255, 0.08);
+  border-radius: 50%;
+  transition:
+    background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:host(.is-badge:hover) {
+  background-color: var(--bg-background-secondary);
+  border-color: rgba(45, 68, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45, 68, 255, 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host(.is-badge) {
+    transition: none;
+  }
+
+  :host(.is-badge:hover) {
+    transform: none;
+  }
 }

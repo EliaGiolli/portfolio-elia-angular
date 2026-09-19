@@ -13,7 +13,13 @@ import { IconComponent } from '../icon/icon';
 
       <header class="card-header">
         @if (icon()) {
-          <app-icon [name]="icon()!" [size]="iconSize()" [decorative]="iconDecorative()" />
+          <app-icon
+            [name]="icon()!"
+            [size]="iconSize()"
+            tone="current"
+            badge
+            [decorative]="iconDecorative()"
+          />
         }
         <div class="header-content">
           <ng-content select="[card-header]"></ng-content>
@@ -35,7 +41,8 @@ import { IconComponent } from '../icon/icon';
 })
 export class Card {
   icon = input<string>();
-  iconSize = input<number>(56);
+  /** Glyph size; the chip the card header draws around it adds 10px a side. */
+  iconSize = input<number>(28);
   label = input<string | undefined>();
   /** Cards almost always have a visible title next to the icon, so the icon
    * is decorative by default. Set to false for the rare card whose icon is

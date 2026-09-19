@@ -13,6 +13,10 @@
     }
 }
 
+.card-header app-icon {
+  color: var(--bg-accent-primary);
+}
+
 .cards-wrapper {
     display: flex;
     flex-wrap: wrap;

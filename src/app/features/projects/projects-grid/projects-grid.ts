@@ -16,6 +16,9 @@ interface FilterTag {
   value: string;
 }
 
+const toTags = (slugs: readonly string[]): FilterTag[] =>
+  slugs.map((value) => ({ label: techLabel(value), value }));
+
 @Component({
   selector: 'app-projects-grid',
   imports: [Button, Card, CardGrid, IconComponent, TooltipDirective, RouterLink],
@@ -35,24 +38,27 @@ export class ProjectsGrid {
   // Route data { stack } is bound automatically via withComponentInputBinding()
   stack = input<TechStack | null>(null);
 
-  private readonly frontendTags: FilterTag[] = [
-    { label: 'React', value: 'react' },
-    { label: 'Next.js', value: 'nextdotjs' },
-    { label: 'Angular', value: 'angular' },
-    { label: 'TypeScript', value: 'typescript' },
-    { label: 'JavaScript', value: 'javascript' },
-    { label: 'TailwindCSS', value: 'tailwindcss' },
-    { label: 'Astro', value: 'astro' },
-  ];
+  /* Slugs only: the chip labels come from techLabel, the same source the icons and
+     the detail page use. Spelling them out here a second time had already drifted —
+     the Tailwind chip read 'TailwindCSS' next to 'Tailwind CSS' everywhere else. */
+  private readonly frontendTags: FilterTag[] = toTags([
+    'react',
+    'nextdotjs',
+    'angular',
+    'typescript',
+    'javascript',
+    'tailwindcss',
+    'astro',
+  ]);
 
-  private readonly backendTags: FilterTag[] = [
-    { label: 'Node.js', value: 'nodedotjs' },
-    { label: 'Express', value: 'express' },
-    { label: 'NestJS', value: 'nestjs' },
-    { label: 'MongoDB', value: 'mongodb' },
-    { label: 'PostgreSQL', value: 'postgresql' },
-    { label: 'TypeScript', value: 'typescript' },
-  ];
+  private readonly backendTags: FilterTag[] = toTags([
+    'nodedotjs',
+    'express',
+    'nestjs',
+    'mongodb',
+    'postgresql',
+    'typescript',
+  ]);
 
   currentTags = computed<FilterTag[]>(() =>
     this.stack() === TechStack.frontend ? this.frontendTags : this.backendTags

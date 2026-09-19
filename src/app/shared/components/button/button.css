@@ -4,6 +4,13 @@
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* `all: unset` sets the control's own colour, but projected text still matched the
+   global `p, span, li { color: var(--text-secondary) }` rule and won on specificity —
+   which left "Live Demo" dark grey on the blue primary button. */
+:is(button, a) ::ng-deep :is(span, p) {
+  color: inherit;
+}
+
 :host(.disabled) {
   pointer-events: none;
   opacity: 0.6;

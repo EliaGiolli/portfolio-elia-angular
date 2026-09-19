@@ -58,6 +58,47 @@ describe('IconComponent', () => {
     });
   });
 
+  describe('sizing and chrome', () => {
+    it('applies `size` to the glyph itself, not to a padded box around it', async () => {
+      fixture.componentRef.setInput('size', 20);
+      await fixture.whenStable();
+
+      expect(img().style.width).toBe('20px');
+      expect(img().style.height).toBe('20px');
+    });
+
+    it('draws no chip unless asked', () => {
+      expect(fixture.nativeElement.classList.contains('is-badge')).toBe(false);
+    });
+
+    it('draws the chip on the host, so it grows around the glyph', async () => {
+      fixture.componentRef.setInput('badge', '');
+      await fixture.whenStable();
+
+      expect(fixture.nativeElement.classList.contains('is-badge')).toBe(true);
+    });
+  });
+
+  describe('tone', () => {
+    const glyph = () => fixture.nativeElement.querySelector('.glyph--mask') as HTMLElement;
+
+    it('renders brand marks as an <img> so they keep their own colours', () => {
+      expect(img()).toBeTruthy();
+      expect(glyph()).toBeNull();
+    });
+
+    it('masks UI glyphs so they inherit the surrounding text colour', async () => {
+      fixture.componentRef.setInput('name', 'arrow-left');
+      fixture.componentRef.setInput('tone', 'current');
+      await fixture.whenStable();
+
+      expect(img()).toBeNull();
+      // Root-relative: a mask url() in a style attribute ignores <base href>, so a
+      // bare `assets/...` would 404 on a nested route like /projects/frontend/2.
+      expect(glyph().style.maskImage).toBe('url("/assets/icons/miscellaneous/arrow-left.svg")');
+    });
+  });
+
   // A name in the wrong folder resolves to a URL that 404s. The browser shows a
   // broken image and nothing throws, so only comparing against the real directories
   // catches it.
@@ -90,7 +131,7 @@ describe('IconComponent', () => {
     });
 
     it('falls back to the slug when there is no mapping', () => {
-      expect(techLabel('prisma')).toBe('prisma');
+      expect(techLabel('some-unmapped-slug')).toBe('some-unmapped-slug');
     });
   });
 });
