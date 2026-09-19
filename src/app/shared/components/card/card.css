@@ -11,6 +11,9 @@
   flex-direction: column;
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* So a projected [card-cover] is clipped by the rounded corners instead of
+     squaring off the top of the card. */
+  overflow: hidden;
 }
 
 .custom-card:hover {

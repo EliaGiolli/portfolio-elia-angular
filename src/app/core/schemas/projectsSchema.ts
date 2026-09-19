@@ -19,6 +19,8 @@ export const ProjectsSchema = z.object({
   highlights: z.array(z.string().min(1)).optional(),
   role: z.string().min(1).optional(),
   year: z.number().int().optional(),
+  technologies_detail: z.array(z.string().min(1)).optional(),
+  core_tech: z.string().min(1).optional(),
 });
 
 export type Project = z.infer<typeof ProjectsSchema>;
