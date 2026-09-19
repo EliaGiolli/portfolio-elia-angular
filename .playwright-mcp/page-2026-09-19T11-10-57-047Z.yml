@@ -1,0 +1,59 @@
+- generic [ref=e3]:
+  - link "Skip to main content" [ref=e4] [cursor=pointer]:
+    - /url: "#content"
+  - banner [ref=e6]:
+    - generic [ref=e7]:
+      - link "GIOLLI DESIGN" [ref=e8] [cursor=pointer]:
+        - /url: /
+      - navigation "Main navigation" [ref=e13]:
+        - link "Homepage" [ref=e14] [cursor=pointer]:
+          - /url: /
+        - link "About me" [ref=e15] [cursor=pointer]:
+          - /url: /about
+        - link "My projects" [ref=e16] [cursor=pointer]:
+          - /url: /projects
+        - link "Contact me" [ref=e17] [cursor=pointer]:
+          - /url: /contacts
+  - main [ref=e18]:
+    - generic [ref=e21]:
+      - heading "I'm Elia Giolli" [level=3] [ref=e22]
+      - heading "Angular developer" [level=1] [ref=e23]
+      - generic [ref=e24]:
+        - generic [ref=e25]:
+          - generic [ref=e26]: Frontend
+          - generic [ref=e27]:
+            - img "html5 icon" [ref=e29] [cursor=pointer]
+            - img "css icon" [ref=e31] [cursor=pointer]
+            - img "javascript icon" [ref=e33] [cursor=pointer]
+            - img "angular icon" [ref=e35] [cursor=pointer]
+            - img "react icon" [ref=e37] [cursor=pointer]
+        - generic [ref=e38]:
+          - generic [ref=e39]: Backend & DB
+          - generic [ref=e40]:
+            - img "nodedotjs icon" [ref=e42] [cursor=pointer]
+            - img "express icon" [ref=e44] [cursor=pointer]
+            - img "nestjs icon" [ref=e46] [cursor=pointer]
+            - img "mongodb icon" [ref=e48] [cursor=pointer]
+            - img "postgresql icon" [ref=e50] [cursor=pointer]
+      - generic [ref=e51]:
+        - button "Go to projects" [ref=e53] [cursor=pointer]
+        - link [ref=e55] [cursor=pointer]:
+          - /url: /Elia_Giolli_CV_Angular_Developer.pdf
+  - contentinfo [ref=e59]:
+    - generic [ref=e60]:
+      - generic [ref=e61]:
+        - heading "GIOLLI DESIGN" [level=2] [ref=e66]
+        - paragraph [ref=e67]: Let's build something amazing together.
+      - generic [ref=e68]:
+        - link "github icon GitHub" [ref=e69] [cursor=pointer]:
+          - /url: https://github.com/EliaGiolli
+          - img "github icon" [ref=e71]
+          - generic [ref=e72]: GitHub
+        - link "linkedin icon LinkedIn" [ref=e73] [cursor=pointer]:
+          - /url: https://linkedin.com/in/eliagiolli
+          - img "linkedin icon" [ref=e75]
+          - generic [ref=e76]: LinkedIn
+        - link "mail icon Email" [ref=e77] [cursor=pointer]:
+          - /url: mailto:eliagiolli22@gmail.com
+          - img "mail icon" [ref=e79]
+          - generic [ref=e80]: Email
