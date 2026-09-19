@@ -5,6 +5,7 @@ import { Button } from '../../../shared/components/button/button';
 import { IconComponent } from '../../../shared/components/icon/icon';
 import { ProjectService } from '../../../core/services/project-service.service';
 import { SeoService } from '../../../core/services/seo.service';
+import { techLabel } from '../../../shared/types/techMeta';
 
 @Component({
   selector: 'app-projects-component',
@@ -26,6 +27,19 @@ export class ProjectsComponent {
     if (!numId) return undefined;
     return this.projectService.projects().find(p => p.id === numId);
   });
+
+  /**
+   * The detail page shows the full stack; `technologies` is only the headline set
+   * the grid card renders. Falls back to it for a project with no detailed list.
+   */
+  detailTechnologies = computed(() => {
+    const p = this.project();
+    if (!p) return [];
+    return (p.technologies_detail ?? p.technologies).map(t => t.toLowerCase().trim());
+  });
+
+  /** Simple Icons slugs read badly raw — 'nextdotjs', 'openapiinitiative'. */
+  protected label = techLabel;
 
   constructor() {
     effect(() => {

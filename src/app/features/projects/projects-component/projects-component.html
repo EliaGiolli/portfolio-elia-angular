@@ -35,11 +35,12 @@
 
         <div class="tech-info">
           <h4>Tech Stack:</h4>
+          <!-- The full stack, not the headline set the grid card shows. -->
           <div class="tech-list">
-            @for (tech of p.technologies; track tech) {
+            @for (tech of detailTechnologies(); track tech) {
               <div class="tech-item">
-                <app-icon [name]="tech.toLowerCase().trim()" [size]="48" />
-                <span>{{ tech }}</span>
+                <app-icon [name]="tech" [size]="48" [decorative]="true" />
+                <span>{{ label(tech) }}</span>
               </div>
             }
           </div>

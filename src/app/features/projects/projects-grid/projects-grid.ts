@@ -9,6 +9,7 @@ import { IconComponent } from '../../../shared/components/icon/icon';
 import { ProjectService } from '../../../core/services/project-service.service';
 import { SeoService } from '../../../core/services/seo.service';
 import { TooltipDirective } from '../../../core/directives/tooltip.directive';
+import { techLabel } from '../../../shared/types/techMeta';
 
 interface FilterTag {
   label: string;
@@ -23,6 +24,9 @@ interface FilterTag {
 })
 export class ProjectsGrid {
   readonly TechStack = TechStack;
+
+  /** Simple Icons slugs read badly raw — 'nextdotjs', 'tailwindcss'. */
+  protected label = techLabel;
 
   projectService = inject(ProjectService);
   private location = inject(Location);

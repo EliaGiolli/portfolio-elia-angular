@@ -35,6 +35,24 @@ export interface ProjectsTypes {
     highlights?: string[],
     /** e.g. 'Solo developer'. */
     role?: string,
-    /** Year the work was done. */
-    year?: number
+    /** Year of the most recent work on the project. */
+    year?: number,
+
+    /**
+     * Full stack, shown only on the detail page. `technologies` above stays the
+     * headline set because it also drives filter matching, so it is kept short
+     * enough to read on a grid card.
+     *
+     * Falls back to `technologies` when absent. Every entry must name a file in
+     * src/assets/icons/tech/ — projects.model.spec.ts enforces that.
+     */
+    technologies_detail?: string[],
+
+    /**
+     * The one technology the project is built around, used for the cover band on
+     * the detail page. Cannot be derived from `technologies[0]`: that is
+     * `nodedotjs` for the Express and NestJS projects, whose real core is the
+     * framework, not the runtime.
+     */
+    core_tech?: string
 }

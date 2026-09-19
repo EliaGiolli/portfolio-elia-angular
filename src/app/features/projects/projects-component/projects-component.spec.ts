@@ -52,15 +52,15 @@ describe('ProjectsComponent', () => {
       expect(section.querySelectorAll('li').length).toBeGreaterThan(0);
     });
 
-    it('omits the long-form blocks entirely for a project without them', async () => {
-      // id 2 has no summary/highlights yet — it must render as it always did.
-      const el = await render('2');
+    it('shows the full detailed stack, not the headline set', async () => {
+      // NexCoin's grid card shows 3 icons; its detail page shows the full 11.
+      const el = await render('1');
 
-      expect(el.querySelector('.project-summary')).toBeNull();
-      expect(el.querySelector('.project-highlights')).toBeNull();
-      expect(el.querySelector('.project-meta')).toBeNull();
-      // The short description is still there.
-      expect(el.querySelector('.description')!.textContent).toContain('blog');
+      const items = el.querySelectorAll('.tech-list .tech-item');
+      expect(items.length).toBeGreaterThan(3);
+      // Rendered through techLabel, so slugs are not shown raw.
+      expect(el.querySelector('.tech-list')!.textContent).toContain('Next.js');
+      expect(el.querySelector('.tech-list')!.textContent).not.toContain('nextdotjs');
     });
   });
 
@@ -118,6 +118,25 @@ describe('ProjectsComponent', () => {
       const meta = el.querySelector('.project-meta')!;
       expect(meta.textContent).toContain('2025');
       expect(meta.textContent).not.toContain('·');
+    });
+
+    // Every real project now has the long-form fields, so absence is only
+    // reachable through a stub — but the template must still tolerate it.
+    it('omits every optional block when a project has none of them', async () => {
+      const el = await renderWith(stub({}));
+
+      expect(el.querySelector('.project-meta')).toBeNull();
+      expect(el.querySelector('.project-summary')).toBeNull();
+      expect(el.querySelector('.project-highlights')).toBeNull();
+      expect(el.querySelector('.description')!.textContent).toContain('Stub description');
+    });
+
+    it('falls back to technologies when there is no detailed list', async () => {
+      const el = await renderWith(stub({ technologies: ['angular', 'typescript'] }));
+
+      const items = el.querySelectorAll('.tech-list .tech-item');
+      expect(items.length).toBe(2);
+      expect(el.querySelector('.tech-list')!.textContent).toContain('TypeScript');
     });
   });
 });
