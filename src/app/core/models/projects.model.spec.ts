@@ -75,11 +75,12 @@ describe('projects.model', () => {
       expect(projects.filter((p) => !p.core_tech)).toEqual([]);
     });
 
-    // description is the page's <meta name="description">; search engines truncate
-    // around 155-160 characters.
-    it('keeps descriptions short enough to survive as a meta description', () => {
+    // ProjectsComponent feeds description straight into SeoService as
+    // `p.description.slice(0, 155)`, which cuts mid-word. Keeping them within the
+    // limit means the meta description is a whole sentence rather than "…visualisa".
+    it('keeps descriptions within the 155 chars the SEO service slices to', () => {
       const tooLong = projects
-        .filter((p) => p.description.length > 200)
+        .filter((p) => p.description.length > 155)
         .map((p) => `${p.project_name} (${p.description.length})`);
 
       expect(tooLong).toEqual([]);

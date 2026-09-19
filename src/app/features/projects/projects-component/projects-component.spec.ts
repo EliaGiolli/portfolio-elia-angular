@@ -138,5 +138,30 @@ describe('ProjectsComponent', () => {
       expect(items.length).toBe(2);
       expect(el.querySelector('.tech-list')!.textContent).toContain('TypeScript');
     });
+
+    describe('cover band', () => {
+      it('renders with the project core tech, keyed for the CSS to colour', async () => {
+        const el = await renderWith(stub({ core_tech: 'nestjs' }));
+
+        const cover = el.querySelector('.card-cover')!;
+        expect(cover).toBeTruthy();
+        expect(cover.getAttribute('data-tech')).toBe('nestjs');
+        expect(cover.querySelector('.card-cover__mark')).toBeTruthy();
+      });
+
+      // The technology is already named in the copy and the tech list, so the band
+      // would only repeat it to a screen reader.
+      it('is hidden from assistive technology', async () => {
+        const el = await renderWith(stub({ core_tech: 'nestjs' }));
+
+        expect(el.querySelector('.card-cover')!.getAttribute('aria-hidden')).toBe('true');
+      });
+
+      it('is omitted entirely when a project has no core tech', async () => {
+        const el = await renderWith(stub({}));
+
+        expect(el.querySelector('.card-cover')).toBeNull();
+      });
+    });
   });
 });

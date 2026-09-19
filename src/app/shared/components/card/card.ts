@@ -7,6 +7,10 @@ import { IconComponent } from '../icon/icon';
   imports: [IconComponent],
   template: `
     <article class="custom-card" [attr.aria-label]="label() || null">
+      <!-- Optional full-bleed banner above the header. Callers that project
+           nothing here render exactly as before. -->
+      <ng-content select="[card-cover]"></ng-content>
+
       <header class="card-header">
         @if (icon()) {
           <app-icon [name]="icon()!" [size]="iconSize()" [decorative]="iconDecorative()" />

@@ -19,4 +19,9 @@ describe('Card', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('renders no cover region when the caller projects none', () => {
+    // /about composes app-card without a cover; it must stay exactly as it was.
+    expect(fixture.nativeElement.querySelector('[card-cover]')).toBeNull();
+  });
 });

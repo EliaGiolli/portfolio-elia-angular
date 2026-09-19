@@ -1,6 +1,14 @@
 <section class="page-wrapper">
   @if (project(); as p) {
     <app-card [icon]="p.tech_stack === 'frontend' ? 'monitor' : 'database'" [label]="p.project_name">
+      <!-- Decorative: the technology is named in the tech list and the copy below,
+           so the band carries no information of its own. -->
+      @if (p.core_tech) {
+        <header card-cover class="card-cover" [attr.data-tech]="p.core_tech" aria-hidden="true">
+          <span class="card-cover__mark"></span>
+        </header>
+      }
+
       <h2 card-header>{{ p.project_name }}</h2>
 
       <div card-body>

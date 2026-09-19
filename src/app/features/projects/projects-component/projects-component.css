@@ -129,3 +129,81 @@ app-card {
   color: var(--bg-accent-primary);
   font-weight: bold;
 }
+
+/* ---------- Cover band ---------- */
+
+/*
+ * The mark is painted with mask-image rather than an <img>, because CSS cannot
+ * recolour an <img> and the Simple Icons files carry no fill of their own.
+ *
+ * Both the colours and the mask URL come from a static rule per technology below,
+ * not a style binding: that keeps the asset URL in the stylesheet where the build
+ * can rewrite it, and keeps url() away from Angular's sanitiser.
+ */
+.card-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 132px;
+  padding: 1.5rem;
+  background-color: var(--cover-bg, var(--bg-accent-primary));
+  background-image: radial-gradient(
+    circle at 30% 20%,
+    rgba(255, 255, 255, 0.14),
+    transparent 60%
+  );
+}
+
+.card-cover__mark {
+  display: block;
+  width: 72px;
+  height: 72px;
+  background-color: var(--cover-mark, #ffffff);
+  -webkit-mask: var(--cover-icon) center / contain no-repeat;
+  mask: var(--cover-icon) center / contain no-repeat;
+}
+
+.card-cover[data-tech='nextdotjs'] {
+  --cover-bg: #000000;
+  --cover-icon: url('/assets/icons/tech/nextdotjs.svg');
+}
+
+.card-cover[data-tech='astro'] {
+  --cover-bg: #17191E;
+  --cover-icon: url('/assets/icons/tech/astro.svg');
+}
+
+.card-cover[data-tech='express'] {
+  --cover-bg: #303030;
+  --cover-icon: url('/assets/icons/tech/express.svg');
+}
+
+.card-cover[data-tech='angular'] {
+  --cover-bg: #DD0031;
+  --cover-icon: url('/assets/icons/tech/angular.svg');
+}
+
+/* React's cyan is unreadable knocked out of white, so it takes React's own dark
+   lockup instead of the white-on-brand treatment the others use. */
+.card-cover[data-tech='react'] {
+  --cover-bg: #20232A;
+  --cover-mark: #61DAFB;
+  --cover-icon: url('/assets/icons/tech/react.svg');
+}
+
+.card-cover[data-tech='nestjs'] {
+  --cover-bg: #E0234E;
+  --cover-icon: url('/assets/icons/tech/nestjs.svg');
+}
+
+@media (max-width: 480px) {
+  .card-cover {
+    min-height: 104px;
+    padding: 1rem;
+  }
+
+  .card-cover__mark {
+    width: 56px;
+    height: 56px;
+  }
+}
