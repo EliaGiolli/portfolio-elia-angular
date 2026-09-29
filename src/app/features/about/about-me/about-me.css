@@ -111,7 +111,7 @@
 }
 
 .block-copy code {
-  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 0.9em;
   background-color: var(--bg-background-secondary);
   color: var(--text-accent-primary);

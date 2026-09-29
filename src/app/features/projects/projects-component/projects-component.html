@@ -56,21 +56,21 @@
       </div>
 
       <div card-footer class="footer-actions">
-        <app-button variant="ghost" [routerLink]="['/projects', p.tech_stack.toLowerCase()]" aria-label="Back to list">
+        <app-button variant="ghost" [link]="['/projects', p.tech_stack.toLowerCase()]">
           <app-icon name="arrow-left" [size]="18" tone="current" [decorative]="true" />
           <span>Back to list</span>
         </app-button>
 
         <div class="external-links">
           @if (p.github_link) {
-            <app-button variant="secondary" [href]="p.github_link" aria-label="View code on GitHub">
+            <app-button variant="secondary" [href]="p.github_link" ariaLabel="View code on GitHub">
               <app-icon name="github" [size]="18" tone="current" [decorative]="true" />
               <span>Code</span>
             </app-button>
           }
 
           @if (p.demo_link) {
-            <app-button variant="primary" [href]="p.demo_link" aria-label="Open live demo">
+            <app-button variant="primary" [href]="p.demo_link" ariaLabel="Open live demo">
               <app-icon name="external-link" [size]="18" tone="current" [decorative]="true" />
               <span>Live Demo</span>
             </app-button>

@@ -69,13 +69,13 @@ app-card-grid {
 }
 
 .chip.reset {
-  background: #ff4d4d12;
-  color: #ff4d4d;
-  border-color: #ff4d4d60;
+  background: color-mix(in srgb, var(--danger) 7%, transparent);
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 40%, transparent);
 
   &:hover {
-    background: #ff4d4d20;
-    color: #ff4d4d;
+    background: color-mix(in srgb, var(--danger) 12%, transparent);
+    color: var(--danger);
   }
 }
 

@@ -11,6 +11,10 @@
   <!-- Order matters: browsers use the last icon link they understand. .ico first (Safari), SVG last. -->
   <link rel="icon" href="favicon.ico" sizes="32x32">
   <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <!-- Latin subsets of the two self-hosted faces (@font-face in styles.css). Font
+       preloads need `crossorigin` even on the same origin, or the file is fetched twice. -->
+  <link rel="preload" href="fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/jetbrains-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",

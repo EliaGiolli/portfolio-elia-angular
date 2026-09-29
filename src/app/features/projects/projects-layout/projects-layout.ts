@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { IconComponent } from '../../../shared/components/icon/icon';
 import { SeoService } from '../../../core/services/seo.service';
 import { Card } from '../../../shared/components/card/card';
-import { RouterLink } from "@angular/router";
 import { Button } from '../../../shared/components/button/button';
 
 @Component({
@@ -11,7 +10,6 @@ import { Button } from '../../../shared/components/button/button';
     Card,
     Button,
     IconComponent, 
-    RouterLink,
   ],
   templateUrl: './projects-layout.html',
   styleUrl: './projects-layout.css',

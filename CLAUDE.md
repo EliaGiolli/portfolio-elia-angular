@@ -4,8 +4,8 @@
 
 A full redesign is under way, phase by phase. Before modifying anything, read:
 
-- `portfolior-refactor/portfolio-redesign.md`: **the source of truth**. It covers decisions (backend positioning, routes, light-only theme), the architecture spec, and the phased task list with checkboxes (one phase = one PR, one task = one commit). Tick tasks there as they land.
-- `portfolior-refactor/GUIDELINES.md`: the background UX audit. Where it disagrees with `portfolio-redesign.md`, the plan wins.
+- `portfolio-refactor/portfolio-redesign.md`: **the source of truth**. It covers decisions (backend positioning, routes, light-only theme), the architecture spec, and the phased task list with checkboxes (one phase = one PR, one task = one commit). Tick tasks there as they land.
+- `portfolio-refactor/GUIDELINES.md`: the background UX audit. Where it disagrees with `portfolio-redesign.md`, the plan wins.
 
 Parts of the architecture described below change as phases merge; the plan says which.
 
@@ -91,7 +91,7 @@ The absolute origin lives in one place, `src/app/core/seo.config.ts` (`SITE_ORIG
 
 ### Shared component conventions
 
-- **`app-button`**: renders `<button>` normally, or `<a>` when `href` is passed, or uses `routerLink` for internal navigation — pick the input based on destination, don't wrap `app-button` in your own anchor/button.
+- **`app-button`**: renders `<button>` normally, `<a routerLink>` when `link` is passed (internal navigation, with optional `fragment` / `queryParams`), or `<a href>` when `href` is passed (external, new tab unless `download`). Pick the input based on the destination. Never put `routerLink` or `aria-label` on the `<app-button>` host: the first makes a clickable wrapper around a real button (two tab stops), and the second names a generic element that screen readers ignore. Use `link` and `ariaLabel` instead. Variants are `primary` (the one filled accent action), `secondary` (neutral outline), `ghost`, and `icon` (44px square, needs `ariaLabel`); `size="sm"` for compact rows.
 - **`app-card`**: composed via named content-projection slots — `card-header`, `card-body`, `card-footer` attributes on projected elements, not component inputs. `icon` is decorative by default (`iconDecorative` defaults `true`); pass `iconDecorative="false"` only when the icon is the sole label for the card.
 - **`app-card-grid`**: renders a `<ul>`, so callers must project `<li>` elements — projecting bare `app-card`s produces invalid list markup. Layout is tuned per call site with the `minColumnWidth` and `gap` inputs, which are forwarded to CSS custom properties on the host; don't re-declare grid rules in the consuming component's stylesheet. Used by both `/about` and `/projects/{frontend,backend}`.
 - **`app-icon`**: resolves `name` to `assets/icons/{tech|miscellaneous}/{name}.svg` via `TECH_ICONS` in `shared/types/techMeta.ts`. Always set `decorative` explicitly for purely visual icons (emits `aria-hidden="true"` + `alt=""`); otherwise it falls back to `"{techLabel(name)} icon"` alt text if none is given. Two more inputs matter:
