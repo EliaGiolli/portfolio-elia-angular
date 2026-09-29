@@ -152,6 +152,8 @@ Add [Performonitoring](https://github.com/EliaGiolli/Performonitoring) as two en
 
 ## Next steps
 
+> These steps are now broken down into phases and tasks in [portfolio-redesign.md](portfolio-redesign.md). That plan also repositions the site for a **backend (NestJS)** role and overrides this audit where they disagree.
+
 1. Pick the About direction (A, B or C) and a type pairing.
 2. Update the design system first: new fonts, neutral scale, dark theme, fixed status colours, tighter radii.
 3. Mock up the new homepage and About page as designs from those tokens, then review them before any Angular code.
