@@ -21,6 +21,19 @@ export const ProjectsSchema = z.object({
   year: z.number().int().optional(),
   technologies_detail: z.array(z.string().min(1)).optional(),
   core_tech: z.string().min(1).optional(),
+
+  // Redesign fields: homepage selection, ordering and demo status. Also optional,
+  // and mirrored in ProjectsTypes like the ones above.
+  featured: z.boolean().optional(),
+  order: z.number().int().optional(),
+  runs_locally: z.boolean().optional(),
+  no_demo_reason: z.string().min(1).optional(),
+  related: z
+    .object({
+      id: z.number().int(),
+      label: z.string().min(1),
+    })
+    .optional(),
 });
 
 export type Project = z.infer<typeof ProjectsSchema>;

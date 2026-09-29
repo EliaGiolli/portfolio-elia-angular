@@ -1,4 +1,4 @@
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { z } from 'zod';
@@ -87,9 +87,53 @@ describe('projects.model', () => {
     });
   });
 
+  // The homepage "Selected work" section is laid out for exactly three rows, and
+  // `order` is what places them, so two featured projects must not share one.
+  it('features three projects, each with a distinct order within its stack', () => {
+    const featured = projects.filter((p) => p.featured);
+    const slots = featured.map((p) => `${p.tech_stack}:${p.order}`);
+
+    expect(featured).toHaveLength(3);
+    expect(featured.every((p) => p.order !== undefined)).toBe(true);
+    expect(slots).toEqual([...new Set(slots)]);
+  });
+
+  // public/sitemap.xml is maintained by hand, so this is what catches a project
+  // added without its URL, or a removed one whose URL is left behind as a 404.
+  it('lists exactly the project detail URLs in the sitemap', () => {
+    const sitemap = readFileSync(join(process.cwd(), 'public/sitemap.xml'), 'utf8');
+    const listed = [...sitemap.matchAll(/\/projects\/(\w+)\/(\d+)<\/loc>/g)]
+      .map(([, stack, id]) => `${stack}/${id}`)
+      .sort();
+    const expected = projects.map((p) => `${p.tech_stack}/${p.id}`).sort();
+
+    expect(listed).toEqual(expected);
+  });
+
   describe('links', () => {
     it('gives every project a GitHub link', () => {
       expect(projects.filter((p) => !p.github_link).map((p) => p.project_name)).toEqual([]);
+    });
+
+    // The detail page builds the cross-link URL from the target's stack and id, so a
+    // dangling id would link straight to the 404 page.
+    it('points every related link at another existing project', () => {
+      const byId = new Map(projects.map((p) => [p.id, p]));
+      const dangling = projects
+        .filter((p) => p.related && (!byId.has(p.related.id) || p.related.id === p.id))
+        .map((p) => `${p.project_name} -> ${p.related!.id}`);
+
+      expect(dangling).toEqual([]);
+    });
+
+    // demoStatus() lets a demo link win over runs_locally, so both set at once would
+    // hide the "no demo" callout while the no_demo_reason sits unused.
+    it('gives local-only projects a reason and no demo link', () => {
+      const bad = projects
+        .filter((p) => p.runs_locally && (p.demo_link || !p.no_demo_reason))
+        .map((p) => p.project_name);
+
+      expect(bad).toEqual([]);
     });
 
     it('uses absolute https URLs', () => {

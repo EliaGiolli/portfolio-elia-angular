@@ -50,30 +50,6 @@ export const projects: ProjectsTypes[] = [
         ]
     },
     {
-        "id": 3,
-        "project_name": "Dev Dashboard",
-        "img_path": "",
-        "description": "A REST API simulating a developer/admin dashboard: persistent system metrics, log management with filtering and archiving, and a bcrypt hashing suite.",
-        "technologies": ["nodedotjs", "express", "typescript"],
-        "technologies_detail": ["nodedotjs", "express", "typescript", "prisma", "sqlite"],
-        "core_tech": "express",
-        "github_link": "https://github.com/EliaGiolli/dashboard-admin-express",
-        "demo_link": "",
-        "tech_stack": TechStack.backend,
-        "role": "Solo developer",
-        "year": 2026,
-        "summary": [
-            "An admin API that snapshots CPU, RAM and uptime into a database so system health can be read as a trend rather than a single instant, alongside persistent logs that can be filtered by level and archived rather than deleted.",
-            "It started as a plain Express server and grew into a database-backed application, which is where most of the interesting decisions came from."
-        ],
-        "highlights": [
-            "Errors handled by a central layer instead of `res.status().json()` scattered through controllers: a custom `AppError` carries a status code and a global middleware catches it, so controllers only describe the happy path. Modelled deliberately on NestJS exception filters.",
-            "Prisma over SQLite for persistence, with service-layer business logic kept separate from lean route handlers.",
-            "Environment variables exposed through an explicit whitelist, so a new secret in `.env` is private by default rather than by remembering.",
-            "Sensitive routes sit behind an API-key guard; bcrypt backs both the hashing endpoints and the stored credentials."
-        ]
-    },
-    {
         "id": 4,
         "project_name": "Shelfspot",
         "img_path": "",
@@ -151,22 +127,28 @@ export const projects: ProjectsTypes[] = [
         "img_path": "",
         "description": "A NestJS API that models a personal library as a graph: books, authors and tags, plus directional connections aggregated into nodes and edges.",
         "technologies": ["nodedotjs", "nestjs", "typescript", "postgresql"],
-        "technologies_detail": ["nestjs", "nodedotjs", "typescript", "postgresql", "typeorm", "passport", "jsonwebtokens", "swagger", "openapiinitiative", "jest"],
+        "technologies_detail": ["nestjs", "nodedotjs", "typescript", "postgresql", "typeorm", "passport", "jsonwebtokens", "zod", "swagger", "openapiinitiative"],
         "core_tech": "nestjs",
         "github_link": "https://github.com/EliaGiolli/bookgraph-nestjs",
         "demo_link": "",
         "tech_stack": TechStack.backend,
         "role": "Solo developer",
         "year": 2026,
+        "featured": true,
+        "order": 1,
         "summary": [
             "BookGraph is a library manager built around relationships rather than a flat list. Books carry authors, tags and reading statuses, and can be linked to one another directionally — this book inspired that one.",
-            "Those links are the point. A dedicated `/graph` endpoint aggregates a user's books and connections into a `{ nodes, edges }` structure that a visualisation library such as vis-network can render directly, turning a reading history into a map."
+            "Those links are the point. A dedicated `/graph` endpoint aggregates a user's books and connections into a `{ nodes, edges }` structure that a visualisation library such as vis-network can render directly, turning a reading history into a map.",
+            "Every domain is its own NestJS module (auth, users, books, authors, tags, connections, graph), and most of the work is in the rules between them: who owns what, which links are allowed, and how the schema is allowed to change.",
+            "It is the back end of a planned Angular client, so the contract comes first: every route, DTO and response shape is described in a generated OpenAPI 3.0 spec before any UI depends on it."
         ],
         "highlights": [
-            "Modular NestJS architecture with each domain — auth, users, books, authors, tags, connections, graph — isolated in its own module.",
-            "TypeORM over PostgreSQL; Passport-JWT and bcrypt for authentication, with ownership checks so a user can only reach their own records.",
-            "DTO validation via class-validator, plus relationship constraints that reject invalid or self-referential connections.",
-            "The full surface is documented as an OpenAPI 3.0 spec generated from the code and browsable through Swagger UI."
+            "Ownership is enforced in every service by filtering on the caller's id, so another user's book answers 404 rather than 403 and never confirms that it exists. Role checks (`ADMIN` / `USER`) are kept to the admin routes under `/users`.",
+            "Connections are validated as a domain rule, not just a shape: a custom `@IsDifferentFrom()` validator rejects self-links with 400, duplicates in either direction get 409, and both books must belong to the caller.",
+            "The global `ValidationPipe` runs with `whitelist` and `forbidNonWhitelisted`, so a request carrying a field its DTO does not declare is rejected instead of silently dropped.",
+            "JWT through Passport, issued in an HttpOnly cookie (`Secure` in production) or read from a Bearer header; bcrypt-hashed passwords; rate limits of 5 requests per 6 seconds on the auth routes and 10 everywhere else.",
+            "TypeORM over PostgreSQL with `synchronize` off, so migrations are the only way the schema changes; a Zod schema validates the environment and the app refuses to boot on a bad value.",
+            "Vitest unit tests for every module with mocked repositories, plus a Supertest E2E suite against Postgres that walks register → log in → create books → connect them → read the graph, and checks that a second user cannot see any of it."
         ]
     },
     {
@@ -182,6 +164,8 @@ export const projects: ProjectsTypes[] = [
         "tech_stack": TechStack.frontend,
         "role": "Solo developer",
         "year": 2026,
+        "featured": true,
+        "order": 1,
         "summary": [
             "Zenith monitors a server fleet: cards showing CPU and memory per node with online, offline and maintenance states, searchable by name, plus an analytics view and a validated form for registering new nodes.",
             "There is no backend, and that is deliberate — an HTTP interceptor supplies mock responses, so the app is built against the HttpClient it would really use rather than around a fake service."
@@ -215,6 +199,64 @@ export const projects: ProjectsTypes[] = [
             "Shared components follow a shadcn-style pattern: class-variance-authority for variants, a `cn()` helper for overrides, and native attributes spread through rather than swallowed.",
             "Typed API contracts end to end, so a response shape change surfaces at compile time instead of in the UI.",
             "Loading and error regions use `aria-live` with `role=\"status\"` and `role=\"alert\"`, and the layout ships a skip link and ARIA landmarks."
+        ]
+    },
+    {
+        "id": 10,
+        "project_name": "Performonitoring — API",
+        "img_path": "",
+        "description": "Express 5 and TypeScript API that samples PC metrics every 2s, stores them with Prisma and SQLite, streams them via Socket.IO. No demo: it runs locally.",
+        "technologies": ["nodedotjs", "express", "typescript", "prisma"],
+        "technologies_detail": ["nodedotjs", "express", "typescript", "prisma", "sqlite", "socketdotio", "zod", "swagger", "openapiinitiative"],
+        "core_tech": "express",
+        "github_link": "https://github.com/EliaGiolli/Performonitoring/tree/main/backend",
+        "demo_link": "",
+        "tech_stack": TechStack.backend,
+        "role": "Solo developer",
+        "year": 2026,
+        "featured": true,
+        "order": 2,
+        "runs_locally": true,
+        "no_demo_reason": "The API reads and fixes the Windows PC it runs on, so it only makes sense on your own machine.",
+        "related": { "id": 11, "label": "See the dashboard" },
+        "summary": [
+            "The API behind Performonitoring samples the Windows machine it runs on every two seconds (CPU per core and temperature, RAM, disk I/O, network and the top processes), streams each snapshot live over Socket.IO and stores it in SQLite through Prisma, so history survives a restart.",
+            "It also acts on the machine: fix actions such as flushing the DNS cache or clearing old temp files run as PowerShell scripts, and every run and every threshold alert lands in a log that can be filtered, paged and archived.",
+            "Runs locally on Windows · no hosted demo."
+        ],
+        "highlights": [
+            "One source of truth for types: Zod schemas in a shared workspace validate every request and generate the OpenAPI document, and a test fails the build if a route ships without docs.",
+            "Fix actions come from a fixed registry of PowerShell scripts, spawned with an argument array rather than a shell string and killed with their whole process tree on timeout. Destructive ones need `confirm: true`, enforced by the server with a 409.",
+            "Hardened for a server with no login: bound to `127.0.0.1`, strict CORS, Helmet, and an `Origin` check on mutating requests and on the Socket.IO handshake, so a page on another origin cannot trigger an action.",
+            "Threshold alerts fire only after three consecutive breaches, at most once every five minutes per metric; samples and logs past the retention window are pruned at startup."
+        ]
+    },
+    {
+        "id": 11,
+        "project_name": "Performonitoring — Dashboard",
+        "img_path": "",
+        "description": "Real-time Windows performance dashboard in React and TypeScript: live CPU, RAM, disk and network charts. No live demo: it monitors the PC it runs on.",
+        "technologies": ["react", "typescript", "vite", "tailwindcss"],
+        "technologies_detail": ["react", "typescript", "vite", "tailwindcss", "reactquery", "radixui", "shadcnui", "socketdotio", "zod", "lucide"],
+        "core_tech": "react",
+        "github_link": "https://github.com/EliaGiolli/Performonitoring/tree/main/frontend",
+        "demo_link": "",
+        "tech_stack": TechStack.frontend,
+        "role": "Solo developer",
+        "year": 2026,
+        "runs_locally": true,
+        "no_demo_reason": "The dashboard shows and fixes the Windows PC it runs on, so it only makes sense on your own machine.",
+        "related": { "id": 10, "label": "See the API" },
+        "summary": [
+            "The dashboard half of Performonitoring: CPU, RAM, disk and network charts that prefill from the API's stored history and then move with every live tick, a process table with a Kill button, one-click fix actions and a filterable activity log.",
+            "It shares a TypeScript monorepo with its API, so it validates incoming Socket.IO events with the same Zod schemas the server uses to validate requests.",
+            "Runs locally on Windows · no hosted demo."
+        ],
+        "highlights": [
+            "Recharts graphs fed over `socket.io-client`, with every live event checked against the shared Zod schemas before it reaches state.",
+            "TanStack Query for server data, Zustand for client state and TanStack Table for the process list and the log.",
+            "Accessible by design: keyboard-only use, a screen-reader summary and a table view for every chart, and 44px touch targets, checked with axe in unit tests and in a real browser through Playwright.",
+            "Destructive actions go through a confirm dialog, results and threshold alerts arrive as toasts, and the interface is built on shadcn/ui and Radix with dark and light themes."
         ]
     },
 ];

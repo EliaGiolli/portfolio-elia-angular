@@ -54,5 +54,32 @@ export interface ProjectsTypes {
      * `nodedotjs` for the Express and NestJS projects, whose real core is the
      * framework, not the runtime.
      */
-    core_tech?: string
+    core_tech?: string,
+
+    /*
+     * Redesign fields. Like the case-study fields above, all optional and mirrored
+     * in ProjectsSchema.
+     */
+
+    /** Shown in the homepage "Selected work" section. */
+    featured?: boolean,
+    /**
+     * Position within its stack in the default sort, lowest first. Projects without
+     * one follow, ordered by `core_tech` priority and then by year.
+     */
+    order?: number,
+    /**
+     * The app only makes sense on the visitor's own machine, so there is no hosted
+     * demo. Drives the "Runs locally · no demo" status. Demo status itself is not
+     * stored: ProjectService.demoStatus() derives it from this and `demo_link`.
+     */
+    runs_locally?: boolean,
+    /** Why there is no live demo, shown in the detail page's callout. */
+    no_demo_reason?: string,
+    /** A sibling project to cross-link, e.g. the API behind a dashboard. */
+    related?: {
+        id: number,
+        /** Link text, e.g. 'See the API'. */
+        label: string
+    }
 }

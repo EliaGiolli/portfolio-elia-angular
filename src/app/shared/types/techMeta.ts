@@ -46,6 +46,8 @@ export const TECH_ICONS: ReadonlySet<string> = new Set([
   'prisma',
   'sqlite',
   'typeorm',
+  // Realtime
+  'socketdotio',
   // Auth
   'jsonwebtokens',
   'passport',
@@ -96,6 +98,7 @@ const TECH_LABELS: Readonly<Record<string, string>> = {
   reactquery: 'TanStack Query',
   reactrouter: 'React Router',
   shadcnui: 'shadcn/ui',
+  socketdotio: 'Socket.IO',
   sqlite: 'SQLite',
   swagger: 'Swagger',
   tailwindcss: 'Tailwind CSS',
