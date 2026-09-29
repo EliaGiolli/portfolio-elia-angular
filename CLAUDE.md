@@ -4,8 +4,8 @@
 
 A full redesign is under way, phase by phase. Before modifying anything, read:
 
-- `portfolior-refactor/portfolio-redesign.md`: **the source of truth**. It covers decisions (backend positioning, routes, light-only theme), the architecture spec, and the phased task list with checkboxes (one phase = one PR, one task = one commit). Tick tasks there as they land.
-- `portfolior-refactor/GUIDELINES.md`: the background UX audit. Where it disagrees with `portfolio-redesign.md`, the plan wins.
+- `portfolio-refactor/portfolio-redesign.md`: **the source of truth**. It covers decisions (backend positioning, routes, light-only theme), the architecture spec, and the phased task list with checkboxes (one phase = one PR, one task = one commit). Tick tasks there as they land.
+- `portfolio-refactor/GUIDELINES.md`: the background UX audit. Where it disagrees with `portfolio-redesign.md`, the plan wins.
 
 Parts of the architecture described below change as phases merge; the plan says which.
 
