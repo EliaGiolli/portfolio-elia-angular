@@ -92,6 +92,27 @@ describe('projects.model', () => {
       expect(projects.filter((p) => !p.github_link).map((p) => p.project_name)).toEqual([]);
     });
 
+    // The detail page builds the cross-link URL from the target's stack and id, so a
+    // dangling id would link straight to the 404 page.
+    it('points every related link at another existing project', () => {
+      const byId = new Map(projects.map((p) => [p.id, p]));
+      const dangling = projects
+        .filter((p) => p.related && (!byId.has(p.related.id) || p.related.id === p.id))
+        .map((p) => `${p.project_name} -> ${p.related!.id}`);
+
+      expect(dangling).toEqual([]);
+    });
+
+    // demoStatus() lets a demo link win over runs_locally, so both set at once would
+    // hide the "no demo" callout while the no_demo_reason sits unused.
+    it('gives local-only projects a reason and no demo link', () => {
+      const bad = projects
+        .filter((p) => p.runs_locally && (p.demo_link || !p.no_demo_reason))
+        .map((p) => p.project_name);
+
+      expect(bad).toEqual([]);
+    });
+
     it('uses absolute https URLs', () => {
       const bad = projects
         .flatMap((p) => [p.github_link, p.demo_link])

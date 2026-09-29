@@ -217,6 +217,62 @@ export const projects: ProjectsTypes[] = [
             "Loading and error regions use `aria-live` with `role=\"status\"` and `role=\"alert\"`, and the layout ships a skip link and ARIA landmarks."
         ]
     },
+    {
+        "id": 10,
+        "project_name": "Performonitoring — API",
+        "img_path": "",
+        "description": "Express 5 and TypeScript API that samples PC metrics every 2s, stores them with Prisma and SQLite, streams them via Socket.IO. No demo: it runs locally.",
+        "technologies": ["nodedotjs", "express", "typescript", "prisma"],
+        "technologies_detail": ["nodedotjs", "express", "typescript", "prisma", "sqlite", "socketdotio", "zod", "swagger", "openapiinitiative"],
+        "core_tech": "express",
+        "github_link": "https://github.com/EliaGiolli/Performonitoring/tree/main/backend",
+        "demo_link": "",
+        "tech_stack": TechStack.backend,
+        "role": "Solo developer",
+        "year": 2026,
+        "runs_locally": true,
+        "no_demo_reason": "The API reads and fixes the Windows PC it runs on, so it only makes sense on your own machine.",
+        "related": { "id": 11, "label": "See the dashboard" },
+        "summary": [
+            "The API behind Performonitoring samples the Windows machine it runs on every two seconds (CPU per core and temperature, RAM, disk I/O, network and the top processes), streams each snapshot live over Socket.IO and stores it in SQLite through Prisma, so history survives a restart.",
+            "It also acts on the machine: fix actions such as flushing the DNS cache or clearing old temp files run as PowerShell scripts, and every run and every threshold alert lands in a log that can be filtered, paged and archived.",
+            "Runs locally on Windows · no hosted demo."
+        ],
+        "highlights": [
+            "One source of truth for types: Zod schemas in a shared workspace validate every request and generate the OpenAPI document, and a test fails the build if a route ships without docs.",
+            "Fix actions come from a fixed registry of PowerShell scripts, spawned with an argument array rather than a shell string and killed with their whole process tree on timeout. Destructive ones need `confirm: true`, enforced by the server with a 409.",
+            "Hardened for a server with no login: bound to `127.0.0.1`, strict CORS, Helmet, and an `Origin` check on mutating requests and on the Socket.IO handshake, so a page on another origin cannot trigger an action.",
+            "Threshold alerts fire only after three consecutive breaches, at most once every five minutes per metric; samples and logs past the retention window are pruned at startup."
+        ]
+    },
+    {
+        "id": 11,
+        "project_name": "Performonitoring — Dashboard",
+        "img_path": "",
+        "description": "Real-time Windows performance dashboard in React and TypeScript: live CPU, RAM, disk and network charts. No live demo: it monitors the PC it runs on.",
+        "technologies": ["react", "typescript", "vite", "tailwindcss"],
+        "technologies_detail": ["react", "typescript", "vite", "tailwindcss", "reactquery", "radixui", "shadcnui", "socketdotio", "zod", "lucide"],
+        "core_tech": "react",
+        "github_link": "https://github.com/EliaGiolli/Performonitoring/tree/main/frontend",
+        "demo_link": "",
+        "tech_stack": TechStack.frontend,
+        "role": "Solo developer",
+        "year": 2026,
+        "runs_locally": true,
+        "no_demo_reason": "The dashboard shows and fixes the Windows PC it runs on, so it only makes sense on your own machine.",
+        "related": { "id": 10, "label": "See the API" },
+        "summary": [
+            "The dashboard half of Performonitoring: CPU, RAM, disk and network charts that prefill from the API's stored history and then move with every live tick, a process table with a Kill button, one-click fix actions and a filterable activity log.",
+            "It shares a TypeScript monorepo with its API, so it validates incoming Socket.IO events with the same Zod schemas the server uses to validate requests.",
+            "Runs locally on Windows · no hosted demo."
+        ],
+        "highlights": [
+            "Recharts graphs fed over `socket.io-client`, with every live event checked against the shared Zod schemas before it reaches state.",
+            "TanStack Query for server data, Zustand for client state and TanStack Table for the process list and the log.",
+            "Accessible by design: keyboard-only use, a screen-reader summary and a table view for every chart, and 44px touch targets, checked with axe in unit tests and in a real browser through Playwright.",
+            "Destructive actions go through a confirm dialog, results and threshold alerts arrive as toasts, and the interface is built on shadcn/ui and Radix with dark and light themes."
+        ]
+    },
 ];
 
 /**

@@ -221,7 +221,7 @@ Open items for Elia (placeholders that must be filled before launch):
 
 ### Phase 2 — `feat/project-data`: content model, backend-first data
 - [x] **2.1** Add `featured`, `order`, `runs_locally`, `no_demo_reason`, `related` to `projectsSchema.ts` **and** `shared/types/projects.ts`.
-- [ ] **2.2** Add Performonitoring — API and — Dashboard (field table in GUIDELINES) with cross-`related` links. Add a `socketdotio` icon + `TECH_ICONS` / `TECH_LABELS` entry if it's shown.
+- [x] **2.2** Add Performonitoring — API and — Dashboard (field table in GUIDELINES) with cross-`related` links. Add a `socketdotio` icon + `TECH_ICONS` / `TECH_LABELS` entry if it's shown.
 - [ ] **2.3** Remove Dev Dashboard. Set `featured` / `order` on Bookgraph, Performonitoring API and Zenith. Expand Bookgraph's `summary` / `highlights`.
 - [ ] **2.4** Update `public/sitemap.xml` for 2.2–2.3.
 - [ ] **2.5** `profile.model.ts` + `profileSchema.ts` with the backend copy drafts. Add a placeholder spec (no `[` left), skipped with a TODO until Elia fills the values.
