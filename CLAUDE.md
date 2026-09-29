@@ -1,5 +1,8 @@
 # CLAUDE.md
 
+
+Before modifying anything,reference the `GUIDELINES.md` inside the portfolio-refactor folder
+
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 Before doing anything, always refer to the skills inside the `.agents/skills/` path — currently `angular-developer` (Angular's official skill: a `SKILL.md` router plus 40 on-demand reference files).
