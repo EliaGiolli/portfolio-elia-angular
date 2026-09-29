@@ -224,7 +224,7 @@ Open items for Elia (placeholders that must be filled before launch):
 - [x] **2.2** Add Performonitoring — API and — Dashboard (field table in GUIDELINES) with cross-`related` links. Add a `socketdotio` icon + `TECH_ICONS` / `TECH_LABELS` entry if it's shown.
 - [x] **2.3** Remove Dev Dashboard. Set `featured` / `order` on Bookgraph, Performonitoring API and Zenith. Expand Bookgraph's `summary` / `highlights`.
 - [x] **2.4** Update `public/sitemap.xml` for 2.2–2.3.
-- [ ] **2.5** `profile.model.ts` + `profileSchema.ts` with the backend copy drafts. Add a placeholder spec (no `[` left), skipped with a TODO until Elia fills the values.
+- [x] **2.5** `profile.model.ts` + `profileSchema.ts` with the backend copy drafts. Add a placeholder spec (no `[` left), skipped with a TODO until Elia fills the values.
 - [ ] **2.6** `ProjectService`:
   - add `filterProjects`, `demoStatus`, `featuredProjects`, `allTechnologies`, `countsByStack`, with backend-first as the default sort;
   - keep `selectedStack` / `activeTags` until Phase 5;
