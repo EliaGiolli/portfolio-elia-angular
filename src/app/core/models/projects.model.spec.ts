@@ -1,4 +1,4 @@
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { z } from 'zod';
@@ -96,6 +96,18 @@ describe('projects.model', () => {
     expect(featured).toHaveLength(3);
     expect(featured.every((p) => p.order !== undefined)).toBe(true);
     expect(slots).toEqual([...new Set(slots)]);
+  });
+
+  // public/sitemap.xml is maintained by hand, so this is what catches a project
+  // added without its URL, or a removed one whose URL is left behind as a 404.
+  it('lists exactly the project detail URLs in the sitemap', () => {
+    const sitemap = readFileSync(join(process.cwd(), 'public/sitemap.xml'), 'utf8');
+    const listed = [...sitemap.matchAll(/\/projects\/(\w+)\/(\d+)<\/loc>/g)]
+      .map(([, stack, id]) => `${stack}/${id}`)
+      .sort();
+    const expected = projects.map((p) => `${p.tech_stack}/${p.id}`).sort();
+
+    expect(listed).toEqual(expected);
   });
 
   describe('links', () => {
