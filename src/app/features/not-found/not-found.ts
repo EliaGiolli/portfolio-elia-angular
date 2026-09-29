@@ -1,7 +1,6 @@
 import { Component, REQUEST_CONTEXT, inject } from '@angular/core';
 import { Button } from "../../shared/components/button/button";
 import { IconComponent } from "../../shared/components/icon/icon";
-import { RouterLink } from "@angular/router";
 import { SeoService } from '../../core/services/seo.service';
 
 /** Shape of the per-request object server.ts hands to the Angular app engine. */
@@ -11,7 +10,7 @@ interface SsrRequestContext {
 
 @Component({
   selector: 'app-not-found',
-  imports: [Button, IconComponent, RouterLink],
+  imports: [Button, IconComponent],
   templateUrl: './not-found.html',
   styleUrl: './not-found.css',
 })

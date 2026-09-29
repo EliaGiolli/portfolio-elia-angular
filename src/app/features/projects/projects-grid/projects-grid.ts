@@ -1,6 +1,5 @@
 import { Component, computed, effect, inject, input } from '@angular/core';
 import { Location } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { TechStack } from '../../../shared/types/projects';
 import { Button } from '../../../shared/components/button/button';
 import { Card } from '../../../shared/components/card/card';
@@ -21,7 +20,7 @@ const toTags = (slugs: readonly string[]): FilterTag[] =>
 
 @Component({
   selector: 'app-projects-grid',
-  imports: [Button, Card, CardGrid, IconComponent, TooltipDirective, RouterLink],
+  imports: [Button, Card, CardGrid, IconComponent, TooltipDirective],
   templateUrl: './projects-grid.html',
   styleUrl: './projects-grid.css',
 })

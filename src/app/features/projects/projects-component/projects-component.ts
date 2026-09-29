@@ -1,5 +1,5 @@
 import { Component, computed, effect, inject, input } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { Card } from '../../../shared/components/card/card';
 import { Button } from '../../../shared/components/button/button';
 import { IconComponent } from '../../../shared/components/icon/icon';
@@ -10,7 +10,7 @@ import { techLabel } from '../../../shared/types/techMeta';
 @Component({
   selector: 'app-projects-component',
   standalone: true,
-  imports: [Card, IconComponent, Button, RouterLink],
+  imports: [Card, IconComponent, Button],
   templateUrl: './projects-component.html',
   styleUrl: './projects-component.css',
 })

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { Button } from './button';
 
@@ -24,6 +25,7 @@ describe('Button', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Button],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Button);
@@ -74,6 +76,86 @@ describe('Button', () => {
       await fixture.whenStable();
 
       expect(anchor()!.getAttribute('download')).toBe('Renamed.pdf');
+    });
+  });
+
+  describe('with a link (internal navigation)', () => {
+    it('renders a real <a> with the router href, not a <button>', async () => {
+      fixture.componentRef.setInput('link', '/projects');
+      await fixture.whenStable();
+
+      expect(fixture.nativeElement.querySelector('button')).toBeNull();
+      const a = anchor()!;
+      expect(a.getAttribute('href')).toBe('/projects');
+      // Internal links stay in the same tab.
+      expect(a.getAttribute('target')).toBeNull();
+    });
+
+    it('adds the fragment and query params to the href', async () => {
+      fixture.componentRef.setInput('link', '/');
+      fixture.componentRef.setInput('fragment', 'contact');
+      await fixture.whenStable();
+      expect(anchor()!.getAttribute('href')).toBe('/#contact');
+
+      fixture.componentRef.setInput('link', ['/projects', 'backend']);
+      fixture.componentRef.setInput('fragment', undefined);
+      fixture.componentRef.setInput('queryParams', { tech: 'nestjs' });
+      await fixture.whenStable();
+      expect(anchor()!.getAttribute('href')).toBe('/projects/backend?tech=nestjs');
+    });
+
+    it('wins over href when both are given', async () => {
+      fixture.componentRef.setInput('link', '/about');
+      fixture.componentRef.setInput('href', 'https://example.com');
+      await fixture.whenStable();
+
+      expect(anchor()!.getAttribute('href')).toBe('/about');
+    });
+  });
+
+  // The host is a generic element, so a name on it would be ignored: it must land
+  // on whichever control actually renders.
+  describe('ariaLabel', () => {
+    it('names the inner <button>, not the host', async () => {
+      fixture.componentRef.setInput('ariaLabel', 'Open menu');
+      await fixture.whenStable();
+
+      const host = fixture.nativeElement as HTMLElement;
+      expect(host.querySelector('button')!.getAttribute('aria-label')).toBe('Open menu');
+      expect(host.hasAttribute('aria-label')).toBe(false);
+    });
+
+    it('names the inner <a> for href and link buttons', async () => {
+      fixture.componentRef.setInput('ariaLabel', 'GitHub');
+      fixture.componentRef.setInput('href', 'https://github.com/EliaGiolli');
+      await fixture.whenStable();
+      expect(anchor()!.getAttribute('aria-label')).toBe('GitHub');
+
+      fixture.componentRef.setInput('href', undefined);
+      fixture.componentRef.setInput('link', '/');
+      await fixture.whenStable();
+      expect(anchor()!.getAttribute('aria-label')).toBe('GitHub');
+    });
+
+    it('is absent when not given, so visible text stays the name', async () => {
+      await fixture.whenStable();
+      expect(fixture.nativeElement.querySelector('button').hasAttribute('aria-label')).toBe(false);
+    });
+  });
+
+  describe('variant and size', () => {
+    it('reflects both on host classes for the stylesheet', async () => {
+      const host = fixture.nativeElement as HTMLElement;
+      expect(host.classList).toContain('btn-primary');
+      expect(host.classList).not.toContain('btn-sm');
+
+      fixture.componentRef.setInput('variant', 'icon');
+      fixture.componentRef.setInput('size', 'sm');
+      await fixture.whenStable();
+
+      expect(host.classList).toContain('btn-icon');
+      expect(host.classList).not.toContain('btn-primary');
+      expect(host.classList).toContain('btn-sm');
     });
   });
 

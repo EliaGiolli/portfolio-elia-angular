@@ -11,12 +11,11 @@ import {
 } from '@angular/forms';
 import { Button } from '../../../shared/components/button/button';
 import { IconComponent } from '../../../shared/components/icon/icon';
-import { RouterLink } from '@angular/router';
 import { SeoService } from '../../../core/services/seo.service';
 
 @Component({
   selector: 'app-contacts',
-  imports: [ReactiveFormsModule, Button, IconComponent, RouterLink],
+  imports: [ReactiveFormsModule, Button, IconComponent],
   templateUrl: './contacts.html',
   styleUrl: './contacts.css',
 })

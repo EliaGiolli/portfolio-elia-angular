@@ -1,13 +1,11 @@
 :host {
   display: inline-block;
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* `all: unset` sets the control's own colour, but projected text still matched the
-   global `p, span, li { color: var(--text-secondary) }` rule and won on specificity —
-   which left "Live Demo" dark grey on the blue primary button. */
-:is(button, a) ::ng-deep :is(span, p) {
+/* Projected <p> would otherwise take the global body-copy colour (a direct rule
+   beats inherited colour, whatever its specificity), leaving grey text on the
+   blue primary button. */
+:is(button, a) ::ng-deep p {
   color: inherit;
 }
 
@@ -22,51 +20,88 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: var(--space-2);
   width: 100%;
   height: 100%;
-  font-family: inherit;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 0.8rem 1.8rem;
-  border-radius: 12px;
-  transition: inherit;
+  min-height: 44px; /* WCAG 2.5.8 asks for 24px; 44px is the comfortable target */
+  padding: 0 1.4rem;
   box-sizing: border-box;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
   cursor: pointer;
 }
 
-/* VARIANT: Primary */
+@media (prefers-reduced-motion: no-preference) {
+  :is(button, a) {
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+}
+
+/* `all: unset` above also strips the outline, and this rule outranks the global
+   :focus-visible one, so the ring has to be restored here (WCAG 2.4.7). */
+:is(button, a):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* SIZE */
+:host(.btn-sm) :is(button, a) {
+  min-height: 36px;
+  padding: 0 1rem;
+  font-size: var(--fs-small);
+}
+
+/* VARIANT: Primary, the one filled accent action. */
 :host(.btn-primary) :is(button, a) {
-  background-color: var(--bg-accent-primary);
-  color: var(--text-on-accent);
-  box-shadow: 0 4px 14px 0 rgba(45, 68, 255, 0.25);
+  background-color: var(--accent);
+  color: var(--on-accent);
 }
 
-:host(.btn-primary:hover) {
-  transform: translateY(-2px);
-  filter: brightness(1.1);
-  box-shadow: 0 6px 20px rgba(45, 68, 255, 0.3);
+:host(.btn-primary) :is(button, a):hover {
+  background-color: var(--accent-hover);
 }
 
-/* VARIANT: Secondary */
+/* VARIANT: Secondary. Neutral outline; the accent is kept for primary actions. */
 :host(.btn-secondary) :is(button, a) {
-  background-color: #ffffff;
-  color: var(--bg-accent-primary);
-  border: 2px solid var(--bg-accent-primary);
+  background-color: var(--surface-panel);
+  border-color: var(--border-control);
+  color: var(--text-primary);
 }
 
-:host(.btn-secondary:hover) {
-  transform: translateY(-2px);
-  background-color: var(--bg-background-secondary);
+:host(.btn-secondary) :is(button, a):hover {
+  background-color: var(--surface-sunken);
 }
 
-/* VARIANT: Ghost */
+/* VARIANT: Ghost. A text-weight action, e.g. "Back". */
 :host(.btn-ghost) :is(button, a) {
   background-color: transparent;
   color: var(--text-secondary);
 }
 
-:host(.btn-ghost:hover) {
-  background-color: var(--bg-background-secondary);
-  color: var(--bg-accent-primary);
+:host(.btn-ghost) :is(button, a):hover {
+  background-color: var(--surface-sunken);
+  color: var(--text-primary);
+}
+
+/* VARIANT: Icon. A 44px square outlined button (GitHub / LinkedIn / mail). */
+:host(.btn-icon) :is(button, a) {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background-color: var(--surface-panel);
+  border-color: var(--border-control);
+  color: var(--text-primary);
+}
+
+:host(.btn-icon) :is(button, a):hover {
+  background-color: var(--surface-sunken);
+  border-color: var(--text-muted);
 }
