@@ -216,7 +216,7 @@ Open items for Elia (placeholders that must be filled before launch):
 - [x] **1.2** New `:root` tokens (see Architecture). Alias every old variable (`--bg-accent-primary`, `--text-accent-primary`, `--bg-background-*`, …) to a new one, so current pages keep rendering.
 - [x] **1.3** Base typography + `.eyebrow`, `.dot-grid`, `scroll-padding-top`. Remove the global `p, span, li` colour rule and Poppins.
 - [x] **1.4** `app-button`: restore the focus outline; add `variant="icon"`, `size`, `routerLink` + `fragment`. Update `button.spec.ts`.
-- [ ] **1.5** `TECH_BRAND` + `techBrand()` in `techMeta.ts`, with a spec asserting ≥4.5:1 for every pair.
+- [x] **1.5** `TECH_BRAND` + `techBrand()` in `techMeta.ts`, with a spec asserting ≥4.5:1 for every pair.
 - *Done when:* existing pages render with the new fonts and no broken colours (screenshot); tests and build are green.
 
 ### Phase 2 — `feat/project-data`: content model, backend-first data

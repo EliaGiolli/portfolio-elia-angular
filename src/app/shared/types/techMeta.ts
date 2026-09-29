@@ -107,6 +107,38 @@ const TECH_LABELS: Readonly<Record<string, string>> = {
   zod: 'Zod',
 };
 
+/** Background + text colour of a project's cover band. */
+export interface TechBrand {
+  bg: string;
+  fg: string;
+}
+
+/**
+ * Cover-band colours for the technologies projects are built around (`core_tech`).
+ * The band carries text (a mono tech label and the year), so every pair must reach
+ * 4.5:1. techMeta.spec.ts checks the ratio, and checks that every `core_tech` in
+ * the project data has an entry here.
+ *
+ * Brand colours are the official ones. React is the exception: its cyan fails
+ * against white, so it uses React's own dark lockup, with the cyan as the text.
+ */
+export const TECH_BRAND: Readonly<Record<string, TechBrand>> = {
+  angular: { bg: '#DD0031', fg: '#FFFFFF' },   // 5.1:1
+  astro: { bg: '#17191E', fg: '#FFFFFF' },
+  express: { bg: '#303030', fg: '#FFFFFF' },
+  nestjs: { bg: '#E0234E', fg: '#FFFFFF' },    // 4.65:1, the tightest pair
+  nextdotjs: { bg: '#000000', fg: '#FFFFFF' },
+  react: { bg: '#20232A', fg: '#61DAFB' },     // 9.7:1
+};
+
+/** Used for any technology without its own entry: the neutral-800 token. */
+export const DEFAULT_TECH_BRAND: TechBrand = { bg: '#22262E', fg: '#FFFFFF' };
+
+/** Cover-band colours for a tech slug, falling back to a neutral dark band. */
+export function techBrand(slug: string | undefined): TechBrand {
+  return (slug && TECH_BRAND[slug.toLowerCase().trim()]) || DEFAULT_TECH_BRAND;
+}
+
 /** Human-readable name for a tech slug, falling back to the slug itself. */
 export function techLabel(slug: string): string {
   const key = slug.toLowerCase().trim();
