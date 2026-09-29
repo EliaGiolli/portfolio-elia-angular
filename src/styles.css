@@ -38,25 +38,79 @@
 }
 
 :root {
-    /* Backgrounds */
-    --bg-background-primary: #FAFAFC;
-    --bg-background-secondary: #F0F2FF;
-    
-    /* Accents */
-    --bg-accent-primary: #2D44FF;
-    --bg-accent-secondary: #E2E8F0;
-    
-    /* Typography */
-    --text-primary: #1A1A1A;
-    --text-accent-primary: #2D44FF;     /* Per titoli (H1, H2) e scritte importanti */
-    --text-secondary: #575F6E;   /* Per paragrafi e descrizioni. È leggibile ma meno "pesante" */
-    /* Per i "meta-data" (es: date, tag tecnologie, testi piccolissimi).
-       Scurito da #8E97A6: quel valore restava fra 2.4:1 e 3.0:1 su tutti gli sfondi
-       in cui viene usato, sotto il minimo WCAG AA di 4.5:1 per il testo piccolo.
-       Il vincolo piu stretto e' .filter-container su #E2E8F0 (projects-grid): qui
-       il rapporto e' 4.62:1, mentre su #FFFFFF / #FAFAFC / #F0F2FF sale a 5.1-5.7:1. */
-    --text-muted: #5F6776;
-    --text-on-accent: #FFFFFF;  /* Per il testo dentro i bottoni blu */
+    /* Light theme only (see portfolio-redesign.md → Decisions). Contrast ratios
+       below are against --surface-panel (#FFF) and --surface-page (#F6F7F9). */
+    --neutral-0: #FFFFFF;
+    --neutral-50: #F6F7F9;
+    --neutral-100: #EEF0F4;
+    --neutral-200: #E2E5EB;
+    --neutral-300: #CDD2DB;
+    --neutral-400: #838A97;   /* control borders: 3.5:1 on white, 3.2:1 on page, 3.0:1 on sunken */
+    --neutral-500: #5F6776;   /* 5.7:1 on white, 5.3:1 on page, 4.5:1 on --neutral-200 */
+    --neutral-600: #474D5B;
+    --neutral-700: #353A46;
+    --neutral-800: #22262E;
+    --neutral-900: #14161C;
+
+    /* Surfaces: three levels, per GUIDELINES → Surfaces. */
+    --surface-page: var(--neutral-50);
+    --surface-panel: var(--neutral-0);
+    --surface-sunken: var(--neutral-100);  /* segmented-control track, inline code */
+    --border-subtle: var(--neutral-200);   /* decorative panel edges */
+    --border-control: var(--neutral-400);  /* inputs and outlined buttons: 3:1 (WCAG 1.4.11) */
+
+    /* Text */
+    --text-primary: var(--neutral-900);    /* 18.1:1 */
+    --text-secondary: var(--neutral-600);  /*  8.5:1 */
+    --text-muted: var(--neutral-500);      /*  5.7:1 (5.3:1 on page): dates, labels, meta */
+
+    /* Accent: actions, focus and active state ONLY. Headings are --text-primary. */
+    --accent: #2D44FF;                     /* 6.2:1 on white */
+    --accent-hover: #1F31D6;
+    --accent-tint: #ECEEFF;                /* tag pills; --accent text on it is 5.4:1 */
+    --on-accent: #FFFFFF;
+
+    /* Status: always paired with a word or icon, never colour alone. The old values
+       failed AA at 3.3-3.8:1. */
+    --success: #1B7F3B;                    /* 5.1:1 (4.7:1 on page) */
+    --danger: #C62828;                     /* 5.6:1 */
+
+    /* Radii: tighter and more technical than the old 4-20px range. */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-pill: 999px;
+
+    --shadow-raised: 0 1px 2px rgb(20 22 28 / 0.06), 0 8px 24px rgb(20 22 28 / 0.08);
+
+    /* Type */
+    --font-display: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-body: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+
+    --fs-display: clamp(2.5rem, 1.6rem + 3.2vw, 4.5rem);
+    --fs-h1: clamp(2.25rem, 1.8rem + 1.6vw, 3rem);
+    --fs-h2: clamp(1.625rem, 1.4rem + 0.8vw, 2rem);
+    --fs-h3: 1.25rem;
+    --fs-body: 1rem;
+    --fs-small: 0.875rem;
+    --fs-label: 0.8rem;
+    --lh-body: 1.6;
+    --lh-tight: 1.1;
+    --tracking-label: 0.08em;
+
+    /* Height of the sticky inner-page header; anchors and focus scroll clear of it. */
+    --header-height: 4rem;
+
+    /* LEGACY ALIASES. Components not yet rebuilt still read the old names. Each
+       one maps onto a new token so the palette is already the new one; the whole
+       block goes in Phase 8 (task 8.1), once nothing references it. */
+    --bg-background-primary: var(--surface-panel);
+    --bg-background-secondary: var(--surface-page);
+    --bg-accent-primary: var(--accent);
+    --bg-accent-secondary: var(--neutral-200);
+    --text-accent-primary: var(--accent);
+    --text-on-accent: var(--on-accent);
 
     /* Spacing scale — shared by every component. Previously declared on the
        :host of about-me, which meant shared/ components like app-card-grid only

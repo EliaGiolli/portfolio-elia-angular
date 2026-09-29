@@ -85,11 +85,11 @@ form {
 
     /* Stato Invalido */
     &.ng-touched.ng-invalid {
-      border-color: #ef4444;
-      background-color: #fef2f2;
+      border-color: var(--danger);
+      background-color: color-mix(in srgb, var(--danger) 6%, var(--surface-panel));
 
       &:focus {
-        box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--danger) 12%, transparent);
       }
     }
   }
@@ -107,7 +107,7 @@ textarea {
 
 /* Messaggi di Errore */
 .error-message {
-  color: #ef4444;
+  color: var(--danger);
   font-size: 0.8rem;
   font-weight: 500;
   margin-top: 0.25rem;
@@ -142,8 +142,8 @@ textarea {
 .icon-container {
   width: 100px;
   height: 100px;
-  background-color: #f0fdf4; /* Verde chiarissimo */
-  color: #22c55e; /* Verde successo */
+  background-color: color-mix(in srgb, var(--success) 8%, var(--surface-panel));
+  color: var(--success);
   border-radius: 50%;
   display: flex;
   align-items: center;
