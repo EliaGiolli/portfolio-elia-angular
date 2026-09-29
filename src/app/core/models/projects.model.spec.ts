@@ -87,6 +87,17 @@ describe('projects.model', () => {
     });
   });
 
+  // The homepage "Selected work" section is laid out for exactly three rows, and
+  // `order` is what places them, so two featured projects must not share one.
+  it('features three projects, each with a distinct order within its stack', () => {
+    const featured = projects.filter((p) => p.featured);
+    const slots = featured.map((p) => `${p.tech_stack}:${p.order}`);
+
+    expect(featured).toHaveLength(3);
+    expect(featured.every((p) => p.order !== undefined)).toBe(true);
+    expect(slots).toEqual([...new Set(slots)]);
+  });
+
   describe('links', () => {
     it('gives every project a GitHub link', () => {
       expect(projects.filter((p) => !p.github_link).map((p) => p.project_name)).toEqual([]);

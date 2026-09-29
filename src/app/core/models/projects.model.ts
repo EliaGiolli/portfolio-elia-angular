@@ -50,30 +50,6 @@ export const projects: ProjectsTypes[] = [
         ]
     },
     {
-        "id": 3,
-        "project_name": "Dev Dashboard",
-        "img_path": "",
-        "description": "A REST API simulating a developer/admin dashboard: persistent system metrics, log management with filtering and archiving, and a bcrypt hashing suite.",
-        "technologies": ["nodedotjs", "express", "typescript"],
-        "technologies_detail": ["nodedotjs", "express", "typescript", "prisma", "sqlite"],
-        "core_tech": "express",
-        "github_link": "https://github.com/EliaGiolli/dashboard-admin-express",
-        "demo_link": "",
-        "tech_stack": TechStack.backend,
-        "role": "Solo developer",
-        "year": 2026,
-        "summary": [
-            "An admin API that snapshots CPU, RAM and uptime into a database so system health can be read as a trend rather than a single instant, alongside persistent logs that can be filtered by level and archived rather than deleted.",
-            "It started as a plain Express server and grew into a database-backed application, which is where most of the interesting decisions came from."
-        ],
-        "highlights": [
-            "Errors handled by a central layer instead of `res.status().json()` scattered through controllers: a custom `AppError` carries a status code and a global middleware catches it, so controllers only describe the happy path. Modelled deliberately on NestJS exception filters.",
-            "Prisma over SQLite for persistence, with service-layer business logic kept separate from lean route handlers.",
-            "Environment variables exposed through an explicit whitelist, so a new secret in `.env` is private by default rather than by remembering.",
-            "Sensitive routes sit behind an API-key guard; bcrypt backs both the hashing endpoints and the stored credentials."
-        ]
-    },
-    {
         "id": 4,
         "project_name": "Shelfspot",
         "img_path": "",
@@ -151,22 +127,28 @@ export const projects: ProjectsTypes[] = [
         "img_path": "",
         "description": "A NestJS API that models a personal library as a graph: books, authors and tags, plus directional connections aggregated into nodes and edges.",
         "technologies": ["nodedotjs", "nestjs", "typescript", "postgresql"],
-        "technologies_detail": ["nestjs", "nodedotjs", "typescript", "postgresql", "typeorm", "passport", "jsonwebtokens", "swagger", "openapiinitiative", "jest"],
+        "technologies_detail": ["nestjs", "nodedotjs", "typescript", "postgresql", "typeorm", "passport", "jsonwebtokens", "zod", "swagger", "openapiinitiative"],
         "core_tech": "nestjs",
         "github_link": "https://github.com/EliaGiolli/bookgraph-nestjs",
         "demo_link": "",
         "tech_stack": TechStack.backend,
         "role": "Solo developer",
         "year": 2026,
+        "featured": true,
+        "order": 1,
         "summary": [
             "BookGraph is a library manager built around relationships rather than a flat list. Books carry authors, tags and reading statuses, and can be linked to one another directionally — this book inspired that one.",
-            "Those links are the point. A dedicated `/graph` endpoint aggregates a user's books and connections into a `{ nodes, edges }` structure that a visualisation library such as vis-network can render directly, turning a reading history into a map."
+            "Those links are the point. A dedicated `/graph` endpoint aggregates a user's books and connections into a `{ nodes, edges }` structure that a visualisation library such as vis-network can render directly, turning a reading history into a map.",
+            "Every domain is its own NestJS module (auth, users, books, authors, tags, connections, graph), and most of the work is in the rules between them: who owns what, which links are allowed, and how the schema is allowed to change.",
+            "It is the back end of a planned Angular client, so the contract comes first: every route, DTO and response shape is described in a generated OpenAPI 3.0 spec before any UI depends on it."
         ],
         "highlights": [
-            "Modular NestJS architecture with each domain — auth, users, books, authors, tags, connections, graph — isolated in its own module.",
-            "TypeORM over PostgreSQL; Passport-JWT and bcrypt for authentication, with ownership checks so a user can only reach their own records.",
-            "DTO validation via class-validator, plus relationship constraints that reject invalid or self-referential connections.",
-            "The full surface is documented as an OpenAPI 3.0 spec generated from the code and browsable through Swagger UI."
+            "Ownership is enforced in every service by filtering on the caller's id, so another user's book answers 404 rather than 403 and never confirms that it exists. Role checks (`ADMIN` / `USER`) are kept to the admin routes under `/users`.",
+            "Connections are validated as a domain rule, not just a shape: a custom `@IsDifferentFrom()` validator rejects self-links with 400, duplicates in either direction get 409, and both books must belong to the caller.",
+            "The global `ValidationPipe` runs with `whitelist` and `forbidNonWhitelisted`, so a request carrying a field its DTO does not declare is rejected instead of silently dropped.",
+            "JWT through Passport, issued in an HttpOnly cookie (`Secure` in production) or read from a Bearer header; bcrypt-hashed passwords; rate limits of 5 requests per 6 seconds on the auth routes and 10 everywhere else.",
+            "TypeORM over PostgreSQL with `synchronize` off, so migrations are the only way the schema changes; a Zod schema validates the environment and the app refuses to boot on a bad value.",
+            "Vitest unit tests for every module with mocked repositories, plus a Supertest E2E suite against Postgres that walks register → log in → create books → connect them → read the graph, and checks that a second user cannot see any of it."
         ]
     },
     {
@@ -182,6 +164,8 @@ export const projects: ProjectsTypes[] = [
         "tech_stack": TechStack.frontend,
         "role": "Solo developer",
         "year": 2026,
+        "featured": true,
+        "order": 1,
         "summary": [
             "Zenith monitors a server fleet: cards showing CPU and memory per node with online, offline and maintenance states, searchable by name, plus an analytics view and a validated form for registering new nodes.",
             "There is no backend, and that is deliberate — an HTTP interceptor supplies mock responses, so the app is built against the HttpClient it would really use rather than around a fake service."
@@ -230,6 +214,8 @@ export const projects: ProjectsTypes[] = [
         "tech_stack": TechStack.backend,
         "role": "Solo developer",
         "year": 2026,
+        "featured": true,
+        "order": 2,
         "runs_locally": true,
         "no_demo_reason": "The API reads and fixes the Windows PC it runs on, so it only makes sense on your own machine.",
         "related": { "id": 11, "label": "See the dashboard" },
