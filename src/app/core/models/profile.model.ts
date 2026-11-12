@@ -25,7 +25,7 @@ export const profile: z.input<typeof ProfileSchema> = {
   experience: [
     {
       period: '[YEAR] – present',
-      role: 'Backend developer',
+      role: 'Frontend developer',
       org: 'Independent projects',
       summary:
         'NestJS and Express APIs over PostgreSQL, SQLite and MongoDB, with validated contracts and generated OpenAPI docs, plus the Angular and React front ends that consume them.',
