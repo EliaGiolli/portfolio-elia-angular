@@ -1,64 +1,66 @@
-import {
-  Component,
-  inject,
-  signal,
-} from '@angular/core';
-import {
-  ReactiveFormsModule,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { Component, signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { form, FormField, FormRoot, validateStandardSchema, submit } from '@angular/forms/signals';
 import { Button } from '../../../shared/components/button/button';
-import { IconComponent } from '../../../shared/components/icon/icon';
-import { SeoService } from '../../../core/services/seo.service';
+import { contactSchema, ContactFormModel } from './formSchema';
 
 @Component({
-  selector: 'app-contacts',
-  imports: [ReactiveFormsModule, Button, IconComponent],
+  selector: 'app-contact',
+  standalone: true,
+  imports: [CommonModule, FormField, FormRoot, Button],
   templateUrl: './contacts.html',
-  styleUrl: './contacts.css',
+  styleUrl: './contacts.css'
 })
-export class Contacts {
-  private seo = inject(SeoService);
+export class ContactComponent {
+  successMessage = signal<string | null>(null);
+  errorMessage = signal<string | null>(null);
 
-  isSubmitted = signal(false);
-  isSubmitting = signal(false);
-
-  constructor() {
-    this.seo.update({
-      title: 'Contact | Elia Giolli',
-      description:
-        'Get in touch with Elia Giolli about front-end or full-stack roles, freelance work, or collaboration on an Angular or Node.js project.',
-      path: '/contacts'
-    });
-  }
-
-  contactsForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    lastName: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    message: new FormControl('', [Validators.required, Validators.minLength(10)]),
+  contactsModel = signal<ContactFormModel>({
+    name: '',
+    email: '',
+    message: '',
+    privacyAccepted: false
   });
 
-  get f() {
-    return this.contactsForm.controls;
-  }
+  // Signal Form with Zod validation via Standard Schema
+  contactForm = form(this.contactsModel, (path) => {
+    validateStandardSchema(path, contactSchema);
+  });
 
-  onSubmit(event: Event) {
-    event.preventDefault();
+  // Computed validation state for backwards compatibility / direct checking
+  formValidationResult = computed(() => {
+    const rawValue = this.contactsModel();
+    const result = contactSchema.safeParse(rawValue);
 
-    if (this.contactsForm.invalid) {
-      this.contactsForm.markAllAsTouched();
-      return;
+    if (result.success) {
+      return { isValid: true, errors: null };
     }
 
-    this.isSubmitting.set(true);
+    return {
+      isValid: false,
+      errors: result.error.format()
+    };
+  });
 
-    setTimeout(() => {
-      this.isSubmitting.set(false);
-      this.isSubmitted.set(true);
-      this.contactsForm.reset();
-    }, 1500);
+  onSubmit() {
+    this.errorMessage.set(null);
+    this.successMessage.set(null);
+
+    return submit(this.contactForm, {
+      action: async () => {
+        // Here the async API call would happen (e.g. HttpClient)
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+        this.successMessage.set('Message successfully sent! We will contact you soon.');
+        this.contactsModel.set({
+          name: '',
+          email: '',
+          message: '',
+          privacyAccepted: false
+        });
+      },
+      onInvalid: () => {
+        this.errorMessage.set('Please fix the errors below before submitting.');
+      }
+    });
   }
 }
