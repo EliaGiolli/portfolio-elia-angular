@@ -44,7 +44,7 @@ export const routes: Routes = [
       // Contacts page
       {
         path: 'contacts',
-        loadComponent: () => import('./features/about/contacts/contacts').then(m => m.Contacts)
+        loadComponent: () => import('./features/about/contacts/contacts').then(m => m.ContactComponent)
       },
       // Explicit target for ProjectsComponent's redirect on an unknown :id.
       {
