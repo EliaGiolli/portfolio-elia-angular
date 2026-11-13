@@ -22,10 +22,32 @@ export class ContactComponent {
     privacyAccepted: false
   });
 
-  // Signal Form with Zod validation via Standard Schema
-  contactForm = form(this.contactsModel, (path) => {
-    validateStandardSchema(path, contactSchema);
-  });
+  // Signal Form with Zod validation and submission options
+  contactForm = form(
+    this.contactsModel,
+    (path) => {
+      validateStandardSchema(path, contactSchema);
+    },
+    {
+      submission: {
+        action: async () => {
+          this.errorMessage.set(null);
+          // Here the async API call would happen (e.g. HttpClient)
+          await new Promise((resolve) => setTimeout(resolve, 1500));
+          this.successMessage.set('Message successfully sent! We will contact you soon.');
+          this.contactsModel.set({
+            name: '',
+            email: '',
+            message: '',
+            privacyAccepted: false
+          });
+        },
+        onInvalid: () => {
+          this.errorMessage.set('Please fix the errors below before submitting.');
+        }
+      }
+    }
+  );
 
   // Computed validation state for backwards compatibility / direct checking
   formValidationResult = computed(() => {
@@ -44,23 +66,6 @@ export class ContactComponent {
 
   onSubmit() {
     this.errorMessage.set(null);
-    this.successMessage.set(null);
-
-    return submit(this.contactForm, {
-      action: async () => {
-        // Here the async API call would happen (e.g. HttpClient)
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        this.successMessage.set('Message successfully sent! We will contact you soon.');
-        this.contactsModel.set({
-          name: '',
-          email: '',
-          message: '',
-          privacyAccepted: false
-        });
-      },
-      onInvalid: () => {
-        this.errorMessage.set('Please fix the errors below before submitting.');
-      }
-    });
+    return submit(this.contactForm);
   }
 }

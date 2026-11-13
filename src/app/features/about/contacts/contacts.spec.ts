@@ -111,4 +111,15 @@ describe('ContactComponent (Signal Forms & Zod)', () => {
       privacyAccepted: false,
     });
   });
+
+  it('should handle native form submit event via FormRoot directive without error', async () => {
+    const formElement: HTMLFormElement = fixture.nativeElement.querySelector('form');
+    expect(formElement).toBeTruthy();
+
+    formElement.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    fixture.detectChanges();
+
+    expect(component.errorMessage()).toBe('Please fix the errors below before submitting.');
+    expect(component.contactForm.name().touched()).toBe(true);
+  });
 });
